@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,9 +17,23 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/', 'HomeController@root')->name('root');
-Route::get('/home', 'HomeController@home')->name('home');
-Route::get('/hot', 'HomeController@hot')->name('hot');
+Route::group(['namespace' => 'Home'], function () {
+
+    Route::get('/', 'HomeController@root')->name('root');
+    Route::get('/home', 'HomeController@home')->name('home');
+
+    Route::get('/hot', 'HotMovieController@index')->name('hot');
+    Route::get('/hot/day', 'HotMovieController@hotByDay')->name('hot.day');
+    Route::get('/hot/week', 'HotMovieController@hotByWeek')->name('hot.week');
+    Route::get('/hot/month', 'HotMovieController@hotByMonth')->name('hot.month');
+
+    Route::get('/new', 'NewMovieController@index')->name('new');
+    Route::get('/new/release', 'NewMovieController@newByReleaseDate')->name('new.release');
+    Route::get('/new/update', 'NewMovieController@newByUpdateDate')->name('new.update');
+});
+
+Route::get('/movies/{id}', 'MovieController@movie')->name('movie');
+
+Route::get('/search', 'SearchController@index')->name('search');
 
 Route::get('/admin', 'AdminController@index')->name('admin');
-Route::get('/search', 'SearchController@index')->name('search');
