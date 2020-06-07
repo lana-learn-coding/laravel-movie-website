@@ -55,8 +55,8 @@
                         <div class="row no-gutters">
                             <div class="col-3 col-md-5">
                                 <div class="w-100 hot-movie-card__img--fixed-ratio">
-                                    <img class="w-100" src="{{ $movie->image ?: asset('img/placeholder.png') }}"
-                                         alt="{{ $movie->name }}">
+                                    <img class="w-100" src="{{ $hotMovie->image ?: asset('img/placeholder.png') }}"
+                                         alt="{{ $hotMovie->name }}">
                                 </div>
                             </div>
                             <div class="col-9 col-md-7">
