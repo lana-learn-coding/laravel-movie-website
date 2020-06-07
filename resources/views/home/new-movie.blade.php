@@ -27,7 +27,7 @@
                 <div class="row">
                     @foreach ($movies as $movie)
                         <div class="col-6 col-md-4 col-xl-3 my-4">
-                            <div class="movie-card card">
+                            <div class="movie-card card hvr-grow d-flex">
                                 <a class="stretched-link" href="{{ route('movie', ['id' => $movie->id]) }}"></a>
                                 <div class="movie-card__img--fixed-ratio">
                                     <img class="w-100" src="{{ $movie->image ?: asset('img/placeholder.png') }}"
@@ -50,7 +50,7 @@
                 <h5 class="mb-2">Hot movie by day</h5>
                 <hr class="border-primary mt-2">
                 @foreach($hots as $hotMovie)
-                    <div class="hot-movie-card card bg-transparent shadow-lg">
+                    <div class="hot-movie-card card bg-transparent hvr-shrink d-flex">
                         <a class="stretched-link" href="{{ route('movie', ['id' => $hotMovie->id]) }}"></a>
                         <div class="row no-gutters">
                             <div class="col-3 col-md-5">
