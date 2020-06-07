@@ -1,26 +1,6 @@
-<!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.base')
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-</head>
-<body>
-<div id="app">
+@section('body')
     <!-- Logo + search bar + login -->
     <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
         <div class="container">
@@ -51,9 +31,11 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
         <div class="container">
             <div class="d-flex flex-nowrap w-100 d-lg-none">
-                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                <button class="navbar-toggler"
+                        type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent"
-                        aria-controls="navbarSupportedContent" aria-expanded="false"
+                        aria-controls="navbarSupportedContent"
+                        aria-expanded="false"
                         aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -76,16 +58,30 @@
                         <a href="{{ route('home') }}" class="nav-link {{ Route::is('home') ? 'active' : '' }}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('home') }}" class="nav-link {{ Route::is('hot') ? 'active' : '' }}">
+                        <a href="{{ route('hot') }}" class="nav-link {{ Route::is('hot') ? 'active' : '' }}">
                             Hot Movies
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="{{ route('home') }}" class="nav-link {{ Route::is('new') ? 'active' : '' }}">
+                    <li class="nav-item dropdown hover">
+                        <a href="{{ route('new') }}"
+                           class="nav-link dropdown-toggle {{ Route::is('new*') ? 'active' : '' }}"
+                        >
                             New Movies
                         </a>
+                        <div class="dropdown-menu">
+                            <a href="{{ route('new.release') }}"
+                               class="dropdown-item {{ Route::is('new.release') ? 'active': '' }}"
+                            >
+                                New Release
+                            </a>
+                            <a href="{{ route('new.update') }}"
+                               class="dropdown-item {{ Route::is('new.update') ? 'active': '' }}"
+                            >
+                                New Update
+                            </a>
+                        </div>
                     </li>
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown hover">
                         <a href="#"
                            role="button"
                            class="nav-link dropdown-toggle {{ Route::is('categories') ? 'active' : '' }}"
@@ -95,7 +91,7 @@
                         >
                             Categories
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <div class="dropdown-menu">
                             <a class="dropdown-item" href="#">Action</a>
                             <a class="dropdown-item" href="#">Another action</a>
                             <div class="dropdown-divider"></div>
@@ -114,8 +110,31 @@
     </nav>
 
     <main class="py-4">
-        @yield('content')
+        @yield('content.body')
     </main>
-</div>
-</body>
-</html>
+@endsection
+
+@section('script')
+    @yield('content.script')
+@endsection
+
+@section('style')
+    <style>
+        .searchbar__input {
+            height: 2rem !important;
+        }
+
+        .navbar-nav {
+            font-size: 1.1rem !important;
+        }
+
+        .nav-item .dropdown-menu {
+            font-size: 1rem !important;
+        }
+
+        .dropdown.hover:hover > .dropdown-menu {
+            display: block;
+        }
+    </style>
+    @yield('content.style')
+@endsection

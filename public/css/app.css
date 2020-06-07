@@ -6015,15 +6015,7 @@ readers do not read off random characters that represent icons */
   width: auto;
 }
 
-.searchbar__input {
-  height: 2rem !important;
-}
-
-.navbar-nav {
-  font-size: 1.1rem !important;
-}
-
-.nav-item .dropdown-menu {
-  font-size: 1rem !important;
+.pagination {
+  flex-wrap: wrap;
 }
 

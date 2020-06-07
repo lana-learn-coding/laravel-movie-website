@@ -10,4 +10,6 @@
 // Font Awesome
 @import 'node_modules/@fortawesome/fontawesome-free/scss/fontawesome';
 
-@import './nav';
+.pagination {
+    flex-wrap: wrap;
+}
