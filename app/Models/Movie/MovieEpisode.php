@@ -24,11 +24,17 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\MovieEpisode whereNumber($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\MovieEpisode whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string $high
+ * @property string $medium
+ * @property string $low
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\MovieEpisode whereHigh($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\MovieEpisode whereLow($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\MovieEpisode whereMedium($value)
  */
 class MovieEpisode extends Model
 {
     protected $fillable = [
-        "name", "number"
+        "name", "number", "high", "medium", "low",
     ];
 
     public function movie()

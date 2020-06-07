@@ -33,12 +33,41 @@ use Illuminate\Database\Eloquent\Model;
  * @mixin \Eloquent
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Movie\MovieTag[] $tags
  * @property-read int|null $tags_count
+ * @property string $release_date
+ * @property string $length
+ * @property-read mixed $views_by_day
+ * @property-read mixed $views_by_month
+ * @property-read mixed $views_by_week
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Movie\MovieView[] $views
+ * @property-read int|null $views_count
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movie whereLength($value)
  */
 class Movie extends Model
 {
     protected $fillable = [
-        "name", "releaseDate", "description", "image", "viewCount"
+        "name", "releaseDate", "description", "image", "length",
     ];
+
+    // TODO: query view from view table;
+    public function getViewsByDayAttribute()
+    {
+        return 100;
+    }
+
+    public function getViewsByWeekAttribute()
+    {
+        return 100;
+    }
+
+    public function getViewsByMonthAttribute()
+    {
+        return 100;
+    }
+
+    public function views()
+    {
+        return $this->hasMany("App\Models\Movie\MovieView");
+    }
 
     public function tags()
     {
