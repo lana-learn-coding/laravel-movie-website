@@ -1,5 +1,25 @@
 @extends('layouts.base')
 
+@pushonce('style:app')
+    <style>
+        .searchbar__input {
+            height: 2rem !important;
+        }
+
+        .navbar-nav {
+            font-size: 1.1rem !important;
+        }
+
+        .nav-item .dropdown-menu {
+            font-size: 1rem !important;
+        }
+
+        .dropdown.hover:hover > .dropdown-menu {
+            display: block;
+        }
+    </style>
+@endpushonce
+
 @section('body')
     <!-- Logo + search bar + login -->
     <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
@@ -110,31 +130,6 @@
     </nav>
 
     <main class="py-4">
-        @yield('content.body')
+        @yield('content')
     </main>
-@endsection
-
-@section('script')
-    @yield('content.script')
-@endsection
-
-@section('style')
-    <style>
-        .searchbar__input {
-            height: 2rem !important;
-        }
-
-        .navbar-nav {
-            font-size: 1.1rem !important;
-        }
-
-        .nav-item .dropdown-menu {
-            font-size: 1rem !important;
-        }
-
-        .dropdown.hover:hover > .dropdown-menu {
-            display: block;
-        }
-    </style>
-    @yield('content.style')
 @endsection

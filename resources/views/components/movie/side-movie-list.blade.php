@@ -1,5 +1,4 @@
-@section('style')
-    @parent
+@push('style')
     <style>
         .hot-movie-card__img--fixed-ratio {
             width: 100%;
@@ -26,7 +25,7 @@
             height: 2.7rem;
         }
     </style>
-@endsection
+@endpush
 
 @foreach($movies as $movie)
     <div class="hot-movie-card card bg-transparent hvr-shrink d-flex">

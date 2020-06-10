@@ -1,6 +1,6 @@
-@extends("layouts.app")
+@extends('layouts.app')
 
-@section('content.body')
+@section('content')
     <div class="container mt-4">
         <div class="row">
             <div class="col-md-8 col-xl-9">
@@ -33,40 +33,4 @@
             </div>
         </div>
     </div>
-@endsection
-
-@section('content.style')
-    <style>
-        .movie-card__img--fixed-ratio {
-            width: 100%;
-            overflow: hidden;
-            padding-bottom: 135%;
-            height: 0;
-        }
-
-        .hot-movie-card__img--fixed-ratio {
-            width: 100%;
-            overflow: hidden;
-            padding-bottom: 80%;
-            height: 0;
-        }
-
-        .hot-movie-card__separator {
-            border: 1px dashed #282828;
-            margin: 1rem 0;
-        }
-
-        .hot-movie-card__body--title {
-            padding-bottom: .4rem;
-            font-size: .9rem;
-            line-height: 1.1rem;
-        }
-
-        .hot-movie-card__body--description {
-            overflow: hidden;
-            line-height: .9rem;
-            font-size: .8rem;
-            height: 2.7rem;
-        }
-    </style>
 @endsection
