@@ -1,4 +1,4 @@
-@push('style')
+@scopedstyle('components.movie.movie-list')
     <style>
         .movie-card__img--fixed-ratio {
             width: 100%;
@@ -7,7 +7,7 @@
             height: 0;
         }
     </style>
-@endpush
+@endscopedstyle
 
 <div class="row">
     @foreach ($movies as $movie)

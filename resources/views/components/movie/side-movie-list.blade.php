@@ -1,4 +1,4 @@
-@push('style')
+@scopedstyle('components.movie.side-movie-list')
     <style>
         .hot-movie-card__img--fixed-ratio {
             width: 100%;
@@ -25,7 +25,7 @@
             height: 2.7rem;
         }
     </style>
-@endpush
+@endscopedstyle
 
 @foreach($movies as $movie)
     <div class="hot-movie-card card bg-transparent hvr-shrink d-flex">

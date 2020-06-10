@@ -1,6 +1,6 @@
 @extends('layouts.base')
 
-@pushonce('style:app')
+@scopedstyle('layouts.app')
     <style>
         .searchbar__input {
             height: 2rem !important;
@@ -18,7 +18,7 @@
             display: block;
         }
     </style>
-@endpushonce
+@endscopedstyle
 
 @section('body')
     <!-- Logo + search bar + login -->
