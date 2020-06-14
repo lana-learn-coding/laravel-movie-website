@@ -9,7 +9,7 @@
 </style>
 @endscopedstyle
 
-<div class="movie-card card hvr-grow d-flex">
+<div class="movie-card card d-flex">
     <a class="stretched-link" href="{{ route('movie', ['id' => $movie->id]) }}"></a>
     <div class="movie-card__img--fixed-ratio">
         <img class="w-100" src="{{ $movie->image ?: asset('img/placeholder.png') }}"

@@ -57,6 +57,11 @@ class Movie extends Model
         "name", "releaseDate", "description", "image", "length",
     ];
 
+    function getNumberOfEpisodesAttribute()
+    {
+        return $this->views()->count('id');
+    }
+
     // TODO: query view from view table;
     public function getViewsByDayAttribute()
     {
