@@ -1,23 +1,23 @@
 @extends('layouts.base')
 
 @scopedstyle('layouts.app')
-    <style>
-        .searchbar__input {
-            height: 2rem !important;
-        }
+<style>
+    .searchbar__input {
+        height: 2rem !important;
+    }
 
-        .navbar-nav {
-            font-size: 1.1rem !important;
-        }
+    .navbar-nav {
+        font-size: 1.1rem !important;
+    }
 
-        .nav-item .dropdown-menu {
-            font-size: 1rem !important;
-        }
+    .nav-item .dropdown-menu {
+        font-size: 1rem !important;
+    }
 
-        .dropdown.hover:hover > .dropdown-menu {
-            display: block;
-        }
-    </style>
+    .dropdown.hover:hover > .dropdown-menu {
+        display: block;
+    }
+</style>
 @endscopedstyle
 
 @section('body')
@@ -84,7 +84,7 @@
                     </li>
                     <li class="nav-item dropdown hover">
                         <a href="{{ route('new') }}"
-                           class="nav-link dropdown-toggle {{ Route::is('new*') ? 'active' : '' }}"
+                           class="nav-link dropdown-toggle {{ Route::is('new.*') ? 'active' : '' }}"
                         >
                             New Movies
                         </a>
@@ -104,12 +104,29 @@
                     <li class="nav-item dropdown hover">
                         <a href="#"
                            role="button"
-                           class="nav-link dropdown-toggle {{ Route::is('categories') ? 'active' : '' }}"
+                           class="nav-link dropdown-toggle {{ Route::is('categories.*') ? 'active' : '' }}"
                            data-toggle="dropdown"
                            aria-haspopup="true"
                            aria-expanded="false"
                         >
                             Categories
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown hover">
+                        <a href="#"
+                           role="button"
+                           class="nav-link dropdown-toggle {{ Route::is('genres.*') ? 'active' : '' }}"
+                           data-toggle="dropdown"
+                           aria-haspopup="true"
+                           aria-expanded="false"
+                        >
+                            Genres
                         </a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="#">Action</a>
