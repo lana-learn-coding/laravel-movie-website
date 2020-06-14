@@ -23,6 +23,10 @@ class CreateMoviesTable extends Migration
 
             $table->date("release_date");
             $table->string("length");
+
+
+            $table->integer("movie_category_id")->unsigned()->index()->nullable();
+            $table->foreign("movie_category_id")->references("id")->on("movie_categories");
         });
     }
 

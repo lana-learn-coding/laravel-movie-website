@@ -25,11 +25,11 @@ use Illuminate\Database\Eloquent\Model;
 class MovieCategory extends Model
 {
     protected $fillable = [
-        "name"
+        "name",
     ];
 
-    public function movies()
+    function movies()
     {
-        return $this->belongsToMany("App\Models\Movie\Movie");
+        return $this->hasMany("App\Models\Movie\Movie");
     }
 }

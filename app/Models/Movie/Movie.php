@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $releaseDate
  * @property string|null $image
  * @property int $viewCount
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Movie\MovieCategory[] $categories
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Movie\MovieGenre[] $categories
  * @property-read int|null $categories_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Movie\MovieEpisode[] $episodes
  * @property-read int|null $episodes_count
@@ -41,6 +41,11 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Movie\MovieView[] $views
  * @property-read int|null $views_count
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movie whereLength($value)
+ * @property int|null $movie_category_id
+ * @property-read \App\Models\Movie\MovieCategory $category
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Movie\MovieCategory[] $genres
+ * @property-read int|null $genres_count
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movie whereMovieCategoryId($value)
  */
 class Movie extends Model
 {
@@ -74,7 +79,7 @@ class Movie extends Model
         return $this->belongsToMany("App\Models\Movie\MovieTag");
     }
 
-    public function categories()
+    public function genres()
     {
         return $this->belongsToMany("App\Models\Movie\MovieCategory");
     }
@@ -82,5 +87,10 @@ class Movie extends Model
     public function episodes()
     {
         return $this->hasMany("App\Models\Movie\MovieEpisode");
+    }
+
+    public function category()
+    {
+        return $this->belongsTo("App\Models\Movie\MovieCategory");
     }
 }

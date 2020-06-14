@@ -17,10 +17,10 @@ class CreateMoviesMovieTagsTable extends Migration
             $table->integer("movie_id")->unsigned()->index();
             $table->foreign("movie_id")->references("id")->on("movies");
 
-            $table->integer("movie_tags_id")->unsigned()->index();
-            $table->foreign("movie_tags_id")->references("id")->on("movie_tags");
+            $table->integer("movie_tag_id")->unsigned()->index();
+            $table->foreign("movie_tag_id")->references("id")->on("movie_tags");
 
-            $table->primary(["movie_id", "movie_tags_id"]);
+            $table->primary(["movie_id", "movie_tag_id"]);
             $table->timestamps();
         });
     }
