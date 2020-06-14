@@ -10,8 +10,7 @@ class HotMovieController extends Controller
 {
     public function __construct()
     {
-        $newUpdateMovies = Movie::select()->orderBy('updatedAt')->take(8)->get();
-        View::share('updates', $newUpdateMovies);
+        View::share('updates', Movie::newUpdate()->take(8)->get());
     }
 
     public function index()
@@ -34,10 +33,9 @@ class HotMovieController extends Controller
 
     public function hotByWeek()
     {
-        $movies = Movie::select()->orderBy('viewsByWeek')->paginate(24);
         return view('home.hot-movie', [
             'by' => 'week',
-            'movies' => $movies,
+            'movies' => Movie::hot()->paginate(24),
         ]);
     }
 

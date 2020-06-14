@@ -46,6 +46,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Movie\MovieCategory[] $genres
  * @property-read int|null $genres_count
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movie whereMovieCategoryId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movie hot()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movie new()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movie newUpdate()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movie newRelease()
  */
 class Movie extends Model
 {
@@ -92,5 +96,20 @@ class Movie extends Model
     public function category()
     {
         return $this->belongsTo("App\Models\Movie\MovieCategory");
+    }
+
+    public function scopeNewRelease($query)
+    {
+        return $query->orderBy("releaseDate");
+    }
+
+    public function scopeNewUpdate($query)
+    {
+        return $query->orderBy("updatedAt");
+    }
+
+    public function scopeHot($query)
+    {
+        return $query->orderBy("viewsByWeek");
     }
 }

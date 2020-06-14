@@ -10,7 +10,7 @@ class NewMovieController extends Controller
 {
     public function __construct()
     {
-        $hotByDay = Movie::select()->orderBy('viewsByDay')->take(8)->get();
+        $hotByDay = Movie::orderBy('viewsByDay')->take(8)->get();
         View::share('hots', $hotByDay);
     }
 
@@ -21,19 +21,17 @@ class NewMovieController extends Controller
 
     public function newByReleaseDate()
     {
-        $movies = Movie::select()->orderBy('releaseDate')->paginate(24);
         return view('home.new-movie', [
             'by' => 'release',
-            'movies' => $movies
+            'movies' => Movie::newRelease()->paginate(24)
         ]);
     }
 
     public function newByUpdateDate()
     {
-        $movies = Movie::select()->orderBy('updatedAt')->paginate(24);
         return view('home.new-movie', [
             'by' => 'update',
-            'movies' => $movies,
+            'movies' => Movie::newUpdate()->paginate(24),
         ]);
     }
 }
