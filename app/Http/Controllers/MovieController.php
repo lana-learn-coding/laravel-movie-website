@@ -22,7 +22,7 @@ class MovieController extends BaseController
 
     function watchMovieIndex(int $id)
     {
-        return redirect('/movie/' . $id . '/watch/1');
+        return redirect('/movies/' . $id . '/watch/1');
     }
 
     function watchMovie(int $id, int $ep)
