@@ -30,7 +30,12 @@ Route::group(['namespace' => 'Home'], function () {
     Route::get('/new', 'NewMovieController@index')->name('new');
     Route::get('/new/release', 'NewMovieController@newByReleaseDate')->name('new.release');
     Route::get('/new/update', 'NewMovieController@newByUpdateDate')->name('new.update');
+
+    Route::get('/search', 'SearchMovieController@simpleSearch')->name('search');
+    Route::get('/search/advanced', 'SearchMovieController@advancedSearch')->name('search.advanced');
 });
+Route::get('/movies/categories/{id}', 'SearchMovieController@simpleSearch')->name('categories');
+Route::get('/movies/genres/{id}', 'SearchMovieController@simpleSearch')->name('genres');
 
 Route::get('/movies/{id}', 'MovieController@movie')->name('movie');
 Route::get('/movies/{id}/watch', 'MovieController@watchMovieIndex')->name('movie.watch');
