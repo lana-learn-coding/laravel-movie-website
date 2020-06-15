@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\Home;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController;
 use App\Models\Movie\Movie;
 use View;
 
-class NewMovieController extends Controller
+class NewMovieController extends BaseController
 {
     public function __construct()
     {
+        parent::__construct();
         $hotByDay = Movie::orderBy('viewsByDay')->take(8)->get();
         View::share('hots', $hotByDay);
     }

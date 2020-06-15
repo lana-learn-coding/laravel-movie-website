@@ -30,10 +30,9 @@
                 </div>
                 <div class="col-1 d-none d-lg-block"></div>
                 <div class="col-5 d-none d-lg-block">
-                    <form action="{{ route("search") }}">
-                        @csrf
+                    <form action="{{ route("search") }}" method="get">
                         <div class="input-group input-group">
-                            <input type="text" placeholder="Search movie..." class="form-control">
+                            <input type="text" placeholder="Search movie..." class="form-control" name="name">
                             <button class="btn btn-primary input-group-append d-flex align-items-center">
                                 <i class="fas fa-search"></i>
                             </button>
@@ -104,7 +103,7 @@
                     <li class="nav-item dropdown hover">
                         <a href="#"
                            role="button"
-                           class="nav-link dropdown-toggle {{ Route::is('categories.*') ? 'active' : '' }}"
+                           class="nav-link dropdown-toggle {{ Route::is('categories*') ? 'active' : '' }}"
                            data-toggle="dropdown"
                            aria-haspopup="true"
                            aria-expanded="false"
@@ -112,16 +111,19 @@
                             Categories
                         </a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
+                            @foreach($categories as $category)
+                                <a class="dropdown-item {{ Route::is('movies/categories/' . $category->name) ? 'active' : '' }}"
+                                   href="{{ url('/movies/categories/' . $category->id) }}"
+                                >
+                                    {{ $category->name }}
+                                </a>
+                            @endforeach
                         </div>
                     </li>
                     <li class="nav-item dropdown hover">
                         <a href="#"
                            role="button"
-                           class="nav-link dropdown-toggle {{ Route::is('genres.*') ? 'active' : '' }}"
+                           class="nav-link dropdown-toggle {{ Route::is('genres*') ? 'active' : '' }}"
                            data-toggle="dropdown"
                            aria-haspopup="true"
                            aria-expanded="false"
@@ -129,10 +131,13 @@
                             Genres
                         </a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
+                            @foreach($genres as $genre)
+                                <a class="dropdown-item {{ Route::is('movies/genres/' . $genre->name) ? 'active' : '' }}"
+                                   href="{{ url('/movies/genres/' . $genre->id) }}"
+                                >
+                                    {{ $genre->name }}
+                                </a>
+                            @endforeach
                         </div>
                     </li>
                 </ul>

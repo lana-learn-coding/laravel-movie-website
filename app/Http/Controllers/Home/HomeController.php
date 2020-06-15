@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Home;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController;
 use App\Models\Movie\Movie;
 
-class HomeController extends Controller
+class HomeController extends BaseController
 {
     public function root()
     {

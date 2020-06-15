@@ -5,11 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Movie\Movie;
 use View;
 
-class MovieController extends Controller
+class MovieController extends BaseController
 {
 
     public function __construct()
     {
+        parent::__construct();
         View::share('hots', Movie::hot()->take(8)->get());
         View::share('news', Movie::newRelease()->take(6)->get());
     }
