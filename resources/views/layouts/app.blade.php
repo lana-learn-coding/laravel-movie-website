@@ -32,7 +32,7 @@
                 <div class="col-5 d-none d-lg-block">
                     <form action="{{ route("search") }}" method="get">
                         <div class="input-group input-group">
-                            <input type="text" placeholder="Search movie..." class="form-control" name="name">
+                            <input type="text" placeholder="Search movie..." class="form-control" name="query" value="{{ request()->query('query') }}">
                             <button class="btn btn-primary input-group-append d-flex align-items-center">
                                 <i class="fas fa-search"></i>
                             </button>
@@ -112,8 +112,8 @@
                         </a>
                         <div class="dropdown-menu">
                             @foreach($categories as $category)
-                                <a class="dropdown-item {{ Route::is('movies/categories/' . $category->name) ? 'active' : '' }}"
-                                   href="{{ url('/movies/categories/' . $category->id) }}"
+                                <a class="dropdown-item {{ Route::is('categories*') && request()->route('id') == $category->id ? 'active' : '' }}"
+                                   href="{{ route('categories', ['id' => $category->id]) }}"
                                 >
                                     {{ $category->name }}
                                 </a>
@@ -132,8 +132,8 @@
                         </a>
                         <div class="dropdown-menu">
                             @foreach($genres as $genre)
-                                <a class="dropdown-item {{ Route::is('movies/genres/' . $genre->name) ? 'active' : '' }}"
-                                   href="{{ url('/movies/genres/' . $genre->id) }}"
+                                <a class="dropdown-item {{ Route::is('genres*') && request()->route('id') == $genre->id ? 'active' : '' }}"
+                                   href="{{ route('genres', ['id' => $genre->id]) }}"
                                 >
                                     {{ $genre->name }}
                                 </a>
