@@ -50,11 +50,12 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movie new()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movie newUpdate()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movie newRelease()
+ * @property-read mixed $number_of_episodes
  */
 class Movie extends Model
 {
     protected $fillable = [
-        "name", "releaseDate", "description", "image", "length",
+        "name", "release_date", "description", "image", "length",
     ];
 
     function getNumberOfEpisodesAttribute()
@@ -105,16 +106,16 @@ class Movie extends Model
 
     public function scopeNewRelease($query)
     {
-        return $query->orderBy("releaseDate");
+        return $query->orderBy("release_date");
     }
 
     public function scopeNewUpdate($query)
     {
-        return $query->orderBy("updatedAt");
+        return $query->orderBy("updated_at");
     }
 
     public function scopeHot($query)
     {
-        return $query->orderBy("viewsByWeek");
+        return $query->orderBy("views_by_week");
     }
 }

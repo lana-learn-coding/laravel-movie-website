@@ -14,9 +14,9 @@ class HomeController extends BaseController
 
     public function home()
     {
-        $features = Movie::select()->orderBy('updatedAt')->limit(6)->get();
-        $hots = Movie::select()->orderBy('viewsByWeek')->limit(10)->get();
-        $news = Movie::select()->orderBy('releaseDate')->limit(12)->get();
+        $features = Movie::select()->orderBy('updated_at')->limit(6)->get();
+        $hots = Movie::select()->orderBy('views_by_week')->limit(10)->get();
+        $news = Movie::select()->orderBy('release_date')->limit(12)->get();
         $random = Movie::select()->inRandomOrder()->limit(12)->get();
         return view('home.home', [
             'hots' => $hots,

@@ -21,7 +21,6 @@ class SearchMovieController extends BaseController
 
     public function simpleSearch(Request $request)
     {
-        $notNull = array();
         $conditions = array();
         if ($request->query('query')) {
             array_push($conditions, ['name', 'like', '%' . $request->query('query') . '%']);

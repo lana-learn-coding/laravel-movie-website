@@ -47,11 +47,11 @@
                         <option value="" class="text-muted" {{ request()->query('date-after') ? '' : 'selected' }}>
                             All Time
                         </option>
-                        @foreach(['2016', '2017', '2018', '2019', '2020'] as $dateAfter)
-                            <option value="{{ $dateAfter }}"
-                                {{ request()->query('date-after') == $dateAfter ? 'selected' : '' }}
+                        @foreach(['2016', '2017', '2018', '2019', '2020'] as $date_after)
+                            <option value="{{ $date_after }}"
+                                {{ request()->query('date-after') == $date_after ? 'selected' : '' }}
                             >
-                                {{ $dateAfter }}
+                                {{ $date_after }}
                             </option>
                         @endforeach
                     </select>

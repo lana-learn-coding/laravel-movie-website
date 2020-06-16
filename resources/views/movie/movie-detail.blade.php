@@ -11,19 +11,19 @@
                     <div>
                         <div class="mb-2">
                             <span class="font-weight-bold mr-2">Release: </span>
-                            <span>{{ $movie->releaseDate ?: 'unknown' }}</span>
+                            <span>{{ $movie->release_date ?: 'unknown' }}</span>
                         </div>
                         <div class="mb-2">
                             <span class="font-weight-bold mr-2">Episodes: </span>
-                            <span>{{ $movie->numberOfEpisodes ?: 'updating' }}</span>
+                            <span>{{ $movie->number_of_episodes ?: 'updating' }}</span>
                         </div>
                         <div class="mb-2">
                             <span class="font-weight-bold mr-2">Categories: </span>
-                            <span>{{ $movie->numberOfEpisodes ?: 'updating' }}</span>
+                            <span>{{ $movie->number_of_episodes ?: 'updating' }}</span>
                         </div>
                         <div class="mb-2">
                             <span class="font-weight-bold mr-2">Genres: </span>
-                            <span>{{ $movie->numberOfEpisodes ?: 'updating' }}</span>
+                            <span>{{ $movie->number_of_episodes ?: 'updating' }}</span>
                         </div>
                     </div>
                     <div>
