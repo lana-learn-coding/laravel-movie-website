@@ -79,6 +79,26 @@ class Movie extends Model
         return 100;
     }
 
+    public function scopeNewRelease($query)
+    {
+        return $query->orderBy("release_date");
+    }
+
+    public function scopeNewUpdate($query)
+    {
+        return $query->orderBy("updated_at");
+    }
+
+    public function scopeHot($query)
+    {
+        return $query->orderBy("views_by_week");
+    }
+
+    public function casts()
+    {
+        return $this->belongsToMany("App\Models\Cast");
+    }
+
     public function views()
     {
         return $this->hasMany("App\Models\Movie\MovieView");
@@ -102,20 +122,5 @@ class Movie extends Model
     public function category()
     {
         return $this->belongsTo("App\Models\Movie\MovieCategory");
-    }
-
-    public function scopeNewRelease($query)
-    {
-        return $query->orderBy("release_date");
-    }
-
-    public function scopeNewUpdate($query)
-    {
-        return $query->orderBy("updated_at");
-    }
-
-    public function scopeHot($query)
-    {
-        return $query->orderBy("views_by_week");
     }
 }
