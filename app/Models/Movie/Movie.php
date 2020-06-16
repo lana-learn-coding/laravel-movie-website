@@ -111,7 +111,7 @@ class Movie extends Model
 
     public function genres()
     {
-        return $this->belongsToMany("App\Models\Movie\MovieCategory");
+        return $this->belongsToMany("App\Models\Movie\MovieGenre");
     }
 
     public function episodes()
