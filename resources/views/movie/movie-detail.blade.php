@@ -36,12 +36,4 @@
             </div>
         </div>
     </div>
-
-    <div class="card mt-4">
-        <div class="card-body">
-            <h5 class="card-title">Movie Plot</h5>
-            <h6 class="card-subtitle mb-3 text-muted">{{ $movie->name }}</h6>
-            <p class="card-text">{{ $movie->description }}</p>
-        </div>
-    </div>
 @endsection

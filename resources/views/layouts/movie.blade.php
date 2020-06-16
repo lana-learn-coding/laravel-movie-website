@@ -29,6 +29,21 @@
     <div class="card mt-4">
         <div class="card-body">
             <h5 class="card-title">Casts</h5>
+            <div class="row">
+                @foreach($movie->genres as $cast)
+                    <div class="col-6 col-sm-4 col-lg-2">
+                        <div class="card">
+                            <img src="{{ $cast->avatar }}" alt="{{ $cast->name }}" class="card-img">
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+    <div class="card mt-4">
+        <div class="card-body">
+            <h5 class="card-title">Movie Plot</h5>
+            <h6 class="card-subtitle mb-3 text-muted">{{ $movie->name }}</h6>
             <p class="card-text">{{ $movie->description }}</p>
         </div>
     </div>
