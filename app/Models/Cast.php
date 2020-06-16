@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Cast extends Model
 {
-    protected $fillable = ['name', 'birth_date'];
+    protected $fillable = ['name', 'birth_date', 'avatar'];
 
     public function movies()
     {

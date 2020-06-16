@@ -18,6 +18,7 @@ class CreateCastsTable extends Migration
             $table->timestamps();
 
             $table->string('name');
+            $table->string('avatar')->nullable();
             $table->date('birth_date')->nullable();
         });
     }
