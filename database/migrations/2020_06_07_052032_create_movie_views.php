@@ -15,8 +15,8 @@ class CreateMovieViews extends Migration
     {
         Schema::create('movie_views', function (Blueprint $table) {
             $table->id();
-            $table->timestamp('date')->unique();
-            $table->integer('view')->unsigned();
+            $table->timestamp('date');
+            $table->integer('count')->unsigned();
 
             $table->integer('movie_id')->unsigned()->index();
             $table->foreign('movie_id')->references('id')->on('movies');

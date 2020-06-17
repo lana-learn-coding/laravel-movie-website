@@ -23,8 +23,10 @@ use Illuminate\Database\Eloquent\Model;
  */
 class MovieView extends Model
 {
+    public $timestamps = false;
+
     protected $fillable = [
-        "view", "date"
+        "count", "date"
     ];
 
     public function movie()
