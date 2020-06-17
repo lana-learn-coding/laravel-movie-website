@@ -1,6 +1,12 @@
+
+# idea
 /.idea
-/_ide_helper.php
-/.phpstorm.meta.php
+_ide_helper.php
+.phpstorm.meta.php
+
+# public build
+/public/js/*
+/public/css/*
 
 /node_modules
 /public/hot
