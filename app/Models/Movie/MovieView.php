@@ -20,6 +20,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\MovieView whereMovieId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\MovieView whereView($value)
  * @mixin \Eloquent
+ * @property int $count
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\MovieView whereCount($value)
  */
 class MovieView extends Model
 {

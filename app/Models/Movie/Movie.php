@@ -51,6 +51,14 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movie newUpdate()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movie newRelease()
  * @property-read mixed $number_of_episodes
+ * @property int|null $movie_language_id
+ * @property int|null $movie_nation_id
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Cast[] $casts
+ * @property-read int|null $casts_count
+ * @property-read \App\Models\Movie\MovieLanguage $language
+ * @property-read \App\Models\Movie\MovieNation $nation
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movie whereMovieLanguageId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movie whereMovieNationId($value)
  */
 class Movie extends Model
 {
