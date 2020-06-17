@@ -18,12 +18,26 @@
                             <span>{{ $movie->number_of_episodes ?: 'updating' }}</span>
                         </div>
                         <div class="mb-2">
+                            <span class="font-weight-bold mr-2">Language: </span>
+                            <span>{{ $movie->language ? $movie->language->name : 'updating' }}</span>
+                        </div>
+                        <div class="mb-2">
+                            <span class="font-weight-bold mr-2">Nation: </span>
+                            <span>{{ $movie->nation ? $movie->nation->name : 'updating' }}</span>
+                        </div>
+                        <div class="mb-2">
                             <span class="font-weight-bold mr-2">Categories: </span>
-                            <span>{{ $movie->number_of_episodes ?: 'updating' }}</span>
+                            <span>{{ $movie->category ? $movie->category->name : 'updating' }}</span>
                         </div>
                         <div class="mb-2">
                             <span class="font-weight-bold mr-2">Genres: </span>
-                            <span>{{ $movie->number_of_episodes ?: 'updating' }}</span>
+                            @if($movie->genres && $movie->genres->isEmpty())
+                                <span>none</span>
+                            @else
+                                @foreach($movie->genres as $genre)
+                                    <span class="mr-1">{{ $genre->name }},</span>
+                                @endforeach
+                            @endif
                         </div>
                     </div>
                     <div>

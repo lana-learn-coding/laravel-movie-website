@@ -14,6 +14,10 @@
         font-size: 1rem !important;
     }
 
+    .nav-item .dropdown-menu.wide {
+        width: 600px;
+    }
+
     .dropdown.hover:hover > .dropdown-menu {
         display: block;
     }
@@ -32,7 +36,8 @@
                 <div class="col-5 d-none d-lg-block">
                     <form action="{{ route("search") }}" method="get">
                         <div class="input-group input-group">
-                            <input type="text" placeholder="Search movie..." class="form-control" name="query" value="{{ request()->query('query') }}">
+                            <input type="text" placeholder="Search movie..." class="form-control" name="query"
+                                   value="{{ request()->query('query') }}">
                             <button class="btn btn-primary input-group-append d-flex align-items-center">
                                 <i class="fas fa-search"></i>
                             </button>
@@ -77,13 +82,13 @@
                         <a href="{{ route('home') }}" class="nav-link {{ Route::is('home') ? 'active' : '' }}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('hot') }}" class="nav-link {{ Route::is('hot') ? 'active' : '' }}">
+                        <a href="{{ route('hot') }}" class="nav-link {{ Route::is('hot.*') ? 'active' : '' }}">
                             Hot Movies
                         </a>
                     </li>
                     <li class="nav-item dropdown hover">
                         <a href="{{ route('new') }}"
-                           class="nav-link dropdown-toggle {{ Route::is('new.*') ? 'active' : '' }}"
+                           class="nav-link {{ Route::is('new.*') ? 'active' : '' }}"
                         >
                             New Movies
                         </a>
@@ -103,7 +108,7 @@
                     <li class="nav-item dropdown hover">
                         <a href="#"
                            role="button"
-                           class="nav-link dropdown-toggle {{ Route::is('categories*') ? 'active' : '' }}"
+                           class="nav-link"
                            data-toggle="dropdown"
                            aria-haspopup="true"
                            aria-expanded="false"
@@ -112,8 +117,8 @@
                         </a>
                         <div class="dropdown-menu">
                             @foreach($categories as $category)
-                                <a class="dropdown-item {{ Route::is('categories*') && request()->route('id') == $category->id ? 'active' : '' }}"
-                                   href="{{ route('categories', ['id' => $category->id]) }}"
+                                <a class="dropdown-item {{ request()->query('category') == $category->id ? 'active' : '' }}"
+                                   href="{{ route('search') . '?category=' . $category->id }}"
                                 >
                                     {{ $category->name }}
                                 </a>
@@ -123,20 +128,66 @@
                     <li class="nav-item dropdown hover">
                         <a href="#"
                            role="button"
-                           class="nav-link dropdown-toggle {{ Route::is('genres*') ? 'active' : '' }}"
+                           class="nav-link"
                            data-toggle="dropdown"
                            aria-haspopup="true"
                            aria-expanded="false"
                         >
                             Genres
                         </a>
+                        <div class="dropdown-menu wide">
+                            <div class="row no-gutters">
+                                @foreach($genres as $genre)
+                                    <div class="col-md-4">
+                                        <a class="dropdown-item {{ request()->query('genre') == $genre->id ? 'active' : '' }}"
+                                           href="{{ route('search')  . '?genre=' . $genre->id }}"
+                                        >
+                                            {{ $genre->name }}
+                                        </a>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown hover">
+                        <a href="#"
+                           role="button"
+                           class="nav-link"
+                           data-toggle="dropdown"
+                           aria-haspopup="true"
+                           aria-expanded="false"
+                        >
+                            Languages
+                        </a>
                         <div class="dropdown-menu">
-                            @foreach($genres as $genre)
-                                <a class="dropdown-item {{ Route::is('genres*') && request()->route('id') == $genre->id ? 'active' : '' }}"
-                                   href="{{ route('genres', ['id' => $genre->id]) }}"
+                            @foreach($languages as $language)
+                                <a class="dropdown-item {{ request()->query('language') == $language->id ? 'active' : '' }}"
+                                   href="{{ route('search') . '?language=' . $language->id }}"
                                 >
-                                    {{ $genre->name }}
+                                    {{ $language->name }}
                                 </a>
+                            @endforeach
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown hover">
+                        <a href="#"
+                           role="button"
+                           class="nav-link"
+                           data-toggle="dropdown"
+                           aria-haspopup="true"
+                           aria-expanded="false"
+                        >
+                            Nations
+                        </a>
+                        <div class="dropdown-menu">
+                            @foreach($nations as $nation)
+                                <div class="col-md-4">
+                                    <a class="dropdown-item {{ request()->query('nation') == $nation->id ? 'active' : '' }}"
+                                       href="{{ route('search') . '?nation=' . $nation->id }}"
+                                    >
+                                        {{ $nation->name }}
+                                    </a>
+                                </div>
                             @endforeach
                         </div>
                     </li>

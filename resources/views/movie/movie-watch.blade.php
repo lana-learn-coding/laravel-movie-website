@@ -7,8 +7,9 @@
                 @include('components.movie.movie-card', ['movie' => $movie])
             </div>
             <div class="col-10">
-                <div class="my-2 mx-3">
-                    {{ $movie->description }}
+                <div class="card-body justify-content-between py-3">
+                    <div>{{ $movie->description }}</div>
+                    <button class="btn btn-primary btn-sm mt-3">Add to favorite</button>
                 </div>
             </div>
         </div>

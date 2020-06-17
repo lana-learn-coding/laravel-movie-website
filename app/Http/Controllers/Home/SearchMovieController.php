@@ -28,6 +28,12 @@ class SearchMovieController extends BaseController
         if ($request->query('category')) {
             array_push($conditions, ['category_id', '=', $request->query('category')]);
         }
+        if ($request->query('language')) {
+            array_push($conditions, ['language_id', '=', $request->query('language')]);
+        }
+        if ($request->query('nation')) {
+            array_push($conditions, ['nation_id', '=', $request->query('nation')]);
+        }
         if ($request->query('genre')) {
             array_push($conditions, ['genre_id', '=', $request->query('genre')]);
         }

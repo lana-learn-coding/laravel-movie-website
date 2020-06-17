@@ -34,8 +34,6 @@ Route::group(['namespace' => 'Home'], function () {
     Route::get('/search', 'SearchMovieController@simpleSearch')->name('search');
     Route::get('/search/advanced', 'SearchMovieController@advancedSearch')->name('search.advanced');
 });
-Route::get('/movies/categories/{id}', 'SearchMovieController@simpleSearch')->name('categories');
-Route::get('/movies/genres/{id}', 'SearchMovieController@simpleSearch')->name('genres');
 
 Route::get('/movies/{id}', 'MovieController@movie')->name('movie');
 Route::get('/movies/{id}/watch', 'MovieController@watchMovieIndex')->name('movie.watch');
