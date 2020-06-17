@@ -5,8 +5,8 @@ _ide_helper.php
 .phpstorm.meta.php
 
 # public build
-/public/js/*
-/public/css/*
+/public/js/*.js
+/public/css/*.css
 
 /node_modules
 /public/hot
