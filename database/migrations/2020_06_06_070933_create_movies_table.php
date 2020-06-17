@@ -27,6 +27,10 @@ class CreateMoviesTable extends Migration
 
             $table->integer('movie_category_id')->unsigned()->index()->nullable();
             $table->foreign('movie_category_id')->references('id')->on('movie_categories');
+            $table->integer('movie_language_id')->unsigned()->index()->nullable();
+            $table->foreign('movie_language_id')->references('id')->on('movie_languages');
+            $table->integer('movie_nation_id')->unsigned()->index()->nullable();
+            $table->foreign('movie_nation_id')->references('id')->on('movie_nations');
         });
     }
 

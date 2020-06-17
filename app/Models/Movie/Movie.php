@@ -123,4 +123,14 @@ class Movie extends Model
     {
         return $this->belongsTo("App\Models\Movie\MovieCategory");
     }
+
+    public function nation()
+    {
+        return $this->belongsTo("App\Models\Movie\MovieNation");
+    }
+
+    public function language()
+    {
+        return $this->belongsTo("App\Models\Movie\MovieLanguage");
+    }
 }
