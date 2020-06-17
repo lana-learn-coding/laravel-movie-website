@@ -17,15 +17,15 @@ class CreateMovieEpisodesTable extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->string("name")->nullable();
-            $table->smallInteger("number")->unsigned();
+            $table->string('name')->nullable();
+            $table->smallInteger('number')->unsigned();
 
-            $table->string("high");
-            $table->string("medium");
-            $table->string("low");
+            $table->string('high');
+            $table->string('medium');
+            $table->string('low');
 
-            $table->integer("movie_id")->unsigned()->index();
-            $table->foreign("movie_id")->references("id")->on("movies");
+            $table->integer('movie_id')->unsigned()->index();
+            $table->foreign('movie_id')->references('id')->on('movies');
         });
     }
 

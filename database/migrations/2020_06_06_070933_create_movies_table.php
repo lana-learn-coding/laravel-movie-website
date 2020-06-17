@@ -17,16 +17,16 @@ class CreateMoviesTable extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->string("name");
-            $table->text("description")->nullable();
-            $table->string("image")->nullable();
+            $table->string('name');
+            $table->text('description')->nullable();
+            $table->string('image')->nullable();
 
-            $table->date("release_date");
-            $table->string("length");
+            $table->date('release_date');
+            $table->smallInteger('length')->unsigned();
 
 
-            $table->integer("movie_category_id")->unsigned()->index()->nullable();
-            $table->foreign("movie_category_id")->references("id")->on("movie_categories");
+            $table->integer('movie_category_id')->unsigned()->index()->nullable();
+            $table->foreign('movie_category_id')->references('id')->on('movie_categories');
         });
     }
 
