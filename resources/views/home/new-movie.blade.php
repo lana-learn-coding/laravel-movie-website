@@ -21,14 +21,14 @@
                     </li>
                 </ul>
                 <div class="mt-4">
-                    <h5 class="mb-1">New movies by {{ $by }}</h5>
-                    <hr class="mt-1 border-primary">
+                    <h4 class="mb-1">New movies by {{ $by }}</h4>
+                    <hr class="mt-1 border-info">
                 </div>
                 @include('components.movie.movie-page', ['movies' => $movies])
             </div>
             <div class="col-md-4 col-xl-3">
-                <h5 class="mb-2">Hot movies by day</h5>
-                <hr class="border-primary mt-2">
+                <h4 class="mb-2">Hot movies by day</h4>
+                <hr class="border-info mt-2">
                 @include('components.movie.side-movie-list', ['movies' => $hots])
             </div>
         </div>

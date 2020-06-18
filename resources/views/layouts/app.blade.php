@@ -3,7 +3,7 @@
 @scopedstyle('layouts.app')
 <style>
     .searchbar__input {
-        height: 2rem !important;
+        height: 2.1rem !important;
     }
 
     .navbar-nav {
@@ -52,9 +52,9 @@
     </nav>
 
     <!-- Nav menu -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top shadow">
         <div class="container">
-            <div class="d-flex flex-nowrap w-100 d-lg-none">
+            <div class="d-flex flex-nowrap w-100 d-lg-none align-items-center">
                 <button class="navbar-toggler"
                         type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent"
@@ -66,23 +66,23 @@
 
                 <form action="{{ route("search") }}" class="d-lg-none flex-grow-1 pl-3 pl-sm-4 pl-md-5">
                     @csrf
-                    <div class="input-group input-group">
-                        <input type="text" placeholder="Search movie..." class="form-control searchbar__input" name="q">
-                        <button class="btn btn-primary input-group-append d-flex align-items-center" type="submit">
+                    <div class="input-group">
+                        <input type="text" placeholder="Search movie..." class="form-control border-0 searchbar__input" name="query">
+                        <button class="btn btn-info input-group-append d-flex align-items-center" type="submit">
                             <i class="fas fa-search"></i>
                         </button>
                     </div>
                 </form>
             </div>
-
             <div class="collapse navbar-collapse d-lg-flex justify-content-between" id="navbarSupportedContent">
+                <hr class="d-lg-none border-light">
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a href="{{ route('home') }}" class="nav-link {{ Route::is('home') ? 'active' : '' }}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('hot') }}" class="nav-link {{ Route::is('hot.*') ? 'active' : '' }}">
+                        <a href="{{ route('hot') }}" class="nav-link {{ Route::is('hot*') ? 'active' : '' }}">
                             Hot Movies
                         </a>
                     </li>
@@ -195,7 +195,7 @@
 
                 <!-- Right Side of Navbar -->
                 <div class="d-lg-none">
-                    <hr class="border-secondary my-2">
+                    <hr class="border-light my-2">
                     @include('components.nav-login')
                 </div>
             </div>

@@ -4,12 +4,14 @@
     <div class="card d-none d-xl-flex">
         <div class="row no-gutters">
             <div class="col-2">
-                @include('components.movie.movie-card', ['movie' => $movie])
+                <div class="shadow-sm">
+                    @include('components.movie.movie-card', ['movie' => $movie])
+                </div>
             </div>
             <div class="col-10">
                 <div class="card-body justify-content-between py-3">
                     <div>{{ $movie->description }}</div>
-                    <button class="btn btn-primary btn-sm mt-3">Add to favorite</button>
+                    <button class="btn btn-info btn-sm mt-3">Add to favorite</button>
                 </div>
             </div>
         </div>
@@ -24,9 +26,9 @@
                 <div>
                     @for($i = 1; $i < 12; $i++)
                         @if($i === 1)
-                            <a class="btn btn-sm mr-1 btn-primary" href="#player">{{ $i }}</a>
+                            <a class="btn shadow-sm btn-sm mr-1 btn-info" href="#player">{{ $i }}</a>
                         @else
-                            <a class="btn btn-sm mr-1 btn-light"
+                            <a class="btn shadow-sm btn-sm mr-1 btn-primary"
                                href="{{ route('movie.watch.ep', ['id' => $movie->id, 'ep' => $i]) }}">{{ $i }}</a>
                         @endif
                     @endfor
