@@ -26,24 +26,29 @@ class SearchMovieController extends BaseController
             array_push($conditions, ['name', 'like', '%' . $request->query('query') . '%']);
         }
         if ($request->query('category')) {
-            array_push($conditions, ['category_id', '=', $request->query('category')]);
+            array_push($conditions, ['movie_category_id', $request->query('category')]);
         }
         if ($request->query('language')) {
-            array_push($conditions, ['language_id', '=', $request->query('language')]);
+            array_push($conditions, ['movie_language_id', $request->query('language')]);
         }
         if ($request->query('nation')) {
-            array_push($conditions, ['nation_id', '=', $request->query('nation')]);
-        }
-        if ($request->query('genre')) {
-            array_push($conditions, ['genre_id', '=', $request->query('genre')]);
+            array_push($conditions, ['movie_nation_id', $request->query('nation')]);
         }
         if ($request->query('date-after')) {
             array_push($conditions, ['release_date', '>', $request->query('date-after') . '-01' . '-01']);
             array_push($conditions, ['release_date', '<', $request->query('date-after') . '-12' . '-12']);
         }
+
+        $movies = Movie::where($conditions);
+
+        if ($request->query('genre')) {
+            $movies->whereHas('genres', function ($genres) use ($request) {
+                $genres->where('id', $request->get('genre'));
+            });
+        }
+
         return view('home.search-movie', [
-            'movies' => Movie::where($conditions)
-                ->paginate(24)
+            'movies' => $movies->paginate(24)
         ]);
     }
 }
