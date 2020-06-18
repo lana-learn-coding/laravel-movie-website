@@ -26,7 +26,7 @@
                             <span>{{ $movie->nation ? $movie->nation->name : 'updating' }}</span>
                         </div>
                         <div class="mb-2">
-                            <span class="font-weight-bold mr-2">Categories: </span>
+                            <span class="font-weight-bold mr-2">Category: </span>
                             <span>{{ $movie->category ? $movie->category->name : 'updating' }}</span>
                         </div>
                         <div class="mb-2">

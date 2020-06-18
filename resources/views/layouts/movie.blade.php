@@ -31,9 +31,14 @@
             <h5 class="card-title">Casts</h5>
             <div class="row">
                 @foreach($movie->genres as $cast)
-                    <div class="col-6 col-sm-4 col-lg-2">
+                    <div class="col-6 col-sm-4 col-lg-3 col-xl-2 hvr-grow">
                         <div class="card">
-                            <img src="{{ $cast->avatar }}" alt="{{ $cast->name }}" class="card-img">
+                            <div class="ratio-wrapper" style="padding-bottom: 120%">
+                                <img src="{{ $cast->avatar ?: asset('img/placeholder.png') }}" alt="{{ $cast->name }}" class="card-img">
+                            </div>
+                            <div class="py-2 px-1">
+                                <span class="text-primary text-truncate" style="font-size: 85%">{{ $cast->name }}</span>
+                            </div>
                         </div>
                     </div>
                 @endforeach
