@@ -12,6 +12,6 @@ class MovieNationSeeder extends Seeder
      */
     public function run()
     {
-        factory(MovieNation::class, 6)->create();
+        factory(MovieNation::class, 8)->create();
     }
 }

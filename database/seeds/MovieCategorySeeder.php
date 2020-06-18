@@ -12,6 +12,6 @@ class MovieCategorySeeder extends Seeder
      */
     public function run()
     {
-        factory(MovieCategory::class, 5)->create();
+        factory(MovieCategory::class, 8)->create();
     }
 }

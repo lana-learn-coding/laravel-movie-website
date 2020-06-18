@@ -12,6 +12,6 @@ class MovieGenreSeeder extends Seeder
      */
     public function run()
     {
-        factory(MovieGenre::class, 24)->create();
+        factory(MovieGenre::class, 30)->create();
     }
 }

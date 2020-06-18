@@ -12,6 +12,6 @@ class MovieLanguageSeeder extends Seeder
      */
     public function run()
     {
-        factory(MovieLanguage::class, 4)->create();
+        factory(MovieLanguage::class, 8)->create();
     }
 }
