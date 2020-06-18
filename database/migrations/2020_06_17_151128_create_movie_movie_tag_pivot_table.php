@@ -14,9 +14,9 @@ class CreateMovieMovieTagPivotTable extends Migration
     {
         Schema::create('movie_movie_tag', function (Blueprint $table) {
             $table->integer('movie_id')->unsigned()->index();
-            $table->foreign('movie_id')->references('id')->on('movie_tags')->onDelete('cascade');
+            $table->foreign('movie_id')->references('id')->on('movies')->onDelete('cascade');
             $table->integer('movie_tag_id')->unsigned()->index();
-            $table->foreign('movie_tag_id')->references('id')->on('movies')->onDelete('cascade');
+            $table->foreign('movie_tag_id')->references('id')->on('movie_tags')->onDelete('cascade');
             $table->primary(['movie_id', 'movie_tag_id']);
         });
     }

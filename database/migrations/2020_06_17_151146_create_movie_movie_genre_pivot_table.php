@@ -14,9 +14,9 @@ class CreateMovieMovieGenrePivotTable extends Migration
     {
         Schema::create('movie_movie_genre', function (Blueprint $table) {
             $table->integer('movie_id')->unsigned()->index();
-            $table->foreign('movie_id')->references('id')->on('movie_genres')->onDelete('cascade');
+            $table->foreign('movie_id')->references('id')->on('movies')->onDelete('cascade');
             $table->integer('movie_genre_id')->unsigned()->index();
-            $table->foreign('movie_genre_id')->references('id')->on('movies')->onDelete('cascade');
+            $table->foreign('movie_genre_id')->references('id')->on('movie_genres')->onDelete('cascade');
             $table->primary(['movie_id', 'movie_genre_id']);
         });
     }
