@@ -12,6 +12,6 @@ class CastSeeder extends Seeder
      */
     public function run()
     {
-        factory(Cast::class, 500)->create();
+        factory(Cast::class, 300)->create();
     }
 }
