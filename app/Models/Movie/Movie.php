@@ -129,16 +129,16 @@ class Movie extends Model
 
     public function category()
     {
-        return $this->belongsTo("App\Models\Movie\MovieCategory");
+        return $this->belongsTo("App\Models\Movie\MovieCategory", "movie_category_id");
     }
 
     public function nation()
     {
-        return $this->belongsTo("App\Models\Movie\MovieNation");
+        return $this->belongsTo("App\Models\Movie\MovieNation", "movie_nation_id");
     }
 
     public function language()
     {
-        return $this->belongsTo("App\Models\Movie\MovieLanguage");
+        return $this->belongsTo("App\Models\Movie\MovieLanguage", "movie_language_id");
     }
 }
