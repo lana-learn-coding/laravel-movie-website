@@ -4,8 +4,9 @@
         <li class="breadcrumb-item text-info"><a href="{{ route('home') }}">Home</a></li>
         <li class="breadcrumb-item active">Search</li>
         <li class="ml-auto">
-            <a href="#" class="hvr-grow-rotate" data-toggle="collapse" data-target="#filter-form"><i
-                    class="fas fa-filter"></i></a>
+            <a href="#" class="hvr-grow-rotate" data-toggle="collapse" data-target="#filter-form">
+                <i class="fas fa-filter"></i>
+            </a>
         </li>
     </ol>
     <div class="collapse show" id="filter-form">
@@ -38,7 +39,10 @@
 @endsection
 @section('content.body')
     <div>
-        <h4 class="mb-2">Result for "{{ request()->query('query') ?: 'All Movies' }}"</h4>
+        <h4 class="mb-2">
+            <span class="mr-1">Result for "{{ request()->query('query') ?: 'All Movies' }}"</span>
+            <span class="small">({{ $movies->total() }})</span>
+        </h4>
         <hr class="mt-2 mb-0 border-info">
     </div>
     @include('components.movie.movie-page', ['movies' => $movies])
