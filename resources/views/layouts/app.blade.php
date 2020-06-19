@@ -2,8 +2,14 @@
 
 @scopedstyle('layouts.app')
 <style>
-    .searchbar__input {
+    .searchbar__input-small {
         height: 2.1rem !important;
+    }
+
+    .searchbar__input-large {
+        height: 2.5rem !important;
+        font-size: 1.1rem;
+        font-weight: 500;
     }
 
     .navbar-nav {
@@ -33,12 +39,12 @@
                     <img class="w-100" src="{{ asset('img/logo.png') }}" alt="">
                 </div>
                 <div class="col-1 d-none d-lg-block"></div>
-                <div class="col-5 d-none d-lg-block">
+                <div class="col-6 d-none d-lg-block">
                     <form action="{{ route("search") }}" method="get">
-                        <div class="input-group input-group">
-                            <input type="text" placeholder="Search movie..." class="form-control" name="query"
+                        <div class="input-group">
+                            <input type="text" placeholder="Search movie..." class="form-control border-0 searchbar__input-large" name="query"
                                    value="{{ request()->query('query') }}">
-                            <button class="btn btn-primary input-group-append d-flex align-items-center">
+                            <button class="btn btn-primary input-group-append d-flex align-items-center px-3">
                                 <i class="fas fa-search"></i>
                             </button>
                         </div>
@@ -67,7 +73,7 @@
                 <form action="{{ route("search") }}" class="d-lg-none flex-grow-1 pl-3 pl-sm-4 pl-md-5">
                     @csrf
                     <div class="input-group">
-                        <input type="text" placeholder="Search movie..." class="form-control border-0 searchbar__input"
+                        <input type="text" placeholder="Search movie..." class="form-control border-0 searchbar__input-small"
                                name="query">
                         <button class="btn btn-info input-group-append d-flex align-items-center" type="submit">
                             <i class="fas fa-search"></i>
