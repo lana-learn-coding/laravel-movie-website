@@ -14,7 +14,7 @@
         font-size: 1rem !important;
     }
 
-    .nav-item .dropdown-menu.wide {
+    .nav-item .dropdown-menu .row.wide {
         width: 600px;
     }
 
@@ -45,7 +45,7 @@
                     </form>
                 </div>
                 <div class="ml-auto d-none d-lg-block">
-                    @include('components.nav-login')
+                    @include('components.app.nav-login')
                 </div>
             </div>
         </div>
@@ -67,7 +67,8 @@
                 <form action="{{ route("search") }}" class="d-lg-none flex-grow-1 pl-3 pl-sm-4 pl-md-5">
                     @csrf
                     <div class="input-group">
-                        <input type="text" placeholder="Search movie..." class="form-control border-0 searchbar__input" name="query">
+                        <input type="text" placeholder="Search movie..." class="form-control border-0 searchbar__input"
+                               name="query">
                         <button class="btn btn-info input-group-append d-flex align-items-center" type="submit">
                             <i class="fas fa-search"></i>
                         </button>
@@ -105,98 +106,16 @@
                             </a>
                         </div>
                     </li>
-                    <li class="nav-item dropdown hover">
-                        <a href="#"
-                           role="button"
-                           class="nav-link"
-                           data-toggle="dropdown"
-                           aria-haspopup="true"
-                           aria-expanded="false"
-                        >
-                            Categories
-                        </a>
-                        <div class="dropdown-menu">
-                            @foreach($categories as $category)
-                                <a class="dropdown-item {{ request()->query('category') == $category->id ? 'active' : '' }}"
-                                   href="{{ route('search') . '?category=' . $category->id }}"
-                                >
-                                    {{ $category->name }}
-                                </a>
-                            @endforeach
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown hover">
-                        <a href="#"
-                           role="button"
-                           class="nav-link"
-                           data-toggle="dropdown"
-                           aria-haspopup="true"
-                           aria-expanded="false"
-                        >
-                            Genres
-                        </a>
-                        <div class="dropdown-menu wide">
-                            <div class="row no-gutters">
-                                @foreach($genres as $genre)
-                                    <div class="col-md-4">
-                                        <a class="dropdown-item {{ request()->query('genre') == $genre->id ? 'active' : '' }}"
-                                           href="{{ route('search')  . '?genre=' . $genre->id }}"
-                                        >
-                                            {{ $genre->name }}
-                                        </a>
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown hover">
-                        <a href="#"
-                           role="button"
-                           class="nav-link"
-                           data-toggle="dropdown"
-                           aria-haspopup="true"
-                           aria-expanded="false"
-                        >
-                            Languages
-                        </a>
-                        <div class="dropdown-menu">
-                            @foreach($languages as $language)
-                                <a class="dropdown-item {{ request()->query('language') == $language->id ? 'active' : '' }}"
-                                   href="{{ route('search') . '?language=' . $language->id }}"
-                                >
-                                    {{ $language->name }}
-                                </a>
-                            @endforeach
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown hover">
-                        <a href="#"
-                           role="button"
-                           class="nav-link"
-                           data-toggle="dropdown"
-                           aria-haspopup="true"
-                           aria-expanded="false"
-                        >
-                            Nations
-                        </a>
-                        <div class="dropdown-menu">
-                            @foreach($nations as $nation)
-                                <div class="col-md-4">
-                                    <a class="dropdown-item {{ request()->query('nation') == $nation->id ? 'active' : '' }}"
-                                       href="{{ route('search') . '?nation=' . $nation->id }}"
-                                    >
-                                        {{ $nation->name }}
-                                    </a>
-                                </div>
-                            @endforeach
-                        </div>
-                    </li>
+                    @include('components.app.nav-dropdown', ['name' => 'Categories', 'type' => 'category', 'items' => $categories])
+                    @include('components.app.nav-dropdown', ['name' => 'Genres', 'type' => 'genres', 'items' => $genres])
+                    @include('components.app.nav-dropdown', ['name' => 'Languages', 'type' => 'language', 'items' => $languages])
+                    @include('components.app.nav-dropdown', ['name' => 'Nations', 'type' => 'nation', 'items' => $nations])
                 </ul>
 
                 <!-- Right Side of Navbar -->
                 <div class="d-lg-none">
                     <hr class="border-light my-2">
-                    @include('components.nav-login')
+                    @include('components.app.nav-login')
                 </div>
             </div>
         </div>

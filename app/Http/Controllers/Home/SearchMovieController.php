@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Movie\Movie;
 use App\Models\Movie\MovieCategory;
 use App\Models\Movie\MovieGenre;
+use Exception;
 use Illuminate\Http\Request;
 use View;
 
@@ -49,6 +50,21 @@ class SearchMovieController extends BaseController
 
         return view('home.search-movie', [
             'movies' => $movies->paginate(24)
+        ]);
+    }
+
+    public function typeSearch(Request $request)
+    {
+        try {
+            $movies = Movie::whereHas($request->query('type'), function ($type) use ($request) {
+                $type->where('id', $request->query('id'));
+            });
+        } catch (Exception $e) {
+            return abort(404);
+        }
+
+        return view('home.subtype', [
+            'movies' => $movies->paginate(24),
         ]);
     }
 }

@@ -17,12 +17,14 @@
         <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
         @if($movie->category)
             <li class="breadcrumb-item">
-                <a href="{{ route('search') . '?category=' . $movie->category->id }}">{{ $movie->category->name }}</a>
+                <a href="{{ route_with_query('type', ['id' => $movie->category->id, 'name' => $movie->category->name, 'type' => 'category'])}}">
+                    {{ $movie->category->name }}
+                </a>
             </li>
         @endif
         @if($movie->language)
             <li class="breadcrumb-item">
-                <a href="{{ route('search') . '?language=' . $movie->language->id }}">{{ $movie->language->name }}</a>
+                <a href="{{ route_with_query('type', ['id' => $movie->language->id, 'name' => $movie->language->name, 'type' => 'language'])}}">{{ $movie->language->name }}</a>
             </li>
         @endif
         <li class="breadcrumb-item active">{{ $movie->name }}</li>

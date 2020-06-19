@@ -32,6 +32,7 @@ Route::group(['namespace' => 'Home'], function () {
     Route::get('/new/update', 'NewMovieController@newByUpdateDate')->name('new.update');
 
     Route::get('/search', 'SearchMovieController@simpleSearch')->name('search');
+    Route::get('/search/type', 'SearchMovieController@typeSearch')->name('type');
     Route::get('/search/advanced', 'SearchMovieController@advancedSearch')->name('search.advanced');
 });
 
