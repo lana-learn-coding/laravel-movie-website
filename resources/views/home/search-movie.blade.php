@@ -39,7 +39,7 @@
 @section('content.body')
     <div>
         <h4 class="mb-2">Result for "{{ request()->query('query') ?: 'All Movies' }}"</h4>
-        <hr class="mt-2 border-info">
+        <hr class="mt-2 mb-0 border-info">
     </div>
     @include('components.movie.movie-page', ['movies' => $movies])
 @endsection
