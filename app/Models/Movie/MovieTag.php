@@ -2,29 +2,33 @@
 
 namespace App\Models\Movie;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\BaseModel;
+use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Carbon;
 
 /**
  * App\Models\Movie\MovieTag
  *
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Movie\Movie[] $movies
+ * @property-read Collection|Movie[] $movies
  * @property-read int|null $movies_count
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\MovieTag newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\MovieTag newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\MovieTag query()
- * @mixin \Eloquent
+ * @method static Builder|MovieTag newModelQuery()
+ * @method static Builder|MovieTag newQuery()
+ * @method static Builder|MovieTag query()
+ * @mixin Eloquent
  * @property int $id
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
  * @property string $name
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\MovieTag whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\MovieTag whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\MovieTag whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\MovieTag whereUpdatedAt($value)
+ * @method static Builder|MovieTag whereCreatedAt($value)
+ * @method static Builder|MovieTag whereId($value)
+ * @method static Builder|MovieTag whereName($value)
+ * @method static Builder|MovieTag whereUpdatedAt($value)
  */
-class MovieTag extends Model
+class MovieTag extends BaseModel
 {
-    protected $fillable = [
+    protected array $fillable = [
         "name"
     ];
 

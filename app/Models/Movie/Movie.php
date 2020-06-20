@@ -2,67 +2,72 @@
 
 namespace App\Models\Movie;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\BaseModel;
+use App\Models\Cast;
+use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Carbon;
 
 /**
  * App\Models\Movie\Movie
  *
  * @property int $id
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
  * @property string $name
  * @property string|null $description
  * @property string|null $releaseDate
  * @property string|null $image
  * @property int $viewCount
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Movie\MovieGenre[] $categories
+ * @property-read Collection|MovieGenre[] $categories
  * @property-read int|null $categories_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Movie\MovieEpisode[] $episodes
+ * @property-read Collection|MovieEpisode[] $episodes
  * @property-read int|null $episodes_count
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movie newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movie newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movie query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movie whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movie whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movie whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movie whereImage($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movie whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movie whereReleaseDate($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movie whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movie whereViewCount($value)
- * @mixin \Eloquent
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Movie\MovieTag[] $tags
+ * @method static Builder|Movie newModelQuery()
+ * @method static Builder|Movie newQuery()
+ * @method static Builder|Movie query()
+ * @method static Builder|Movie whereCreatedAt($value)
+ * @method static Builder|Movie whereDescription($value)
+ * @method static Builder|Movie whereId($value)
+ * @method static Builder|Movie whereImage($value)
+ * @method static Builder|Movie whereName($value)
+ * @method static Builder|Movie whereReleaseDate($value)
+ * @method static Builder|Movie whereUpdatedAt($value)
+ * @method static Builder|Movie whereViewCount($value)
+ * @mixin Eloquent
+ * @property-read Collection|MovieTag[] $tags
  * @property-read int|null $tags_count
  * @property string $release_date
  * @property string $length
  * @property-read mixed $views_by_day
  * @property-read mixed $views_by_month
  * @property-read mixed $views_by_week
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Movie\MovieView[] $views
+ * @property-read Collection|MovieView[] $views
  * @property-read int|null $views_count
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movie whereLength($value)
+ * @method static Builder|Movie whereLength($value)
  * @property int|null $movie_category_id
- * @property-read \App\Models\Movie\MovieCategory $category
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Movie\MovieCategory[] $genres
+ * @property-read MovieCategory $category
+ * @property-read Collection|MovieCategory[] $genres
  * @property-read int|null $genres_count
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movie whereMovieCategoryId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movie hot()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movie new()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movie newUpdate()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movie newRelease()
+ * @method static Builder|Movie whereMovieCategoryId($value)
+ * @method static Builder|Movie hot()
+ * @method static Builder|Movie new()
+ * @method static Builder|Movie newUpdate()
+ * @method static Builder|Movie newRelease()
  * @property-read mixed $number_of_episodes
  * @property int|null $movie_language_id
  * @property int|null $movie_nation_id
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Cast[] $casts
+ * @property-read Collection|Cast[] $casts
  * @property-read int|null $casts_count
- * @property-read \App\Models\Movie\MovieLanguage $language
- * @property-read \App\Models\Movie\MovieNation $nation
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movie whereMovieLanguageId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movie whereMovieNationId($value)
+ * @property-read MovieLanguage $language
+ * @property-read MovieNation $nation
+ * @method static Builder|Movie whereMovieLanguageId($value)
+ * @method static Builder|Movie whereMovieNationId($value)
  */
-class Movie extends Model
+class Movie extends BaseModel
 {
-    protected $fillable = [
+    protected array $fillable = [
         "name", "release_date", "description", "image", "length",
     ];
 

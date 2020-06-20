@@ -2,29 +2,33 @@
 
 namespace App\Models\Movie;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\BaseModel;
+use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Carbon;
 
 /**
  * App\Models\Movie\MovieCategory
  *
  * @property int $id
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
  * @property string $name
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Movie\Movie[] $movies
+ * @property-read Collection|Movie[] $movies
  * @property-read int|null $movies_count
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\MovieCategory newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\MovieCategory newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\MovieCategory query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\MovieCategory whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\MovieCategory whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\MovieCategory whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\MovieCategory whereUpdatedAt($value)
- * @mixin \Eloquent
+ * @method static Builder|MovieCategory newModelQuery()
+ * @method static Builder|MovieCategory newQuery()
+ * @method static Builder|MovieCategory query()
+ * @method static Builder|MovieCategory whereCreatedAt($value)
+ * @method static Builder|MovieCategory whereId($value)
+ * @method static Builder|MovieCategory whereName($value)
+ * @method static Builder|MovieCategory whereUpdatedAt($value)
+ * @mixin Eloquent
  */
-class MovieCategory extends Model
+class MovieCategory extends BaseModel
 {
-    protected $fillable = [
+    protected array $fillable = [
         "name",
     ];
 
