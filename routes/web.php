@@ -39,4 +39,9 @@ Route::group(['namespace' => 'Home'], function () {
 Route::get('/movies/{id}', 'MovieController@movie')->name('movie');
 Route::get('/movies/{id}/watch', 'MovieController@watchMovieIndex')->name('movie.watch');
 Route::get('/movies/{id}/watch/{ep}', 'MovieController@watchMovie')->name('movie.watch.ep');
-Route::get('/admin', 'AdminController@index')->name('admin');
+
+Route::group(['namespace' => 'Admin'], function () {
+    Route::get('/admin', 'AdminController@index')->name('admin');
+
+});
+
