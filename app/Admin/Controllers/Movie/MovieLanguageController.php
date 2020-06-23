@@ -1,20 +1,21 @@
 <?php
 
-namespace App\Admin\Controllers;
+namespace App\Admin\Controllers\Movie;
 
+use App\Models\Movie\MovieLanguage;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 
-class ExampleController extends AdminController
+class MovieLanguageController extends AdminController
 {
     /**
      * Title for current resource.
      *
      * @var string
      */
-    protected $title = 'Example controller';
+    protected $title = 'MovieLanguage';
 
     /**
      * Make a grid builder.
@@ -23,10 +24,10 @@ class ExampleController extends AdminController
      */
     protected function grid()
     {
-        $grid = new Grid(new ExampleModel);
+        $grid = new Grid(new MovieLanguage());
 
-        $grid->column('id', __('ID'))->sortable();
-        $grid->column('created_at', __('Created at'));
+        $grid->column('id', __('Id'));
+        $grid->column('name', __('Name'));
         $grid->column('updated_at', __('Updated at'));
 
         return $grid;
@@ -35,16 +36,17 @@ class ExampleController extends AdminController
     /**
      * Make a show builder.
      *
-     * @param mixed   $id
+     * @param mixed $id
      * @return Show
      */
     protected function detail($id)
     {
-        $show = new Show(ExampleModel::findOrFail($id));
+        $show = new Show(MovieLanguage::findOrFail($id));
 
-        $show->field('id', __('ID'));
+        $show->field('id', __('Id'));
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
+        $show->field('name', __('Name'));
 
         return $show;
     }
@@ -56,11 +58,9 @@ class ExampleController extends AdminController
      */
     protected function form()
     {
-        $form = new Form(new ExampleModel);
+        $form = new Form(new MovieLanguage());
 
-        $form->display('id', __('ID'));
-        $form->display('created_at', __('Created At'));
-        $form->display('updated_at', __('Updated At'));
+        $form->text('name', __('Name'));
 
         return $form;
     }
