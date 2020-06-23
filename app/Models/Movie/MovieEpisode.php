@@ -36,7 +36,7 @@ use Illuminate\Support\Carbon;
  */
 class MovieEpisode extends BaseModel
 {
-    protected array $fillable = [
+    protected $fillable = [
         "name", "number", "high", "medium", "low",
     ];
 

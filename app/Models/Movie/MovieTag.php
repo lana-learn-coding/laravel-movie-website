@@ -28,7 +28,7 @@ use Illuminate\Support\Carbon;
  */
 class MovieTag extends BaseModel
 {
-    protected array $fillable = [
+    protected $fillable = [
         "name"
     ];
 

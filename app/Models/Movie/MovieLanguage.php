@@ -28,7 +28,7 @@ use Illuminate\Support\Carbon;
  */
 class MovieLanguage extends Model
 {
-    protected array $fillable = [
+    protected $fillable = [
         "name",
     ];
 

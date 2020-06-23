@@ -28,7 +28,7 @@ use Illuminate\Support\Carbon;
  */
 class MovieNation extends BaseModel
 {
-    protected array $fillable = [
+    protected $fillable = [
         "name",
     ];
 

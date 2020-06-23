@@ -27,9 +27,9 @@ use Illuminate\Database\Eloquent\Builder;
  */
 class MovieView extends BaseModel
 {
-    public bool $timestamps = false;
+    public $timestamps = false;
 
-    protected array $fillable = [
+    protected $fillable = [
         "count", "date"
     ];
 

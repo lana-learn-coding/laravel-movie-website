@@ -33,7 +33,7 @@ use Illuminate\Support\Carbon;
  */
 class Cast extends Model
 {
-    protected array $fillable = ['name', 'birth_date', 'avatar'];
+    protected $fillable = ['name', 'birth_date', 'avatar'];
 
     public function movies()
     {

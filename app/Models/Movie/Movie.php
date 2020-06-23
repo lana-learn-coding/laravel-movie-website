@@ -67,7 +67,7 @@ use Illuminate\Support\Carbon;
  */
 class Movie extends BaseModel
 {
-    protected array $fillable = [
+    protected $fillable = [
         "name", "release_date", "description", "image", "length",
     ];
 
