@@ -1,5 +1,7 @@
 <?php
 
+use Encore\Admin\Grid\Displayers\DropdownActions;
+
 return [
 
     /*
@@ -374,7 +376,7 @@ return [
     | The global Grid action display class.
     |--------------------------------------------------------------------------
     */
-    'grid_action_class' => \Encore\Admin\Grid\Displayers\DropdownActions::class,
+    'grid_action_class' => DropdownActions::class,
 
     /*
     |--------------------------------------------------------------------------
@@ -396,6 +398,8 @@ return [
     |
     */
     'extensions' => [
-
+        'media-manager' => [
+            'disk' => 'public'
+        ],
     ],
 ];
