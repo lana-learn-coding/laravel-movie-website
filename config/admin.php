@@ -11,7 +11,7 @@ return [
     | login page.
     |
     */
-    'name' => 'Laravel-admin',
+    'name' => 'LaMovies',
 
     /*
     |--------------------------------------------------------------------------
@@ -22,7 +22,7 @@ return [
     | `img` tag, eg '<img src="http://logo-url" alt="Admin logo">'.
     |
     */
-    'logo' => '<b>Laravel</b> admin',
+    'logo' => '<b>Lana</b> Movies',
 
     /*
     |--------------------------------------------------------------------------
@@ -34,7 +34,7 @@ return [
     | '<img src="http://logo-url" alt="Admin logo">'.
     |
     */
-    'logo-mini' => '<b>La</b>',
+    'logo-mini' => '<b>Lm</b>',
 
     /*
     |--------------------------------------------------------------------------
@@ -60,7 +60,7 @@ return [
 
         'prefix' => env('ADMIN_ROUTE_PREFIX', 'admin'),
 
-        'namespace' => 'App\\Admin\\Controllers',
+        'namespace' => '',
 
         'middleware' => ['web', 'admin'],
     ],
@@ -116,7 +116,7 @@ return [
 
         'guards' => [
             'admin' => [
-                'driver'   => 'session',
+                'driver' => 'session',
                 'provider' => 'admin',
             ],
         ],
@@ -124,7 +124,7 @@ return [
         'providers' => [
             'admin' => [
                 'driver' => 'eloquent',
-                'model'  => Encore\Admin\Auth\Database\Administrator::class,
+                'model' => Encore\Admin\Auth\Database\Administrator::class,
             ],
         ],
 
@@ -159,7 +159,7 @@ return [
         // Image and file upload path under the disk above.
         'directory' => [
             'image' => 'images',
-            'file'  => 'files',
+            'file' => 'files',
         ],
     ],
 
@@ -193,11 +193,11 @@ return [
         'menu_model' => Encore\Admin\Auth\Database\Menu::class,
 
         // Pivot table for table above.
-        'operation_log_table'    => 'admin_operation_log',
+        'operation_log_table' => 'admin_operation_log',
         'user_permissions_table' => 'admin_user_permissions',
-        'role_users_table'       => 'admin_role_users',
+        'role_users_table' => 'admin_role_users',
         'role_permissions_table' => 'admin_role_permissions',
-        'role_menu_table'        => 'admin_role_menu',
+        'role_menu_table' => 'admin_role_menu',
     ],
 
     /*
@@ -240,7 +240,7 @@ return [
     | Indicates whether to check menu roles.
     |--------------------------------------------------------------------------
     */
-    'check_menu_roles'       => true,
+    'check_menu_roles' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -276,7 +276,7 @@ return [
     |    "skin-red", "skin-red-light", "skin-black", "skin-black-light".
     |
     */
-    'skin' => 'skin-blue-light',
+    'skin' => 'skin-blue',
 
     /*
     |--------------------------------------------------------------------------
@@ -290,7 +290,7 @@ return [
     | "sidebar-mini".
     |
     */
-    'layout' => ['sidebar-mini', 'sidebar-collapse'],
+    'layout' => ['sidebar-mini', 'fixed'],
 
     /*
     |--------------------------------------------------------------------------
