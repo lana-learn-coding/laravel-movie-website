@@ -3,6 +3,9 @@
 namespace App\Admin\Controllers\Movie;
 
 use App\Models\Movie\Movie;
+use App\Models\Movie\MovieCategory;
+use App\Models\Movie\MovieLanguage;
+use App\Models\Movie\MovieNation;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -26,14 +29,21 @@ class MovieController extends AdminController
     {
         $grid = new Grid(new Movie());
 
-        $grid->column('id', __('Id'));
-        $grid->column('name', __('Name'));
-        $grid->column('release_date', __('Release date'));
-        $grid->column('updated_at', __('Updated at'));
-        $grid->column('length', __('Length'));
-        $grid->column('movie_category_id', __('Movie category id'));
-        $grid->column('movie_language_id', __('Movie language id'));
-        $grid->column('movie_nation_id', __('Movie nation id'));
+        $grid->column('id', __('Id'))->hide()->sortable();
+        $grid->column('name', __('Name'))->sortable();
+        $grid->column('description', __('Description'))->hide();
+        $grid->column('image', __('Cover'))->image()->hide();
+        $grid->column('category.name', __('Category'));
+        $grid->column('language.name', __('Language'));
+        $grid->column('nation.name', __('Nation'));
+        $grid->column('updated_at', __('Updated at'))->hide()->sortable();
+
+        $grid->filter(function ($filter) {
+            $filter->disableIdFilter();
+            $filter->like('name', __('Name'));
+            $filter->between('updated_at', __('Updated At'));
+        });
+
         return $grid;
     }
 
@@ -45,20 +55,26 @@ class MovieController extends AdminController
      */
     protected function detail($id)
     {
-        $show = new Show(Movie::findOrFail($id));
+        $detail = Movie::findOrFail($id);
+        $show = new Show($detail);
 
         $show->field('id', __('Id'));
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
         $show->field('name', __('Name'));
         $show->field('description', __('Description'));
-        $show->field('image', __('Image'));
+        $show->field('image', __('Image'))->image();
         $show->field('release_date', __('Release date'));
         $show->field('length', __('Length'));
-        $show->field('movie_category_id', __('Movie category id'));
-        $show->field('movie_language_id', __('Movie language id'));
-        $show->field('movie_nation_id', __('Movie nation id'));
-
+        $show->field('movie_nation_id', __('Nation'))->as(function ($id) use ($detail) {
+            return $detail->nation->name ?? '';
+        });
+        $show->field('movie_language_id', __('Language'))->as(function ($id) use ($detail) {
+            return $detail->language->name ?? '';
+        });
+        $show->field('movie_category_id', __('Category'))->as(function ($id) use ($detail) {
+            return $detail->category->name ?? '';
+        });
         return $show;
     }
 
@@ -71,14 +87,14 @@ class MovieController extends AdminController
     {
         $form = new Form(new Movie());
 
-        $form->text('name', __('Name'));
+        $form->text('name', __('Name'))->required();
         $form->textarea('description', __('Description'));
         $form->image('image', __('Image'));
-        $form->date('release_date', __('Release date'))->default(date('Y-m-d'));
-        $form->number('length', __('Length'));
-        $form->number('movie_category_id', __('Movie category id'));
-        $form->number('movie_language_id', __('Movie language id'));
-        $form->number('movie_nation_id', __('Movie nation id'));
+        $form->date('release_date', __('Release date'))->default(date('Y-m-d'))->required();
+        $form->number('length', __('Length'))->required();
+        $form->select('movie_category_id', __('Category'))->options(MovieCategory::all()->pluck('name', 'id'));
+        $form->select('movie_language_id', __('Language'))->options(MovieLanguage::all()->pluck('name', 'id'));
+        $form->select('movie_nation_id', __('Nation'))->options(MovieNation::all()->pluck('name', 'id'));
 
         return $form;
     }
