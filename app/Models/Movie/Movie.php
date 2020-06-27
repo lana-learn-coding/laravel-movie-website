@@ -68,12 +68,12 @@ use Illuminate\Support\Carbon;
 class Movie extends BaseModel
 {
     protected $fillable = [
-        "name", "release_date", "description", "image", "length",
+        "name", "release_date", "description", "image", "length", "total_episodes"
     ];
 
     function getNumberOfEpisodesAttribute()
     {
-        return $this->views()->count('id');
+        return $this->episodes()->get()->unique('number')->count();
     }
 
     // TODO: query view from view table;
@@ -90,6 +90,11 @@ class Movie extends BaseModel
     public function getViewsByMonthAttribute()
     {
         return 100;
+    }
+
+    public function getViewsByAllTimeAttribute()
+    {
+        return $this->views()->get()->sum('view');
     }
 
     public function scopeNewRelease($query)
