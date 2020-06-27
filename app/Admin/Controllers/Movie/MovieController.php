@@ -4,6 +4,7 @@ namespace App\Admin\Controllers\Movie;
 
 use App\Models\Movie\Movie;
 use App\Models\Movie\MovieCategory;
+use App\Models\Movie\MovieGenre;
 use App\Models\Movie\MovieLanguage;
 use App\Models\Movie\MovieNation;
 use Encore\Admin\Controllers\AdminController;
@@ -36,6 +37,7 @@ class MovieController extends AdminController
         $grid->column('category.name', __('Category'));
         $grid->column('language.name', __('Language'));
         $grid->column('nation.name', __('Nation'));
+        $grid->column('genres', __('Genres'))->pluck('name')->label();
         $grid->column('updated_at', __('Updated at'))->hide()->sortable();
 
         $grid->filter(function ($filter) {
@@ -59,21 +61,30 @@ class MovieController extends AdminController
         $show = new Show($detail);
 
         $show->field('id', __('Id'));
-        $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
         $show->field('name', __('Name'));
         $show->field('description', __('Description'));
         $show->field('image', __('Image'))->image();
         $show->field('release_date', __('Release date'));
         $show->field('length', __('Length'));
-        $show->field('movie_nation_id', __('Nation'))->as(function ($id) use ($detail) {
-            return $detail->nation->name ?? '';
+        $show->field('number_of_episodes', __('Number of Eps'))->as(function ($numberOfEps) use ($detail) {
+            return $numberOfEps . '/' . ($detail->total_episodes ?? '???');
         });
-        $show->field('movie_language_id', __('Language'))->as(function ($id) use ($detail) {
-            return $detail->language->name ?? '';
-        });
-        $show->field('movie_category_id', __('Category'))->as(function ($id) use ($detail) {
-            return $detail->category->name ?? '';
+
+        $show->field('nation.name', __('Nation'));
+        $show->field('language.name', __('Language'));
+        $show->field('category.name', __('Category'));
+
+        $show->episodes('Episodes', function ($episodes) {
+            $episodes->resource('/admin/movies/episodes');
+
+            $episodes->id()->hide();
+            $episodes->number()->sortable()->searchable();
+            $episodes->quality()->sortable()->searchable();
+            $episodes->name()->hide();
+            $episodes->updated_at()->sortable();
+
+            $episodes->disableFilter();
         });
         return $show;
     }
@@ -91,10 +102,25 @@ class MovieController extends AdminController
         $form->textarea('description', __('Description'));
         $form->image('image', __('Image'));
         $form->date('release_date', __('Release date'))->default(date('Y-m-d'))->required();
-        $form->number('length', __('Length'))->required();
-        $form->select('movie_category_id', __('Category'))->options(MovieCategory::all()->pluck('name', 'id'));
-        $form->select('movie_language_id', __('Language'))->options(MovieLanguage::all()->pluck('name', 'id'));
-        $form->select('movie_nation_id', __('Nation'))->options(MovieNation::all()->pluck('name', 'id'));
+        $form->number('length', __('Length'))->required()->rules('integer|min:1');
+        $form->text('total_episodes', 'Total Episodes')->rules('nullable|integer|min:1');
+        $form->multipleSelect('genres', __('Genres'))->options(MovieGenre::all()->pluck('name', 'id'))->required();
+        $form->select('movie_category_id', __('Category'))->options(MovieCategory::all()->pluck('name', 'id'))->required();
+        $form->select('movie_language_id', __('Language'))->options(MovieLanguage::all()->pluck('name', 'id'))->required();
+        $form->select('movie_nation_id', __('Nation'))->options(MovieNation::all()->pluck('name', 'id'))->required();
+
+        if ($form->isCreating()) {
+            $form->hasMany('episodes', __('Episode'), function (Form\NestedForm $form) {
+                $form->number('number', __('Number'))->required()->rules('integer|min:1');
+                $form->text('name', __('Name'))->required();
+                $form->select('quality', __('Quality'))->options([
+                    '360' => '360p',
+                    '720' => '720p',
+                    '1080' => '1080p',
+                ])->required();
+                $form->file('file', __('File'))->required()->rules('mimes:mp4');
+            });
+        }
 
         return $form;
     }
