@@ -24,6 +24,7 @@ Route::group([
 
     $router->resource('movies/tags', 'Movie\MovieTagController');
     $router->resource('movies/categories', 'Movie\MovieCategoryController');
+    $router->resource('movies/episodes', 'Movie\MovieEpisodeController');
     $router->resource('movies/genres', 'Movie\MovieGenreController');
     $router->resource('movies', 'Movie\MovieController');
 
