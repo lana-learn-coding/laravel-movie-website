@@ -33,11 +33,15 @@ use Illuminate\Support\Carbon;
  * @method static Builder|MovieEpisode whereHigh($value)
  * @method static Builder|MovieEpisode whereLow($value)
  * @method static Builder|MovieEpisode whereMedium($value)
+ * @property string $file
+ * @property string $quality
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\MovieEpisode whereFile($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\MovieEpisode whereQuality($value)
  */
 class MovieEpisode extends BaseModel
 {
     protected $fillable = [
-        "name", "number", "high", "medium", "low",
+        "name", "number", "quality", "file"
     ];
 
     public function movie()
