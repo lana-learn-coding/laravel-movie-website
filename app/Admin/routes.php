@@ -19,13 +19,13 @@ Route::group([
 ], function (Router $router) {
     $router->get('/', '\App\Admin\Controllers\HomeController@index');
 
-    $router->resource('movies/languages', MovieLanguageController::class);
-    $router->resource('movies/nations', MovieNationController::class);
+    $router->resource('movies/languages', 'Movie\MovieLanguageController');
+    $router->resource('movies/nations', 'Movie\MovieNationController');
 
-    $router->resource('movies/tags', MovieTagController::class);
-    $router->resource('movies/categories', MovieCategoryController::class);
-    $router->resource('movies/genres', MovieGenreController::class);
-    $router->resource('movies', MovieController::class);
+    $router->resource('movies/tags', 'Movie\MovieTagController');
+    $router->resource('movies/categories', 'Movie\MovieCategoryController');
+    $router->resource('movies/genres', 'Movie\MovieGenreController');
+    $router->resource('movies', 'Movie\MovieController');
 
-    $router->resource('casts', CastController::class);
+    $router->resource('casts', 'Movie\CastController');
 });
