@@ -39,6 +39,7 @@ class MovieController extends AdminController
         $grid->column('nation.name', __('Nation'));
         $grid->column('genres', __('Genres'))->pluck('name')->label();
         $grid->column('updated_at', __('Updated at'))->hide()->sortable();
+        $grid->column('created_at', __('Created at'))->hide()->sortable();
 
         $grid->filter(function ($filter) {
             $filter->disableIdFilter();

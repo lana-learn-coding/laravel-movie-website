@@ -35,6 +35,7 @@ class MovieEpisodeController extends AdminController
         $grid->column('quality', __('Quality'))->sortable();
         $grid->column('movie_id', __('Movie Id'))->sortable()->hide()->searchable();
         $grid->column('updated_at', __('Updated at'))->sortable();
+        $grid->column('created_at', __('Created at'))->hide()->sortable();
 
         $grid->filter(function ($filter) {
             $filter->disableIdFilter();
