@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers\Movie;
 
+use App\Admin\Selectables\CastSelectable;
 use App\Models\Movie\Movie;
 use App\Models\Movie\MovieCategory;
 use App\Models\Movie\MovieGenre;
@@ -33,18 +34,19 @@ class MovieController extends AdminController
         $grid->column('id', __('Id'))->hide()->sortable();
         $grid->column('name', __('Name'))->sortable();
         $grid->column('description', __('Description'))->hide();
-        $grid->column('image', __('Cover'))->image()->hide();
-        $grid->column('category.name', __('Category'));
-        $grid->column('language.name', __('Language'));
-        $grid->column('nation.name', __('Nation'));
         $grid->column('genres', __('Genres'))->pluck('name')->label();
+        $grid->column('casts', __('Casts'))->pluck('name')->label('info');
+        $grid->column('image', __('Cover'))->image()->hide();
+        $grid->column('category.name', __('Category'))->hide();
+        $grid->column('language.name', __('Language'));
+        $grid->column('nation.name', __('Nation'))->hide();
         $grid->column('updated_at', __('Updated at'))->hide()->sortable();
         $grid->column('created_at', __('Created at'))->hide()->sortable();
 
         $grid->filter(function ($filter) {
             $filter->disableIdFilter();
             $filter->like('name', __('Name'));
-            $filter->between('updated_at', __('Updated At'));
+            $filter->between('updated_at', __('Updated At'))->date();
         });
 
         return $grid;
@@ -76,7 +78,7 @@ class MovieController extends AdminController
         $show->field('language.name', __('Language'));
         $show->field('category.name', __('Category'));
 
-        $show->episodes('Episodes', function ($episodes) {
+        $show->episodes('Episodes', function (Grid $episodes) {
             $episodes->resource('/admin/movies/episodes');
 
             $episodes->id()->hide();
@@ -87,6 +89,17 @@ class MovieController extends AdminController
 
             $episodes->disableFilter();
         });
+
+        $show->casts('Casts', function (Grid $casts) {
+            $casts->resource('/admin/casts');
+
+            $casts->id()->hide();
+            $casts->name();
+            $casts->updated_at()->sortable();
+
+            $casts->disableBatchActions();
+        });
+
         return $show;
     }
 
@@ -109,6 +122,8 @@ class MovieController extends AdminController
         $form->select('movie_category_id', __('Category'))->options(MovieCategory::all()->pluck('name', 'id'))->required();
         $form->select('movie_language_id', __('Language'))->options(MovieLanguage::all()->pluck('name', 'id'))->required();
         $form->select('movie_nation_id', __('Nation'))->options(MovieNation::all()->pluck('name', 'id'))->required();
+
+        $form->belongsToMany('casts', CastSelectable::class, __('Casts'));
 
         if ($form->isCreating()) {
             $form->hasMany('episodes', __('Episode'), function (Form\NestedForm $form) {

@@ -1,12 +1,6 @@
 <?php
 
-use App\Admin\Controllers\CastController;
-use App\Admin\Controllers\Movie\MovieCategoryController;
-use App\Admin\Controllers\Movie\MovieController;
-use App\Admin\Controllers\Movie\MovieGenreController;
-use App\Admin\Controllers\Movie\MovieLanguageController;
-use App\Admin\Controllers\Movie\MovieNationController;
-use App\Admin\Controllers\Movie\MovieTagController;
+use Encore\Admin\Facades\Admin;
 use Illuminate\Routing\Router;
 
 Admin::routes();
@@ -28,5 +22,5 @@ Route::group([
     $router->resource('movies/genres', 'Movie\MovieGenreController');
     $router->resource('movies', 'Movie\MovieController');
 
-    $router->resource('casts', 'Movie\CastController');
+    $router->resource('casts', 'CastController');
 });
