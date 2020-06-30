@@ -96,7 +96,7 @@ class CastController extends AdminController
         $form = new Form(new Cast());
 
         $form->text('name', __('Name'))->required();
-        $form->image('avatar', __('Avatar'));
+        $form->cropper('avatar', __('Avatar'))->cRatio(200, 250)->crop(200, 250);
         $form->date('birth_date', __('Birth date'))->default(date('Y-m-d'))->required();
 
         $form->belongsToMany('movies', MovieSelectable::class, __('Movies'));

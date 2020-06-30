@@ -403,6 +403,9 @@ return [
         ],
         'material-ui' => [
             'enable' => false
+        ],
+        'cropper' => [
+            'enable' => true
         ]
     ],
 ];
