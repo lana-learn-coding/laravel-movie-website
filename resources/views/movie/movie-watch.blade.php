@@ -24,14 +24,14 @@
             <div class="mt-5">
                 <h6 class="card-title font-weight-bold">Episode</h6>
                 <div>
-                    @for($i = 1; $i < 12; $i++)
-                        @if($i === 1)
-                            <a class="btn shadow-sm btn-sm mr-1 btn-info" href="#player">{{ $i }}</a>
+                    @foreach($movie->episode_list as $ep)
+                        @if($ep === request()->ep)
+                            <a class="btn shadow-sm btn-sm mr-1 btn-info" href="#player">{{ $ep->number }}</a>
                         @else
                             <a class="btn shadow-sm btn-sm mr-1 btn-primary"
-                               href="{{ route('movie.watch.ep', ['id' => $movie->id, 'ep' => $i]) }}">{{ $i }}</a>
+                               href="{{ route('movie.watch.ep', ['id' => $movie->id, 'ep' => $ep->number]) }}">{{ $ep->number }}</a>
                         @endif
-                    @endfor
+                    @endforeach
                 </div>
             </div>
         </div>

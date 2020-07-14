@@ -27,6 +27,14 @@ class MovieController extends BaseController
 
     function watchMovie(int $id, int $ep)
     {
-        return view('movie.movie-watch', ['movie' => Movie::findOrFail($id)]);
+        $movie = Movie::findOrFail($id);
+        $episode = $movie->episodes()->get()->firstWhere("number", "=", $ep);
+        if ($episode === null) {
+            abort(404);
+        }
+        return view('movie.movie-watch', [
+            'movie' => $movie,
+            'episode' => $episode
+        ]);
     }
 }

@@ -137,6 +137,11 @@ class Movie extends BaseModel
         return $this->hasMany("App\Models\Movie\MovieEpisode");
     }
 
+    public function getEpisodeListAttribute()
+    {
+        return $this->episodes()->get()->unique("number");
+    }
+
     public function category()
     {
         return $this->belongsTo("App\Models\Movie\MovieCategory", "movie_category_id");
