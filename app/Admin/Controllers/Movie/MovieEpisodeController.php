@@ -83,10 +83,14 @@ class MovieEpisodeController extends AdminController
         $form->number('number', __('Number'))->required()->rules('integer|min:1');
         $form->text('name', __('Name'))->required();
         $form->select('quality', __('Quality'))->options([
-            '720' => '720p',
-            '1080' => '1080p',
+            '360p' => '360p',
+            '480p' => '480p',
+            '720p' => '720p',
+            '1080p' => '1080p',
+            '2160p' => '2k',
+            '4096p' => '4k',
         ])->required();
-        $form->file('file', __('File'))->required()->rules('mimes:mp4');
+        $form->file('file', __('File'))->move('videos')->required()->rules('mimes:mp4');
 
         return $form;
     }
