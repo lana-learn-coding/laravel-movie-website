@@ -11,6 +11,8 @@
 |
 */
 
+use App\Http\VideoStream;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -39,3 +41,16 @@ Route::group(['namespace' => 'Home'], function () {
 Route::get('/movies/{id}', 'MovieController@movie')->name('movie');
 Route::get('/movies/{id}/watch', 'MovieController@watchMovieIndex')->name('movie.watch');
 Route::get('/movies/{id}/watch/{ep}', 'MovieController@watchMovie')->name('movie.watch.ep');
+
+Route::get('/streams/{path}', function ($path) {
+    $file = storage_path('app/uploads') . DIRECTORY_SEPARATOR . $path;
+
+    if (!file_exists($file)) {
+        abort(404);
+    }
+
+    $stream = new VideoStream($file);
+    return response()->stream(function () use ($stream) {
+        $stream->start();
+    });
+})->where('path', '(.*)');
