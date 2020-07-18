@@ -17,13 +17,16 @@
         </div>
     </div>
     <div class="card mt-4">
-        <div class="card-body card-font-size-lg">
+        <div class="card-body card-font-size-lg" id="player">
             <video
                 id="video"
                 class="video-js vjs-fluid vjs-16-9"
             >
                 @foreach($episodes  as $ep)
-                    <source src="{{ url('streams/' . $ep->file) }}" type="video/mp4" label="{{ $ep->quality }}"/>
+                    <source src="{{ route('stream.video', ['path' => $ep->file]) }}"
+                            type="video/mp4"
+                            label="{{ $ep->quality }}"
+                    >
                 @endforeach
                 <p class="vjs-no-js">
                     To view this video please enable JavaScript, and consider upgrading to a
@@ -34,8 +37,9 @@
                 <h6 class="card-title font-weight-bold">Episode</h6>
                 <div>
                     @foreach($movie->episode_list as $ep)
-                        @if($ep === request()->ep)
-                            <a class="btn shadow-sm btn-sm mr-1 btn-info" href="#video">{{ $ep->number }}</a>
+                        @if($ep->number == request()->ep)
+                            <a class="btn shadow-sm btn-sm mr-1 btn-info"
+                               href="{{ route('movie.watch.ep', ['id' => $movie->id, 'ep' => $ep->number]) }}">{{ $ep->number }}</a>
                         @else
                             <a class="btn shadow-sm btn-sm mr-1 btn-primary"
                                href="{{ route('movie.watch.ep', ['id' => $movie->id, 'ep' => $ep->number]) }}">{{ $ep->number }}</a>

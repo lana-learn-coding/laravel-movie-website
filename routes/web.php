@@ -53,4 +53,4 @@ Route::get('/streams/{path}', function ($path) {
     return response()->stream(function () use ($stream) {
         $stream->start();
     });
-})->where('path', '(.*)');
+})->where('path', '(.*)')->name('stream.video');
