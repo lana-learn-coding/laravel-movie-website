@@ -41,7 +41,7 @@
                         </div>
                         <div class="mb-2">
                             <span class="font-weight-bold mr-2">Views: </span>
-                            <span>{{ $movie->views_by_all_time ?: 0 }}</span>
+                            <span>{{ $movie->views_count_by_all_time ?: 0 }}</span>
                         </div>
                     </div>
                     <div>

@@ -30,7 +30,8 @@ class MovieController extends BaseController
         $movie = Movie::findOrFail($id);
         $episodes = $movie->episodes()->get()
             ->where('number', '=', $ep)
-            ->unique('quality');
+            ->unique('quality')
+            ->sortByDesc('quality');
 
         if ($episodes->isEmpty()) {
             abort(404);
@@ -46,7 +47,7 @@ class MovieController extends BaseController
     {
         $movie = Movie::findOrFail($id);
         $movie->views()->create([
-            'date' => date('Y-m-d', time()),
+            'date' => date('Y-m-d'),
             'count' => 1
         ])->save();
         return response('', 200);

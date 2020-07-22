@@ -64,11 +64,19 @@ use Illuminate\Support\Carbon;
  * @property-read MovieNation $nation
  * @method static Builder|Movie whereMovieLanguageId($value)
  * @method static Builder|Movie whereMovieNationId($value)
+ * @property int|null $total_episodes
+ * @property-read mixed $episode_list
+ * @property-read mixed $views_by_all_time
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movie whereTotalEpisodes($value)
+ * @property-read mixed $views_count_by_all_time
+ * @property-read mixed $views_count_by_day
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movie hotByDay()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movie hotByMonth()
  */
 class Movie extends BaseModel
 {
     protected $fillable = [
-        "name", "release_date", "description", "image", "length", "total_episodes"
+        'name', 'release_date', 'description', 'image', 'length', 'total_episodes'
     ];
 
     function getNumberOfEpisodesAttribute()
@@ -76,84 +84,101 @@ class Movie extends BaseModel
         return $this->episodes()->get()->unique('number')->count();
     }
 
-    // TODO: query view from view table;
-    public function getViewsByDayAttribute()
+    public function getViewsCountByDayAttribute()
     {
-        return 100;
+        $oneDayAgo = date('Y-m-d', strtotime('-1 day'));
+        return $this->views()
+            ->whereBetween('date', [$oneDayAgo, date('Y-m-d')])
+            ->sum('count');
     }
 
-    public function getViewsByWeekAttribute()
+    public function getViewsCountByAllTimeAttribute()
     {
-        return 100;
-    }
-
-    public function getViewsByMonthAttribute()
-    {
-        return 100;
-    }
-
-    public function getViewsByAllTimeAttribute()
-    {
-        return $this->views()->get()->sum('view');
+        return $this->views()->sum('count');
     }
 
     public function scopeNewRelease($query)
     {
-        return $query->orderBy("release_date");
+        return $query->orderBy('release_date');
     }
 
     public function scopeNewUpdate($query)
     {
-        return $query->orderBy("updated_at");
+        return $query->orderBy('updated_at');
     }
 
     public function scopeHot($query)
     {
-        return $query->orderBy("views_by_week");
+        $now = date('Y-m-d');
+        $sevenDayAgo = date('Y-m-d', strtotime('-7 days'));
+
+        return $query->withCount(['views' => function ($query) use ($now, $sevenDayAgo) {
+            return $query->whereBetween('date', [$sevenDayAgo, $now]);
+        }])->orderByDesc('views_count');
+    }
+
+    public function scopeHotByDay($query)
+    {
+        $now = date('Y-m-d');
+        $oneDayAgo = date('Y-m-d', strtotime('-1 day'));
+
+        return $query->withCount(['views' => function ($query) use ($now, $oneDayAgo) {
+            return $query->whereBetween('date', [$oneDayAgo, $now]);
+        }])->orderByDesc('views_count');
+    }
+
+    public function scopeHotByMonth($query)
+    {
+        $now = date('Y-m-d');
+        $monthAgo = date('Y-m-d', strtotime('-1 month'));
+
+        return $query->withCount(['views' => function ($query) use ($now, $monthAgo) {
+            return $query->whereBetween('date', [$monthAgo, $now]);
+        }])->orderByDesc('views_count');
     }
 
     public function casts()
     {
-        return $this->belongsToMany("App\Models\Cast");
+        return $this->belongsToMany('App\Models\Cast');
     }
 
     public function views()
     {
-        return $this->hasMany("App\Models\Movie\MovieView");
+        return $this->hasMany('App\Models\Movie\MovieView');
     }
 
     public function tags()
     {
-        return $this->belongsToMany("App\Models\Movie\MovieTag");
+        return $this->belongsToMany('App\Models\Movie\MovieTag');
     }
 
     public function genres()
     {
-        return $this->belongsToMany("App\Models\Movie\MovieGenre");
+        return $this->belongsToMany('App\Models\Movie\MovieGenre');
     }
 
     public function episodes()
     {
-        return $this->hasMany("App\Models\Movie\MovieEpisode");
+        return $this->hasMany('App\Models\Movie\MovieEpisode');
     }
 
     public function getEpisodeListAttribute()
     {
-        return $this->episodes()->get()->unique("number");
+        return $this->episodes()->get()->unique('number');
     }
 
     public function category()
     {
-        return $this->belongsTo("App\Models\Movie\MovieCategory", "movie_category_id");
+        return $this->belongsTo('App\Models\Movie\MovieCategory', 'movie_category_id');
     }
 
     public function nation()
     {
-        return $this->belongsTo("App\Models\Movie\MovieNation", "movie_nation_id");
+        return $this->belongsTo('App\Models\Movie\MovieNation', 'movie_nation_id');
     }
 
     public function language()
     {
-        return $this->belongsTo("App\Models\Movie\MovieLanguage", "movie_language_id");
+        return $this->belongsTo('App\Models\Movie\MovieLanguage', 'movie_language_id');
     }
 }

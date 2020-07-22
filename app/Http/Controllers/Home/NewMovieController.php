@@ -11,7 +11,7 @@ class NewMovieController extends BaseController
     public function __construct()
     {
         parent::__construct();
-        $hotByDay = Movie::orderBy('views_by_day')->take(8)->get();
+        $hotByDay = Movie::hotByDay()->take(8)->get();
         View::share('hots', $hotByDay);
     }
 
