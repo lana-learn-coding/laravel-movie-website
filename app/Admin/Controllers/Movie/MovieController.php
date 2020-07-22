@@ -131,8 +131,11 @@ class MovieController extends AdminController
                 $form->text('name', __('Name'))->required();
                 $form->select('quality', __('Quality'))->options([
                     '360' => '360p',
+                    '480' => '480p',
                     '720' => '720p',
                     '1080' => '1080p',
+                    '2160' => '2k',
+                    '4096' => '4k',
                 ])->required();
                 $form->file('file', __('File'))->required()->rules('mimes:mp4');
             });

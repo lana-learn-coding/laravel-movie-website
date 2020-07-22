@@ -21,7 +21,7 @@ class CreateMovieEpisodesTable extends Migration
             $table->smallInteger('number')->unsigned();
 
             $table->string('file');
-            $table->string('quality');
+            $table->integer('quality');
 
             $table->integer('movie_id')->unsigned()->index();
             $table->foreign('movie_id')->references('id')->on('movies');
