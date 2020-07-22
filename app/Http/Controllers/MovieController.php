@@ -41,4 +41,14 @@ class MovieController extends BaseController
             'episodes' => $episodes
         ]);
     }
+
+    function bumpMovieViewsCount(int $id)
+    {
+        $movie = Movie::findOrFail($id);
+        $movie->views()->create([
+            'date' => date('Y-m-d', time()),
+            'count' => 1
+        ])->save();
+        return response('', 200);
+    }
 }

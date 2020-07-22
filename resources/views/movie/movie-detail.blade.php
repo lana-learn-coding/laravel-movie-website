@@ -39,12 +39,22 @@
                                 @endforeach
                             @endif
                         </div>
+                        <div class="mb-2">
+                            <span class="font-weight-bold mr-2">Views: </span>
+                            <span>{{ $movie->views_by_all_time ?: 0 }}</span>
+                        </div>
                     </div>
                     <div>
-                        <a class="btn btn-warning px-3" href="{{ route('movie.watch',['id' => $movie->id]) }}">
+                        <a class="btn btn-warning px-2 mr-2" href="{{ route('movie.watch',['id' => $movie->id]) }}">
                             <i class="fas fa-play-circle mr-1"></i>
-                            <span class="font-weight-bold">Watch Now</span>
+                            <span class="font-weight-bold">Watch</span>
                         </a>
+                        @auth
+                            <a class="btn btn-success px-2" href="{{ route('movie.watch', ['id' => $movie->id]) }}">
+                                <i class="fas fa-heart mr-1"></i>
+                                <span class="font-weight-bold">Favorite</span>
+                            </a>
+                        @endauth
                     </div>
                 </div>
             </div>
