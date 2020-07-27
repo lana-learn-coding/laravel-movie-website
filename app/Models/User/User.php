@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\User;
 
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
@@ -66,4 +66,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function favoriteMovies()
+    {
+        return $this->belongsToMany('App\Models\Movie\Movie', 'movie_user_favorite');
+    }
 }
