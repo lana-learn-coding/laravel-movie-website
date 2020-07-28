@@ -18,7 +18,18 @@
                     web browser that supports HTML5 video
                 </p>
             </video>
-            <div class="mt-5">
+            <div class="mt-2">
+                <div class="mb-4">
+                    @if(!Auth::check() || !Auth::user()->favoriteMovies()->where('id', $movie->id)->exists())
+                        <a class="btn btn-secondary btn-sm mr-2"
+                           href="{{ route("movie.favorite.set", ["id" => $movie->id]) }}">
+                            Add to favorite
+                        </a>
+                    @endif
+                    <a href="{{ route("movie", ["id" => $movie->id]) }}" class="btn btn-secondary btn-sm">
+                        Back to movie page
+                    </a>
+                </div>
                 <h6 class="card-title font-weight-bold">Episode</h6>
                 <div>
                     @foreach($movie->episode_list as $ep)
@@ -58,7 +69,6 @@
 
             this.one('play', () => setTimeout(() => {
                 $.post('{{ route('movie.views.bump', ['id' => $movie->id]) }}')
-                console.log("hi");
             }, fiveMinutes))
         });
     </script>

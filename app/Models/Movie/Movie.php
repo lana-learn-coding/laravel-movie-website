@@ -72,12 +72,72 @@ use Illuminate\Support\Carbon;
  * @property-read mixed $views_count_by_day
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movie hotByDay()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movie hotByMonth()
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User\User[] $comments
+ * @property-read int|null $comments_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User\User[] $favorites
+ * @property-read int|null $favorites_count
+ * @property-read mixed $rating_by_percent
  */
 class Movie extends BaseModel
 {
     protected $fillable = [
         'name', 'release_date', 'description', 'image', 'length', 'total_episodes'
     ];
+
+    public function favorites()
+    {
+        return $this->belongsToMany('App\Models\User\User', 'movie_user_favorite');
+    }
+
+    public function comments()
+    {
+        return $this->belongsToMany('App\Models\User\User', 'movie_user_comment')->using('App\Models\User\UserComment');
+    }
+
+    public function casts()
+    {
+        return $this->belongsToMany('App\Models\Cast');
+    }
+
+    public function views()
+    {
+        return $this->hasMany('App\Models\Movie\MovieView');
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany('App\Models\Movie\MovieTag');
+    }
+
+    public function genres()
+    {
+        return $this->belongsToMany('App\Models\Movie\MovieGenre');
+    }
+
+    public function episodes()
+    {
+        return $this->hasMany('App\Models\Movie\MovieEpisode');
+    }
+
+    public function category()
+    {
+        return $this->belongsTo('App\Models\Movie\MovieCategory', 'movie_category_id');
+    }
+
+    public function nation()
+    {
+        return $this->belongsTo('App\Models\Movie\MovieNation', 'movie_nation_id');
+    }
+
+    public function language()
+    {
+        return $this->belongsTo('App\Models\Movie\MovieLanguage', 'movie_language_id');
+    }
+
+    public function getEpisodeListAttribute()
+    {
+        return $this->episodes()->get()->unique('number');
+    }
 
     function getNumberOfEpisodesAttribute()
     {
@@ -95,6 +155,11 @@ class Movie extends BaseModel
     public function getViewsCountByAllTimeAttribute()
     {
         return $this->views()->sum('count');
+    }
+
+    public function getRatingByPercentAttribute()
+    {
+        return 70;
     }
 
     public function scopeNewRelease($query)
@@ -135,50 +200,5 @@ class Movie extends BaseModel
         return $query->withCount(['views' => function ($query) use ($now, $monthAgo) {
             return $query->whereBetween('date', [$monthAgo, $now]);
         }])->orderByDesc('views_count');
-    }
-
-    public function casts()
-    {
-        return $this->belongsToMany('App\Models\Cast');
-    }
-
-    public function views()
-    {
-        return $this->hasMany('App\Models\Movie\MovieView');
-    }
-
-    public function tags()
-    {
-        return $this->belongsToMany('App\Models\Movie\MovieTag');
-    }
-
-    public function genres()
-    {
-        return $this->belongsToMany('App\Models\Movie\MovieGenre');
-    }
-
-    public function episodes()
-    {
-        return $this->hasMany('App\Models\Movie\MovieEpisode');
-    }
-
-    public function getEpisodeListAttribute()
-    {
-        return $this->episodes()->get()->unique('number');
-    }
-
-    public function category()
-    {
-        return $this->belongsTo('App\Models\Movie\MovieCategory', 'movie_category_id');
-    }
-
-    public function nation()
-    {
-        return $this->belongsTo('App\Models\Movie\MovieNation', 'movie_nation_id');
-    }
-
-    public function language()
-    {
-        return $this->belongsTo('App\Models\Movie\MovieLanguage', 'movie_language_id');
     }
 }

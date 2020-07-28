@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Movie\Movie;
+use Auth;
 use View;
 
 class MovieController extends BaseController
@@ -43,13 +44,24 @@ class MovieController extends BaseController
         ]);
     }
 
+    function favoriteMovie(int $id)
+    {
+        if (Movie::where('id', $id)->exists()) {
+            Auth::user()->favoriteMovies()->attach($id);
+        }
+        return back();
+    }
+
+    function unFavoriteMovie(int $id)
+    {
+        Auth::user()->favoriteMovies()->detach($id);
+        return back();
+    }
+
     function bumpMovieViewsCount(int $id)
     {
         $movie = Movie::findOrFail($id);
-        $movie->views()->create([
-            'date' => date('Y-m-d'),
-            'count' => 1
-        ])->save();
+        $movie->favorites();
         return response('', 200);
     }
 }

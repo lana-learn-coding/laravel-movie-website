@@ -35,6 +35,10 @@ use Illuminate\Support\Carbon;
  * @method static Builder|User whereRememberToken($value)
  * @method static Builder|User whereUpdatedAt($value)
  * @mixin Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Movie\Movie[] $comments
+ * @property-read int|null $comments_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Movie\Movie[] $favoriteMovies
+ * @property-read int|null $favorite_movies_count
  */
 class User extends Authenticatable
 {
@@ -70,5 +74,11 @@ class User extends Authenticatable
     public function favoriteMovies()
     {
         return $this->belongsToMany('App\Models\Movie\Movie', 'movie_user_favorite');
+    }
+
+    public function comments()
+    {
+        return $this->belongsToMany('App\Models\Movie\Movie', 'movie_user_comment')
+            ->using('App\Models\User\UserComment');
     }
 }

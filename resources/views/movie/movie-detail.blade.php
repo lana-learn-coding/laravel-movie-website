@@ -43,18 +43,40 @@
                             <span class="font-weight-bold mr-2">Views: </span>
                             <span>{{ $movie->views_count_by_all_time ?: 0 }}</span>
                         </div>
+                        <div class="mb-2">
+                            <span class="font-weight-bold mr-2">Rating: </span>
+                            <span class="small">
+                                @for($i = 0; $i < 5; $i++)
+                                    <i class="fas fa-star {{$i * 20 <= $movie->rating_by_percent ? 'text-warning' : ''}}"></i>
+                                @endfor
+                            </span>
+                        </div>
                     </div>
                     <div>
                         <a class="btn btn-warning px-2 mr-2" href="{{ route('movie.watch',['id' => $movie->id]) }}">
                             <i class="fas fa-play-circle mr-1"></i>
                             <span class="font-weight-bold">Watch</span>
                         </a>
-                        @auth
-                            <a class="btn btn-success px-2" href="{{ route('movie.watch', ['id' => $movie->id]) }}">
+                        @guest
+                            <button class="btn btn-success px-2" data-require-logged-in>
                                 <i class="fas fa-heart mr-1"></i>
                                 <span class="font-weight-bold">Favorite</span>
-                            </a>
-                        @endauth
+                            </button>
+                        @else
+                            @if(Auth::user()->favoriteMovies()->where('id', $movie->id)->exists())
+                                <a class="btn btn-danger px-2" id="favorite-button"
+                                   href="{{ route('movie.favorite.remove', ['id' => $movie->id]) }}">
+                                    <i class="fas fa-heart mr-1"></i>
+                                    <span class="font-weight-bold">Favorited</span>
+                                </a>
+                            @else
+                                <a class="btn btn-success px-2" id="favorite-button"
+                                   href="{{ route('movie.favorite.set', ['id' => $movie->id])}} ">
+                                    <i class="fas fa-heart mr-1"></i>
+                                    <span class="font-weight-bold">Favorite</span>
+                                </a>
+                            @endif
+                        @endguest
                     </div>
                 </div>
             </div>
