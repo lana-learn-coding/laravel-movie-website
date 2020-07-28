@@ -20,6 +20,7 @@
 <body>
 
 <div id="app">
+    @stack('globals')
     @yield('body')
 </div>
 
