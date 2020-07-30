@@ -11,12 +11,6 @@
 |
 */
 
-use App\Http\VideoStream;
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
 Route::group(['namespace' => 'Home'], function () {
@@ -38,22 +32,16 @@ Route::group(['namespace' => 'Home'], function () {
     Route::get('/search/advanced', 'SearchMovieController@advancedSearch')->name('search.advanced');
 });
 
-Route::get('/movies/{id}', 'MovieController@movie')->name('movie');
-Route::get('/movies/{id}/watch', 'MovieController@watchMovieIndex')->name('movie.watch');
-Route::get('/movies/{id}/watch/{ep}', 'MovieController@watchMovie')->name('movie.watch.ep');
+Route::group(['namespace' => 'Movie'], function () {
+    Route::get('/movies/{id}', 'MovieController@movie')->name('movie');
+    Route::get('/movies/{id}/watch', 'MovieController@watchMovieIndex')->name('movie.watch');
+    Route::get('/movies/{id}/watch/{ep}', 'MovieController@watchMovie')->name('movie.watch.ep');
 
-Route::get('/movies/{id}/favorite', 'MovieController@favoriteMovie')->name('movie.favorite.set');
-Route::get('/movies/{id}/un-favorite', 'MovieController@unFavoriteMovie')->name('movie.favorite.remove');
+    Route::get('/movies/{id}/favorite', 'MovieController@favoriteMovie')->name('movie.favorite.set');
+    Route::get('/movies/{id}/un-favorite', 'MovieController@unFavoriteMovie')->name('movie.favorite.remove');
 
-Route::get('/streams/{path}', function ($path) {
-    $file = storage_path('app/uploads') . DIRECTORY_SEPARATOR . $path;
+    Route::get('/casts', 'CastController@casts')->name('cast');
+    Route::get('/casts/{id}', 'CastController@castDetail')->name('cast.detail');
 
-    if (!file_exists($file)) {
-        abort(404);
-    }
-
-    $stream = new VideoStream($file);
-    return response()->stream(function () use ($stream) {
-        $stream->start();
-    });
-})->where('path', '(.*)')->name('stream.video');
+    Route::get('/streams/{path}', 'ContentController@stream')->where('path', '(.*)')->name('stream.video');
+});

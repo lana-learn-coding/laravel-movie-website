@@ -1,0 +1,11 @@
+<div class="card shadow border-0 w-100">
+    <a class="stretched-link" href="{{ route('cast.detail', ['id' => $cast->id]) }}"></a>
+    <div class="ratio-wrapper" style="padding-bottom: 120%">
+        <img src="{{ $cast->avatar ? url('uploads/' . $cast->avatar) : asset('img/placeholder.png') }}"
+             alt="{{ $cast->name }}"
+             class="card-img">
+    </div>
+    <div class="py-2 px-1 text-truncate text-info">
+        <span style="font-size: 85%">{{ $cast->name }}</span>
+    </div>
+</div>

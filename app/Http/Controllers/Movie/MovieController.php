@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Movie;
 
+use App\Http\Controllers\BaseController;
 use App\Models\Movie\Movie;
 use Auth;
 use View;

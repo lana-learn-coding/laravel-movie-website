@@ -33,10 +33,15 @@ use Illuminate\Support\Carbon;
  */
 class Cast extends Model
 {
-    protected $fillable = ['name', 'birth_date', 'avatar'];
+    protected $fillable = ['name', 'birth_date', 'avatar', 'gender'];
 
     public function movies()
     {
         return $this->belongsToMany("App\Models\Movie\Movie");
+    }
+
+    public function getMoviesCountAttribute()
+    {
+        return $this->movies()->count('id');
     }
 }

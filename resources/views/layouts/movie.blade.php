@@ -41,17 +41,9 @@
         <div class="card-body">
             <h4 class="card-title mb-3">Casts</h4>
             <div class="row">
-                @foreach($movie->genres as $cast)
+                @foreach($movie->casts as $cast)
                     <div class="col-4 col-lg-3 col-xl-2 hvr-bob">
-                        <div class="card shadow border-0">
-                            <div class="ratio-wrapper" style="padding-bottom: 120%">
-                                <img src="{{ $cast->avatar ?: asset('img/placeholder.png') }}" alt="{{ $cast->name }}"
-                                     class="card-img">
-                            </div>
-                            <div class="py-2 px-1">
-                                <span class="text-info text-truncate" style="font-size: 85%">{{ $cast->name }}</span>
-                            </div>
-                        </div>
+                        @include('components.movie.cast-card', ['$cast' => $cast])
                     </div>
                 @endforeach
             </div>
