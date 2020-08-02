@@ -47,43 +47,60 @@
                             <span class="font-weight-bold mr-2">Rating: </span>
                             <span class="small">
                                 @for($i = 0; $i < 5; $i++)
-                                    <i class="fas fa-star {{$i * 20 <= $movie->rating_by_percent ? 'text-warning' : ''}}"></i>
+                                    <i class="fas fa-star {{$i * 20 < $movie->rating_by_percent ? 'text-warning' : ''}}"></i>
                                 @endfor
                             </span>
                         </div>
                     </div>
                     <div>
                         @if($movie->number_of_episodes > 0)
-                            <a class="btn btn-warning px-2 mr-2" href="{{ route('movie.watch',['id' => $movie->id]) }}">
+                            <a class="btn btn-warning px-2 mr-2 mb-2"
+                               href="{{ route('movie.watch',['id' => $movie->id]) }}">
                                 <i class="fas fa-play-circle mr-1"></i>
                                 <span class="font-weight-bold">Watch</span>
                             </a>
                         @else
-                            <button class="btn btn-secondary px-2 mr-2" type="button" disabled>
+                            <button class="btn btn-secondary px-2 mr-2 mb-2" type="button" disabled>
                                 <i class="fas fa-play-circle mr-1"></i>
                                 <span class="font-weight-bold">Updating...</span>
                             </button>
                         @endif
-                        @guest
-                            <button class="btn btn-success px-2" data-require-logged-in>
+
+                        @if($movie->isFavoritedBy(Auth::id()))
+                            <a class="btn btn-danger px-2 mr-2 mb-2" id="favorite-button"
+                               href="{{ route('movie.favorite.remove', ['id' => $movie->id]) }}">
+                                <i class="fas fa-heart mr-1"></i>
+                                <span class="font-weight-bold">Favorited</span>
+                            </a>
+                        @else
+                            <a class="btn btn-success px-2 mr-2 mb-2" id="favorite-button" data-require-logged-in
+                               href="{{ route('movie.favorite.add', ['id' => $movie->id])}} ">
                                 <i class="fas fa-heart mr-1"></i>
                                 <span class="font-weight-bold">Favorite</span>
+                            </a>
+                        @endif
+
+                        <div class="btn-group mb-2 mr-2">
+                            <button type="button" class="btn btn-info dropdown-toggle" aria-haspopup="true"
+                                    aria-expanded="false" data-toggle="dropdown" data-require-logged-in>
+                                @if($movie->ratedBy(Auth::id()))
+                                    <span><i class="fas fa-star"></i> {{ $movie->ratedBy(Auth::id()) }}</span>
+                                @else
+                                    <span><i class="fas fa-star"></i> Rate</span>
+                                @endif
                             </button>
-                        @else
-                            @if(Auth::user()->favoriteMovies()->where('id', $movie->id)->exists())
-                                <a class="btn btn-danger px-2" id="favorite-button"
-                                   href="{{ route('movie.favorite.remove', ['id' => $movie->id]) }}">
-                                    <i class="fas fa-heart mr-1"></i>
-                                    <span class="font-weight-bold">Favorited</span>
-                                </a>
-                            @else
-                                <a class="btn btn-success px-2" id="favorite-button"
-                                   href="{{ route('movie.favorite.set', ['id' => $movie->id])}} ">
-                                    <i class="fas fa-heart mr-1"></i>
-                                    <span class="font-weight-bold">Favorite</span>
-                                </a>
+                            @if(Auth::check())
+                                <div class="dropdown-menu" style="min-width: auto">
+                                    @for($i = 1; $i <= 5 ; $i++)
+                                        <a class="dropdown-item"
+                                           href="{{ route_with_query('movie.rating.rate', ['rating' => $i], ['id' => $movie->id]) }}">
+                                            <span>{{ $i }}</span>
+                                            <i class="fas fa-star text-warning"></i>
+                                        </a>
+                                    @endfor
+                                </div>
                             @endif
-                        @endguest
+                        </div>
                     </div>
                 </div>
             </div>

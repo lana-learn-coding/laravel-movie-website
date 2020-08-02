@@ -39,6 +39,10 @@ use Illuminate\Support\Carbon;
  * @property-read int|null $comments_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Movie\Movie[] $favoriteMovies
  * @property-read int|null $favorite_movies_count
+ * @property string $username
+ * @property string|null $avatar
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User\User whereAvatar($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User\User whereUsername($value)
  */
 class User extends Authenticatable
 {
@@ -74,6 +78,13 @@ class User extends Authenticatable
     public function favoriteMovies()
     {
         return $this->belongsToMany('App\Models\Movie\Movie', 'movie_user_favorite');
+    }
+
+    public function ratedMovies()
+    {
+        return $this->belongsToMany('App\Models\Movie\Movie', 'movie_user_rating')
+            ->using('App\Models\Movie\MovieRating')
+            ->withPivot(['rating']);
     }
 
     public function comments()

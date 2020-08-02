@@ -20,15 +20,23 @@
             </video>
             <div class="mt-2">
                 <div class="mb-4">
-                    @if(!Auth::check() || !Auth::user()->favoriteMovies()->where('id', $movie->id)->exists())
-                        <a class="btn btn-secondary btn-sm mr-2"
-                           href="{{ route("movie.favorite.set", ["id" => $movie->id]) }}">
+                    @if(!Auth::check() || !$movie->isFavoritedBy(Auth::id()))
+                        <a class="btn btn-secondary btn-sm mr-2 mb-2"
+                           href="{{ route("movie.favorite.add", ["id" => $movie->id]) }}">
                             Add to favorite
                         </a>
                     @endif
-                    <a href="{{ route("movie", ["id" => $movie->id]) }}" class="btn btn-secondary btn-sm">
-                        Back to movie page
+                    <a href="{{ route("movie", ["id" => $movie->id]) }}" class="btn btn-secondary btn-sm mr-2 mb-2">
+                        Back <span class="d-none d-md-inline">to movie page</span>
                     </a>
+                    <span class="small mr-2 text-nowrap">
+                        @for($i = 1; $i <= 5; $i++)
+                            <a href="{{ route_with_query('movie.rating.rate', ['rating' => $i], ['id' => $movie->id]) }}"
+                               data-require-logged-in>
+                                <i class="fas fa-star {{$i <= ($movie->ratedBy(Auth::id()) ?? 0) ? 'text-warning' : ''}}"></i>
+                            </a>
+                        @endfor
+                    </span>
                 </div>
                 <h6 class="card-title font-weight-bold">Episode</h6>
                 <div>

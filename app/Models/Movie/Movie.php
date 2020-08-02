@@ -77,9 +77,16 @@ class Movie extends BaseModel
         'name', 'release_date', 'description', 'image', 'length', 'total_episodes'
     ];
 
-    public function favorites()
+    public function favoritedByUsers()
     {
         return $this->belongsToMany('App\Models\User\User', 'movie_user_favorite');
+    }
+
+    public function ratedByUsers()
+    {
+        return $this->belongsToMany('App\Models\User\User', 'movie_user_rating')
+            ->using('App\Models\Movie\MovieRating')
+            ->withPivot(['rating']);
     }
 
     public function comments()
@@ -154,7 +161,9 @@ class Movie extends BaseModel
 
     public function getRatingByPercentAttribute()
     {
-        return 70;
+        $maxRate = $this->ratedByUsers()->count('id') * 5;
+        $rate = $this->ratedByUsers()->sum('rating');
+        return ((double)$rate / $maxRate) * 100;
     }
 
     public function scopeNewReleased($query)
@@ -220,5 +229,19 @@ class Movie extends BaseModel
     public function scopeHaveAnyEpisodes($query)
     {
         return $query->has('episodes');
+    }
+
+    public function isFavoritedBy($userId)
+    {
+        return $this->favoritedByUsers()->where('id', $userId)->exists();
+    }
+
+    public function ratedBy($userId)
+    {
+        $user = $this->ratedByUsers()->where('id', $userId)->first();
+        if ($user) {
+            return (int)$user->pivot->rating;
+        }
+        return null;
     }
 }

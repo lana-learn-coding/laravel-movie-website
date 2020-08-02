@@ -2,7 +2,7 @@
 
 namespace App\Models\Movie;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
 /**
  * App\Models\Movie\MovieRating
@@ -12,7 +12,17 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\MovieRating query()
  * @mixin \Eloquent
  */
-class MovieRating extends Model
+class MovieRating extends Pivot
 {
-    //
+    protected $fillable = ['rating'];
+
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User\User');
+    }
+
+    public function movie()
+    {
+        return $this->belongsTo('App\Models\Movie\Movie');
+    }
 }

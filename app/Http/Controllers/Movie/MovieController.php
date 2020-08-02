@@ -17,9 +17,10 @@ class MovieController extends BaseController
         View::share('hots', Movie::hot()->take(8)->get());
         View::share('news', Movie::newReleased()->take(6)->get());
         $this->middleware('auth')->only([
-            'unFavoriteMovie',
+            'removeFavoriteMovie',
             'favoriteMovie',
-            'writeComment'
+            'writeComment',
+            'rateMovie'
         ]);
     }
 
@@ -59,7 +60,7 @@ class MovieController extends BaseController
         return back();
     }
 
-    function unFavoriteMovie(int $id)
+    function removeFavoriteMovie(int $id)
     {
         Auth::user()->favoriteMovies()->detach($id);
         return back();
@@ -68,7 +69,7 @@ class MovieController extends BaseController
     function bumpMovieViewsCount(int $id)
     {
         $movie = Movie::findOrFail($id);
-        $movie->favorites();
+        $movie->favoritedByUsers();
         return response('', 200);
     }
 
@@ -80,6 +81,18 @@ class MovieController extends BaseController
         Auth::user()->comments()->attach($id, [
             'comment' => $request->input('comment'),
         ]);
-        return back()->with('scrollTo', '#comment');
+        return back();
+    }
+
+    function rateMovie(Request $request, int $id)
+    {
+        $request->validate([
+            'rating' => 'integer|min:1|max:5',
+        ]);
+        Auth::user()->ratedMovies()->detach($id);
+        Auth::user()->ratedMovies()->attach($id, [
+            'rating' => $request->input('rating')
+        ]);
+        return back();
     }
 }
