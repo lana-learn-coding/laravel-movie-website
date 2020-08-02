@@ -5,7 +5,6 @@ namespace App\Models\Movie;
 use App\Models\BaseModel;
 use Fico7489\Laravel\EloquentJoin\Traits\EloquentJoin;
 
-
 /**
  * App\Models\Movie\Movie
  *
@@ -28,8 +27,8 @@ use Fico7489\Laravel\EloquentJoin\Traits\EloquentJoin;
  * @property-read int|null $comments_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Movie\MovieEpisode[] $episodes
  * @property-read int|null $episodes_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User\User[] $favorites
- * @property-read int|null $favorites_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User\User[] $favoritedByUsers
+ * @property-read int|null $favorited_by_users_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Movie\MovieGenre[] $genres
  * @property-read int|null $genres_count
  * @property-read mixed $episode_list
@@ -39,6 +38,8 @@ use Fico7489\Laravel\EloquentJoin\Traits\EloquentJoin;
  * @property-read mixed $views_count_by_day
  * @property-read \App\Models\Movie\MovieLanguage|null $language
  * @property-read \App\Models\Movie\MovieNation|null $nation
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User\User[] $ratedByUsers
+ * @property-read int|null $rated_by_users_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Movie\MovieTag[] $tags
  * @property-read int|null $tags_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Movie\MovieView[] $views

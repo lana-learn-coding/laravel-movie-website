@@ -2,47 +2,42 @@
 
 namespace App\Models\User;
 
-use Eloquent;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\DatabaseNotification;
-use Illuminate\Notifications\DatabaseNotificationCollection;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Carbon;
 
 /**
- * App\Models\User
+ * App\Models\User\User
  *
  * @property int $id
- * @property string $name
+ * @property string $username
+ * @property string|null $avatar
  * @property string $email
- * @property Carbon|null $email_verified_at
+ * @property \Illuminate\Support\Carbon|null $email_verified_at
  * @property string $password
  * @property string|null $remember_token
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
- * @property-read DatabaseNotificationCollection|DatabaseNotification[] $notifications
- * @property-read int|null $notifications_count
- * @method static Builder|User newModelQuery()
- * @method static Builder|User newQuery()
- * @method static Builder|User query()
- * @method static Builder|User whereCreatedAt($value)
- * @method static Builder|User whereEmail($value)
- * @method static Builder|User whereEmailVerifiedAt($value)
- * @method static Builder|User whereId($value)
- * @method static Builder|User whereName($value)
- * @method static Builder|User wherePassword($value)
- * @method static Builder|User whereRememberToken($value)
- * @method static Builder|User whereUpdatedAt($value)
- * @mixin Eloquent
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Movie\Movie[] $comments
  * @property-read int|null $comments_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Movie\Movie[] $favoriteMovies
  * @property-read int|null $favorite_movies_count
- * @property string $username
- * @property string|null $avatar
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
+ * @property-read int|null $notifications_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Movie\Movie[] $ratedMovies
+ * @property-read int|null $rated_movies_count
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User\User newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User\User newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User\User query()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User\User whereAvatar($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User\User whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User\User whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User\User whereEmailVerifiedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User\User whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User\User wherePassword($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User\User whereRememberToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User\User whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User\User whereUsername($value)
+ * @mixin \Eloquent
  */
 class User extends Authenticatable
 {

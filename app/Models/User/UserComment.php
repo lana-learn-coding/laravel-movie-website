@@ -7,10 +7,7 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 /**
  * App\Models\User\UserComment
  *
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User\UserComment[] $childComments
- * @property-read int|null $child_comments_count
  * @property-read \App\Models\Movie\Movie $movie
- * @property-read \App\Models\User\UserComment $parentComment
  * @property-read \App\Models\User\User $user
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User\UserComment newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User\UserComment newQuery()

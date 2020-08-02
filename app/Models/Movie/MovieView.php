@@ -3,27 +3,23 @@
 namespace App\Models\Movie;
 
 use App\Models\BaseModel;
-use Eloquent;
-use Illuminate\Database\Eloquent\Builder;
 
 /**
  * App\Models\Movie\MovieView
  *
  * @property int $id
  * @property string $date
- * @property int $view
- * @property int $movie_id
- * @property-read Movie $movie
- * @method static Builder|MovieView newModelQuery()
- * @method static Builder|MovieView newQuery()
- * @method static Builder|MovieView query()
- * @method static Builder|MovieView whereDate($value)
- * @method static Builder|MovieView whereId($value)
- * @method static Builder|MovieView whereMovieId($value)
- * @method static Builder|MovieView whereView($value)
- * @mixin Eloquent
  * @property int $count
- * @method static Builder|MovieView whereCount($value)
+ * @property int $movie_id
+ * @property-read \App\Models\Movie\Movie $movie
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\MovieView newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\MovieView newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\MovieView query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\MovieView whereCount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\MovieView whereDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\MovieView whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\MovieView whereMovieId($value)
+ * @mixin \Eloquent
  */
 class MovieView extends BaseModel
 {
