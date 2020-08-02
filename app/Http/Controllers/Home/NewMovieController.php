@@ -35,4 +35,12 @@ class NewMovieController extends BaseController
             'movies' => Movie::newUpdate()->paginate(24),
         ]);
     }
+
+    public function newByCreateDate()
+    {
+        return view('home.new-movie', [
+            'by' => 'create',
+            'movies' => Movie::newCreate()->paginate(24),
+        ]);
+    }
 }

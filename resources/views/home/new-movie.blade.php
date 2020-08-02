@@ -15,6 +15,13 @@
                     <li class="nav-item">
                         <a class="nav-link {{ Route::is('new.update') ? 'active' : '' }}"
                            href="{{  route('new.update') }}">
+                            <span> Newly Updated </span>
+                            <span class="d-none d-md-inline">Movies</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ Route::is('new.create') ? 'active' : '' }}"
+                           href="{{  route('new.create') }}">
                             <span> Newly Added </span>
                             <span class="d-none d-md-inline">Movies</span>
                         </a>

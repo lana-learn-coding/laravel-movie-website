@@ -26,6 +26,7 @@ Route::group(['namespace' => 'Home'], function () {
     Route::get('/new', 'NewMovieController@index')->name('new');
     Route::get('/new/release', 'NewMovieController@newByReleaseDate')->name('new.release');
     Route::get('/new/update', 'NewMovieController@newByUpdateDate')->name('new.update');
+    Route::get('/new/create', 'NewMovieController@newByCreateDate')->name('new.create');
 
     Route::get('/search', 'SearchMovieController@simpleSearch')->name('search');
     Route::get('/search/type', 'SearchMovieController@typeSearch')->name('type');

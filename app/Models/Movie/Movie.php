@@ -5,6 +5,7 @@ namespace App\Models\Movie;
 use App\Models\BaseModel;
 use App\Models\Cast;
 use Eloquent;
+use Fico7489\Laravel\EloquentJoin\Traits\EloquentJoin;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Carbon;
@@ -80,6 +81,8 @@ use Illuminate\Support\Carbon;
  */
 class Movie extends BaseModel
 {
+    use EloquentJoin;
+
     protected $fillable = [
         'name', 'release_date', 'description', 'image', 'length', 'total_episodes'
     ];
@@ -166,12 +169,22 @@ class Movie extends BaseModel
 
     public function scopeNewRelease($query)
     {
-        return $query->haveAnyEpisodes()->orderBy('release_date');
+        return $query->orderBy('release_date');
     }
 
     public function scopeNewUpdate($query)
     {
-        return $query->haveAnyEpisodes()->orderBy('updated_at');
+        return $query->haveAnyEpisodes()->orderByJoin('episodes.updated_at', 'desc');
+    }
+
+    public function scopeNewCreate($query)
+    {
+        return $query->haveAnyEpisodes()->orderByJoin('episodes.updated_at', 'asc');
+    }
+
+    public function scopeNewFeatures($query)
+    {
+        return $query->hotByYear()->orderByJoin('episodes.updated_at', 'desc');
     }
 
     public function scopeHot($query)
@@ -201,6 +214,16 @@ class Movie extends BaseModel
 
         return $query->haveAnyEpisodes()->withCount(['views' => function ($query) use ($now, $monthAgo) {
             return $query->whereBetween('date', [$monthAgo, $now]);
+        }])->orderByDesc('views_count');
+    }
+
+    public function scopeHotByYear($query)
+    {
+        $now = date('Y-m-d');
+        $yearAgo = date('Y-m-d', strtotime('-1 year'));
+
+        return $query->haveAnyEpisodes()->withCount(['views' => function ($query) use ($now, $yearAgo) {
+            return $query->whereBetween('date', [$yearAgo, $now]);
         }])->orderByDesc('views_count');
     }
 
