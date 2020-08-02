@@ -91,7 +91,9 @@ class Movie extends BaseModel
 
     public function comments()
     {
-        return $this->belongsToMany('App\Models\User\User', 'movie_user_comment')->using('App\Models\User\UserComment');
+        return $this->belongsToMany('App\Models\User\User', 'movie_user_comment')
+            ->using('App\Models\User\UserComment')
+            ->withPivot(['comment']);
     }
 
     public function casts()
@@ -164,12 +166,12 @@ class Movie extends BaseModel
 
     public function scopeNewRelease($query)
     {
-        return $query->orderBy('release_date');
+        return $query->haveAnyEpisodes()->orderBy('release_date');
     }
 
     public function scopeNewUpdate($query)
     {
-        return $query->orderBy('updated_at');
+        return $query->haveAnyEpisodes()->orderBy('updated_at');
     }
 
     public function scopeHot($query)
@@ -177,7 +179,7 @@ class Movie extends BaseModel
         $now = date('Y-m-d');
         $sevenDayAgo = date('Y-m-d', strtotime('-7 days'));
 
-        return $query->withCount(['views' => function ($query) use ($now, $sevenDayAgo) {
+        return $query->haveAnyEpisodes()->withCount(['views' => function ($query) use ($now, $sevenDayAgo) {
             return $query->whereBetween('date', [$sevenDayAgo, $now]);
         }])->orderByDesc('views_count');
     }
@@ -187,7 +189,7 @@ class Movie extends BaseModel
         $now = date('Y-m-d');
         $oneDayAgo = date('Y-m-d', strtotime('-1 day'));
 
-        return $query->withCount(['views' => function ($query) use ($now, $oneDayAgo) {
+        return $query->haveAnyEpisodes()->withCount(['views' => function ($query) use ($now, $oneDayAgo) {
             return $query->whereBetween('date', [$oneDayAgo, $now]);
         }])->orderByDesc('views_count');
     }
@@ -197,8 +199,13 @@ class Movie extends BaseModel
         $now = date('Y-m-d');
         $monthAgo = date('Y-m-d', strtotime('-1 month'));
 
-        return $query->withCount(['views' => function ($query) use ($now, $monthAgo) {
+        return $query->haveAnyEpisodes()->withCount(['views' => function ($query) use ($now, $monthAgo) {
             return $query->whereBetween('date', [$monthAgo, $now]);
         }])->orderByDesc('views_count');
+    }
+
+    public function scopeHaveAnyEpisodes($query)
+    {
+        return $query->has('episodes');
     }
 }

@@ -32,14 +32,4 @@ class UserComment extends Pivot
     {
         return $this->belongsTo('App\Models\Movie\Movie');
     }
-
-    public function parentComment()
-    {
-        return $this->belongsTo('App\Models\User\UserComment');
-    }
-
-    public function childComments()
-    {
-        return $this->hasMany('App\Models\User\UserComment');
-    }
 }

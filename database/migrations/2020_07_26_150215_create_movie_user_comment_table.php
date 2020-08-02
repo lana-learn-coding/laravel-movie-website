@@ -18,8 +18,6 @@ class CreateMovieUserCommentTable extends Migration
             $table->timestamps();
             $table->string('comment');
 
-            $table->integer('parent_comment_id')->unsigned()->index();
-            $table->foreign('parent_comment_id')->references('id')->on('movie_user_comment')->onDelete('cascade');
             $table->integer('movie_id')->unsigned()->index();
             $table->foreign('movie_id')->references('id')->on('movies')->onDelete('cascade');
             $table->integer('user_id')->unsigned()->index();

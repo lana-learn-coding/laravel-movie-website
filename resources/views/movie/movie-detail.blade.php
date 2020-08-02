@@ -2,7 +2,7 @@
 
 @section('content.movie')
     <div class="row">
-        <div class="col-md-5 col-lg-4">
+        <div class="col-md-5 col-lg-4 d-flex">
             @include('components.movie.movie-card', ['movie' => $movie])
         </div>
         <div class="col-md-7 col-lg-8 mt-2 mt-md-0">
@@ -53,10 +53,17 @@
                         </div>
                     </div>
                     <div>
-                        <a class="btn btn-warning px-2 mr-2" href="{{ route('movie.watch',['id' => $movie->id]) }}">
-                            <i class="fas fa-play-circle mr-1"></i>
-                            <span class="font-weight-bold">Watch</span>
-                        </a>
+                        @if($movie->number_of_episodes > 0)
+                            <a class="btn btn-warning px-2 mr-2" href="{{ route('movie.watch',['id' => $movie->id]) }}">
+                                <i class="fas fa-play-circle mr-1"></i>
+                                <span class="font-weight-bold">Watch</span>
+                            </a>
+                        @else
+                            <button class="btn btn-secondary px-2 mr-2" type="button" disabled>
+                                <i class="fas fa-play-circle mr-1"></i>
+                                <span class="font-weight-bold">Updating...</span>
+                            </button>
+                        @endif
                         @guest
                             <button class="btn btn-success px-2" data-require-logged-in>
                                 <i class="fas fa-heart mr-1"></i>

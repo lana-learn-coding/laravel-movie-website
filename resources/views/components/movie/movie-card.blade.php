@@ -1,7 +1,8 @@
 <div class="movie-card card d-flex w-100">
     <a class="stretched-link" href="{{ route('movie', ['id' => $movie->id]) }}"></a>
     <div class="ratio-wrapper" style="padding-bottom: 130%">
-        <img class="w-100" src="{{ $movie->image ? url('uploads/' . $movie->image) : asset('img/placeholder.png') }}"
+        <img class="w-100"
+             src="{{ $movie->image ? url('uploads/' . $movie->image) : asset('img/movie-placeholder.jpg') }}"
              alt="{{ $movie->name }}">
     </div>
     <div class="card-body p-2">

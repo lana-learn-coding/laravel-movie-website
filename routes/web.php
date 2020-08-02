@@ -36,9 +36,9 @@ Route::group(['namespace' => 'Movie'], function () {
     Route::get('/movies/{id}', 'MovieController@movie')->name('movie');
     Route::get('/movies/{id}/watch', 'MovieController@watchMovieIndex')->name('movie.watch');
     Route::get('/movies/{id}/watch/{ep}', 'MovieController@watchMovie')->name('movie.watch.ep');
-
     Route::get('/movies/{id}/favorite', 'MovieController@favoriteMovie')->name('movie.favorite.set');
     Route::get('/movies/{id}/un-favorite', 'MovieController@unFavoriteMovie')->name('movie.favorite.remove');
+    Route::post('/movies/{id}/comment/write', 'MovieController@writeComment')->name('movie.comment.write');
 
     Route::get('/casts', 'CastController@casts')->name('cast');
     Route::get('/casts/{id}', 'CastController@castDetail')->name('cast.detail');

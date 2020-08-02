@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Movie;
 use App\Http\Controllers\BaseController;
 use App\Models\Movie\Movie;
 use Auth;
+use Illuminate\Http\Request;
 use View;
 
 class MovieController extends BaseController
@@ -15,6 +16,11 @@ class MovieController extends BaseController
         parent::__construct();
         View::share('hots', Movie::hot()->take(8)->get());
         View::share('news', Movie::newRelease()->take(6)->get());
+        $this->middleware('auth')->only([
+            'unFavoriteMovie',
+            'favoriteMovie',
+            'writeComment'
+        ]);
     }
 
     function movie($id)
@@ -64,5 +70,16 @@ class MovieController extends BaseController
         $movie = Movie::findOrFail($id);
         $movie->favorites();
         return response('', 200);
+    }
+
+    function writeComment(Request $request, int $id)
+    {
+        $request->validate([
+            'comment' => 'not_regex:/^\s*$/',
+        ]);
+        Auth::user()->comments()->attach($id, [
+            'comment' => $request->input('comment'),
+        ]);
+        return back()->with('scrollTo', '#comment');
     }
 }

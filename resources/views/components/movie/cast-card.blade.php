@@ -1,7 +1,7 @@
 <div class="card shadow border-0 w-100">
     <a class="stretched-link" href="{{ route('cast.detail', ['id' => $cast->id]) }}"></a>
     <div class="ratio-wrapper" style="padding-bottom: 120%">
-        <img src="{{ $cast->avatar ? url('uploads/' . $cast->avatar) : asset('img/placeholder.png') }}"
+        <img src="{{ $cast->avatar ? url('uploads/' . $cast->avatar) : asset('img/cast-placeholder.jpeg') }}"
              alt="{{ $cast->name }}"
              class="card-img">
     </div>
