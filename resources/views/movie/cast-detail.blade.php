@@ -3,7 +3,7 @@
 @section('content.header')
     <ol class="breadcrumb mb-4 mb-md-5">
         <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('cast') }}">Casts</a></li>
+        <li class="breadcrumb-item active">Casts</li>
         <li class="breadcrumb-item active">{{ $cast->name }}</li>
     </ol>
 @endsection
