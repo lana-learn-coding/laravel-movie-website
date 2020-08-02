@@ -114,7 +114,7 @@ class MovieController extends AdminController
 
         $form->text('name', __('Name'))->required();
         $form->textarea('description', __('Description'));
-        $form->cropper('image', __('Image'))->cRatio(300, 400)->crop(300, 400);
+        $form->cropper('image', __('Image'))->cRatio(380, 500)->crop(380, 500);
         $form->date('release_date', __('Release date'))->default(date('Y-m-d'))->required();
         $form->number('length', __('Length'))->required()->rules('integer|min:1');
         $form->text('total_episodes', 'Total Episodes')->rules('nullable|integer|min:1');
