@@ -3,7 +3,7 @@
 @section('content.header')
     <ol class="breadcrumb mb-4 mb-md-5">
         <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-        <li class="breadcrumb-item active">Casts</li>
+        <li class="breadcrumb-item"><a href="{{ route('cast') }}">Casts</a></li>
         <li class="breadcrumb-item active">{{ $cast->name }}</li>
     </ol>
 @endsection
@@ -11,7 +11,7 @@
 @section('content.body')
     <div>
         <h4 class="mb-2">{{ $cast->name }}</h4>
-        <hr class="mt-2 border-info">
+        <hr class="mt-2 mb-0 border-info">
     </div>
     @yield('content.movie')
     <div class="row mt-4">

@@ -121,6 +121,9 @@
                     @include('components.app.nav-dropdown', ['name' => 'Genres', 'type' => 'genres', 'items' => $genres])
                     @include('components.app.nav-dropdown', ['name' => 'Languages', 'type' => 'language', 'items' => $languages])
                     @include('components.app.nav-dropdown', ['name' => 'Nations', 'type' => 'nation', 'items' => $nations])
+                    <li class="nav-item">
+                        <a href="{{ route('cast') }}" class="nav-link {{ Route::is('cast') ? 'active' : '' }}">Casts</a>
+                    </li>
                 </ul>
 
                 <!-- Right Side of Navbar -->

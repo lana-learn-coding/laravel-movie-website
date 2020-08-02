@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Movie;
 use App\Http\Controllers\BaseController;
 use App\Models\Cast;
 use App\Models\Movie\Movie;
+use Illuminate\Http\Request;
 use View;
 
 class CastController extends BaseController
@@ -16,9 +17,12 @@ class CastController extends BaseController
         View::share('news', Movie::newReleased()->take(6)->get());
     }
 
-    function casts()
+    function casts(Request $request)
     {
-        return view('movie.cast-list');
+        $casts = Cast::where('name', 'like', '%' . $request->query('name') . '%')->paginate(24);
+        return view('movie.cast-list', [
+            'casts' => $casts
+        ]);
     }
 
     function castDetail($id)
