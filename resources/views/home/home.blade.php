@@ -28,10 +28,10 @@
                         </div>
                     @endforeach
                 </div>
-                <h4 class="mb-2 mt-2 mt-md-3">New Release</h4>
+                <h4 class="mb-2 mt-2 mt-md-3">New Released</h4>
                 <hr class="border-info mt-2 mb-0">
                 <div class="row">
-                    @foreach($release as $movie)
+                    @foreach($releases as $movie)
                         <div class="col-6 col-md-4 col-xl-3 my-4">
                             <div class="hvr-grow shadow d-block">
                                 @include('components.movie.movie-card', ['movie' => $movie])

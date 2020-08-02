@@ -6,29 +6,29 @@
             <div class="col-md-8 col-xl-9">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <a class="nav-link {{ Route::is('new.release') ? 'active' : '' }} text-nowrap"
-                           href="{{ route('new.release') }}">
+                        <a class="nav-link {{ Route::is('new.released') ? 'active' : '' }} text-nowrap"
+                           href="{{ route('new.released') }}">
                             <span> Newly Released </span>
                             <span class="d-none d-md-inline">Movies</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ Route::is('new.update') ? 'active' : '' }}"
-                           href="{{  route('new.update') }}">
+                        <a class="nav-link {{ Route::is('new.updated') ? 'active' : '' }}"
+                           href="{{  route('new.updated') }}">
                             <span> Newly Updated </span>
                             <span class="d-none d-md-inline">Movies</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ Route::is('new.create') ? 'active' : '' }}"
-                           href="{{  route('new.create') }}">
+                        <a class="nav-link {{ Route::is('new.created') ? 'active' : '' }}"
+                           href="{{  route('new.created') }}">
                             <span> Newly Added </span>
                             <span class="d-none d-md-inline">Movies</span>
                         </a>
                     </li>
                 </ul>
                 <div class="mt-4">
-                    <h4 class="mb-1">New movies by {{ $by }}</h4>
+                    <h4 class="mb-1">New movies by {{ $by }} date</h4>
                     <hr class="mt-1 border-info">
                 </div>
                 @include('components.movie.movie-page', ['movies' => $movies])

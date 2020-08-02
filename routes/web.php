@@ -24,9 +24,9 @@ Route::group(['namespace' => 'Home'], function () {
     Route::get('/hot/month', 'HotMovieController@hotByMonth')->name('hot.month');
 
     Route::get('/new', 'NewMovieController@index')->name('new');
-    Route::get('/new/release', 'NewMovieController@newByReleaseDate')->name('new.release');
-    Route::get('/new/update', 'NewMovieController@newByUpdateDate')->name('new.update');
-    Route::get('/new/create', 'NewMovieController@newByCreateDate')->name('new.create');
+    Route::get('/new/released', 'NewMovieController@newByReleaseDate')->name('new.released');
+    Route::get('/new/updated', 'NewMovieController@newByUpdateDate')->name('new.updated');
+    Route::get('/new/created', 'NewMovieController@newByCreateDate')->name('new.created');
 
     Route::get('/search', 'SearchMovieController@simpleSearch')->name('search');
     Route::get('/search/type', 'SearchMovieController@typeSearch')->name('type');

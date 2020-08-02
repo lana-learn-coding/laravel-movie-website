@@ -17,30 +17,30 @@ class NewMovieController extends BaseController
 
     public function index()
     {
-        return redirect('/new/release');
+        return redirect()->route('new.released');
     }
 
     public function newByReleaseDate()
     {
         return view('home.new-movie', [
-            'by' => 'release',
-            'movies' => Movie::newRelease()->paginate(24)
+            'by' => 'released',
+            'movies' => Movie::newReleased()->paginate(24)
         ]);
     }
 
     public function newByUpdateDate()
     {
         return view('home.new-movie', [
-            'by' => 'update',
-            'movies' => Movie::newUpdate()->paginate(24),
+            'by' => 'updated',
+            'movies' => Movie::newUpdated()->paginate(24),
         ]);
     }
 
     public function newByCreateDate()
     {
         return view('home.new-movie', [
-            'by' => 'create',
-            'movies' => Movie::newCreate()->paginate(24),
+            'by' => 'created',
+            'movies' => Movie::newCreated()->paginate(24),
         ]);
     }
 }

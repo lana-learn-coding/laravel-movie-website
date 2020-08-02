@@ -3,10 +3,7 @@
 namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\BaseController;
-use App\Http\Controllers\Controller;
 use App\Models\Movie\Movie;
-use App\Models\Movie\MovieCategory;
-use App\Models\Movie\MovieGenre;
 use Exception;
 use Illuminate\Http\Request;
 use View;
@@ -17,7 +14,7 @@ class SearchMovieController extends BaseController
     {
         parent::__construct();
         View::share('hots', Movie::hot()->take(8)->get());
-        View::share('news', Movie::newRelease()->take(6)->get());
+        View::share('news', Movie::newReleased()->take(6)->get());
     }
 
     public function simpleSearch(Request $request)

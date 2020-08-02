@@ -11,7 +11,7 @@ class HotMovieController extends BaseController
     public function __construct()
     {
         parent::__construct();
-        View::share('updates', Movie::newUpdate()->take(8)->get());
+        View::share('updates', Movie::newUpdated()->take(8)->get());
     }
 
     public function index()
