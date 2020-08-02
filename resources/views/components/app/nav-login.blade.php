@@ -18,7 +18,7 @@
                aria-haspopup="true"
                aria-expanded="false"
             >
-                <span> {{ Auth::user()->name }}</span>
+                <span> {{ Auth::user()->username }}</span>
             </a>
 
             <div class="dropdown-menu dropdown-menu-right">
