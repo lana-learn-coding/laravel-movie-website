@@ -162,7 +162,7 @@ class Movie extends BaseModel
 
     public function getRatingByPercentAttribute()
     {
-        $maxRate = $this->ratedByUsers()->count('id') * 5;
+        $maxRate = $this->ratedByUsers()->count('id') * 5 ?: 1;
         $rate = $this->ratedByUsers()->sum('rating');
         return ((double)$rate / $maxRate) * 100;
     }
