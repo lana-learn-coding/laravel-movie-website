@@ -7,6 +7,7 @@ use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
+use Hash;
 
 class UserController extends AdminController
 {
@@ -87,19 +88,34 @@ class UserController extends AdminController
     protected function form()
     {
         $form = new Form(new User());
+        if ($form->isCreating()) {
+            $form->text('username', __('Username'))->required()->rules('string|min:6|max:255|unique:users');
+            $form->cropper('avatar', __('Avatar'))->cRatio(250, 250)->crop(250, 250);
+            $form->email('email', __('Email'))->required()->rules('email|unique:users');
+            $form->password('password', __('Password'))->required()->rules('confirmed|min:8')->default(function ($form) {
+                return $form->model()->password;
+            });
+            $form->password('password_confirmation', trans('Password Confirmation'))->required()->default(function ($form) {
+                return $form->model()->password;
+            });
 
-        $form->text('username', __('Username'))->required()->rules('string|min:6|max:255|unique:users');
-        $form->cropper('avatar', __('Avatar'))->cRatio(250, 250)->crop(250, 250);
-        $form->email('email', __('Email'))->required()->rules('email|unique:users');
-        $form->password('password', __('Password'))->required()->rules('confirmed|min:8');
-        $form->password('password_confirmation', trans('Password Confirmation'))->required();
+            $form->text('detail.name', __('Name'))->rules('string|min:3|max:255');
+            $form->date('detail.birth_date', __('Birth Date'))->rules('before:today');
+            $form->select('detail.gender', __('Gender'))->options([
+                'M' => 'Male',
+                'F' => 'Female',
+            ]);
 
-        $form->text('detail.name', __('Name'))->rules('string|min:3|max:255');
-        $form->date('detail.birth_date', __('Birth Date'))->rules('before:today');
-        $form->select('detail.gender', __('Gender'))->options([
-            'M' => 'Male',
-            'F' => 'Female',
-        ]);
+            $form->ignore(['password_confirmation']);
+            $form->saving(function (Form $form) {
+                if ($form->password && $form->model()->password != $form->password) {
+                    $form->password = Hash::make($form->password);
+                }
+            });
+        } elseif ($form->isEditing()) {
+            $form->date('created_at')->required();
+            $form->date('updated_at')->required();
+        }
         return $form;
     }
 }
