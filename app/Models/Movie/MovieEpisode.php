@@ -28,6 +28,7 @@ use App\Models\BaseModel;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\MovieEpisode whereQuality($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\MovieEpisode whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BaseModel toPage($size = 12)
  */
 class MovieEpisode extends BaseModel
 {

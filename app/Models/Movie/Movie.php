@@ -69,6 +69,7 @@ use Fico7489\Laravel\EloquentJoin\Traits\EloquentJoin;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movie whereTotalEpisodes($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movie whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BaseModel toPage($size = 12)
  */
 class Movie extends BaseModel
 {

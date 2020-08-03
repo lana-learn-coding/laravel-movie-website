@@ -22,6 +22,8 @@ use App\Models\MovieCountable;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\MovieTag whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\MovieTag whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\MovieTag manyMovie($count = 0)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BaseModel toPage($size = 12)
  */
 class MovieTag extends BaseModel
 {

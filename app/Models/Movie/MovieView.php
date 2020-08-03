@@ -20,6 +20,7 @@ use App\Models\BaseModel;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\MovieView whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\MovieView whereMovieId($value)
  * @mixin \Eloquent
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BaseModel toPage($size = 12)
  */
 class MovieView extends BaseModel
 {
