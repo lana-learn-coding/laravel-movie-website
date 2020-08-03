@@ -23,4 +23,6 @@ Route::group([
     $router->resource('movies', 'Movie\MovieController');
 
     $router->resource('casts', 'CastController');
+
+    $router->resource('users', 'User\UserController');
 });
