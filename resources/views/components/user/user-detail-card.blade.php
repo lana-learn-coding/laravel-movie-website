@@ -4,6 +4,7 @@
             <a class="stretched-link" href="{{ route('user.detail', ['id' => $user->id]) }}"></a>
             <img src="{{ $user->avatar ? url('uploads/' . $user->avatar) : asset('img/avatar-placeholder.jpg') }}"
                  alt="{{ $user->username }}"
+                 id="user-avatar"
                  class="card-img">
         </div>
     </div>

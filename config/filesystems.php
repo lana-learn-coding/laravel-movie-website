@@ -70,6 +70,13 @@ return [
             'root' => storage_path('app/uploads'),
             'visibility' => 'public',
             'url' => env('APP_URL') . '/uploads',
+        ],
+
+        'upload' => [
+            'driver' => 'local',
+            'root' => storage_path('app/uploads'),
+            'visibility' => 'public',
+            'url' => env('APP_URL') . '/uploads',
         ]
     ],
 

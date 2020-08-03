@@ -6,8 +6,11 @@ use App\Http\Controllers\BaseController;
 use App\Models\Movie\Movie;
 use App\Models\User\User;
 use Auth;
+use Exception;
 use Hash;
 use Illuminate\Http\Request;
+use Image;
+use Storage;
 use View;
 
 class UserController extends BaseController
@@ -68,7 +71,8 @@ class UserController extends BaseController
 
         $request->validate([
             'name' => ['nullable', 'string', 'min:3', 'max:255'],
-            'gender' => ['nullable', 'string', 'in:F,M']
+            'gender' => ['nullable', 'string', 'in:F,M'],
+            'birth_date' => ['nullable', 'date', 'date_format:Y-m-d', 'before:today']
         ]);
         $user->detail()->delete();
         $user->detail()->create($request->post());
@@ -85,6 +89,21 @@ class UserController extends BaseController
                 'new_password' => ['required', 'string', 'min:8', 'confirmed']
             ]);
             $user->password = Hash::make($request->input('new_password'));
+        }
+        if ($request->input('avatar')) {
+            try {
+                $ext = 'jpeg';
+                $image = Image::make($request->input('avatar'))
+                    ->crop(250, 250)
+                    ->encode($ext);
+                $path = 'images' . DIRECTORY_SEPARATOR . uniqid() . '.' . $ext;
+                Storage::disk('upload')->put($path, $image);
+
+                $user->avatar = $path;
+            } catch (Exception $e) {
+                return redirect()->back()->withInput()
+                    ->withErrors(['avatar' => 'Bad image format']);
+            }
         }
 
         $user->save();
