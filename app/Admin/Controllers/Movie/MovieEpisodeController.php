@@ -8,6 +8,7 @@ use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
+use Storage;
 
 class MovieEpisodeController extends AdminController
 {
@@ -90,7 +91,28 @@ class MovieEpisodeController extends AdminController
             '2160' => '2k',
             '4096' => '4k',
         ])->required();
-        $form->largefile('file', __('File'))->group('videos')->required();
+
+        if ($form->isEditing()) {
+            $form->file('file', __('File'))->readonly();
+        } else {
+            $form->largefile('file', __('File'))->required();
+
+            $form->ignore(['uploaded']);
+
+            $form->saving(function (Form $form) {
+                if ($form->file && $form->model()->file != $form->file) {
+                    // file_image_hum.jpg => file/image/hum.jpg
+                    $path = implode(DIRECTORY_SEPARATOR, explode('_', $form->file));
+                    $ext = pathinfo($path, PATHINFO_EXTENSION);
+
+                    $saveFilename = uniqid() . uniqid() . '.' . $ext;
+                    $savePath = path_join(['uploads', 'videos', $saveFilename]);
+
+                    Storage::move(path_join(['aetherupload', $path]), $savePath);
+                    $form->file = 'videos/' . $saveFilename;
+                }
+            });
+        }
 
         return $form;
     }
