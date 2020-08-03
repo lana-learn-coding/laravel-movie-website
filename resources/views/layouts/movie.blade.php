@@ -69,7 +69,8 @@
                         </button>
                     @else
                         <img class="card-image w-100"
-                             src="{{ Auth::user()->avatar ?: asset('img/avatar-placeholder.jpg') }}" alt="anonymous">
+                             src="{{ Auth::user()->avatar ? url(Auth::user()->avatar) : asset('img/avatar-placeholder.jpg') }}"
+                             alt="anonymous">
                         <button type="submit" class="btn btn-info btn-sm w-100 mt-2">Post</button>
                     @endguest
                 </div>
@@ -88,7 +89,9 @@
             @foreach($movie->comments as $user)
                 <div class="row pb-4">
                     <div class="col-2 col-lg-1 pr-1 pt-1">
-                        <img class="card-image w-100" src="{{ asset('img/avatar-placeholder.jpg') }}" alt="anonymous">
+                        <img class="card-image w-100"
+                             src="{{ $user->avatar ? url($user->avatar) : asset('img/avatar-placeholder.jpg') }}"
+                             alt="anonymous">
                     </div>
                     <div class="col-10 col-lg-11 pl-2">
                         <a href="{{ route('user.detail', ['id' => $user->id]) }}"><b>{{ $user->username }}</b></a>
