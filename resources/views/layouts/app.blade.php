@@ -1,4 +1,4 @@
-@extends('layouts.base')
+@extends('layouts.base.app-base')
 
 @scopedstyle('layouts.app')
 <style>
