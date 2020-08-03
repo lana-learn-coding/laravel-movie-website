@@ -85,14 +85,14 @@
             </form>
 
             <hr class="border-secondary mt-2">
-            @foreach($movie->comments as $comment)
+            @foreach($movie->comments as $user)
                 <div class="row pb-4">
                     <div class="col-2 col-lg-1 pr-1 pt-1">
                         <img class="card-image w-100" src="{{ asset('img/avatar-placeholder.jpg') }}" alt="anonymous">
                     </div>
                     <div class="col-10 col-lg-11 pl-2">
-                        <b>{{ $comment->username }}</b>
-                        <div>{{ $comment->pivot->comment }}</div>
+                        <a href="{{ route('user.detail', ['id' => $user->id]) }}"><b>{{ $user->username }}</b></a>
+                        <div>{{ $user->pivot->comment }}</div>
                     </div>
                 </div>
             @endforeach

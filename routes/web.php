@@ -48,3 +48,13 @@ Route::group(['namespace' => 'Movie'], function () {
 
     Route::get('/streams/{path}', 'ContentController@stream')->where('path', '(.*)')->name('stream.video');
 });
+
+Route::group(['namespace' => 'User'], function () {
+    Route::get('/users/{id}', 'UserController@userDetail')->name('user.detail');
+    Route::get('/users/{id}/favorite-movies', 'UserController@favorites')->name('user.favorite');
+    Route::get('/users/{id}/rated-movies', 'UserController@ratedMovies')->name('user.rated');
+
+    Route::get('/users/{id}/update', 'UserController@getUpdate')->name('user.update');
+    Route::post('/users/{id}/update', 'UserController@update')->name('user.update');
+});
+

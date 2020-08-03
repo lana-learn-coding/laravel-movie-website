@@ -38,6 +38,7 @@ use Illuminate\Notifications\Notifiable;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User\User whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User\User whereUsername($value)
  * @mixin \Eloquent
+ * @property-read \App\Models\User\UserDetail|null $detail
  */
 class User extends Authenticatable
 {
@@ -49,7 +50,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'username', 'name', 'email', 'password', 'avatar'
+        'username', 'email', 'password', 'avatar'
     ];
 
     /**
@@ -69,6 +70,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function detail()
+    {
+        return $this->hasOne('App\Models\User\UserDetail');
+    }
 
     public function favoriteMovies()
     {
