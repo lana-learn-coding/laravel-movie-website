@@ -30,6 +30,7 @@ class MovieController extends AdminController
     protected function grid()
     {
         $grid = new Grid(new Movie());
+        $grid->model()->withCount('episodes');
 
         $grid->column('id', __('Id'))->hide()->sortable();
         $grid->column('name', __('Name'))->sortable();
@@ -37,14 +38,14 @@ class MovieController extends AdminController
         $grid->column('genres', __('Genres'))->pluck('name')->label();
         $grid->column('casts', __('Casts'))->pluck('name')->label('info');
         $grid->column('image', __('Cover'))->image()->hide();
-        $grid->column('category.name', __('Category'))->hide();
-        $grid->column('language.name', __('Language'));
-        $grid->column('nation.name', __('Nation'))->hide();
+        $grid->column('episodes_count', __('Episodes'))->sortable();
+        $grid->column('category.name', __('Category'))->hide()->searchable();
+        $grid->column('language.name', __('Language'))->searchable();
+        $grid->column('nation.name', __('Nation'))->hide()->searchable();
         $grid->column('updated_at', __('Updated at'))->hide()->sortable();
         $grid->column('created_at', __('Created at'))->hide()->sortable();
 
         $grid->filter(function ($filter) {
-            $filter->disableIdFilter();
             $filter->like('name', __('Name'));
             $filter->between('updated_at', __('Updated At'))->date();
         });

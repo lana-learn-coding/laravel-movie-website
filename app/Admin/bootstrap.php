@@ -18,4 +18,8 @@
  *
  */
 
+use Encore\LargeFileUpload\LargeFileField;
+
 Encore\Admin\Form::forget(['map', 'editor']);
+Encore\Admin\Form::extend('largefile', LargeFileField::class);
+

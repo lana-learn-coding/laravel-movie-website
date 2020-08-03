@@ -19,3 +19,8 @@ $ php artisan admin:install
   ```
   $ php artisan admin:import media-manager
   ```
+  
+- 404 fix (may caused by aetherupload): 
+```
+$ php artisan aetherupload:publish
+```

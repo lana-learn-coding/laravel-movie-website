@@ -90,7 +90,7 @@ class MovieEpisodeController extends AdminController
             '2160' => '2k',
             '4096' => '4k',
         ])->required();
-        $form->file('file', __('File'))->move('videos')->required()->rules('mimes:mp4');
+        $form->largefile('file', __('File'))->group('videos')->required();
 
         return $form;
     }
