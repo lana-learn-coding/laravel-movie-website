@@ -28,15 +28,12 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Cast extends Model
 {
+    use MovieCountable;
+
     protected $fillable = ['name', 'birth_date', 'avatar', 'gender'];
 
     public function movies()
     {
         return $this->belongsToMany("App\Models\Movie\Movie");
-    }
-
-    public function getMoviesCountAttribute()
-    {
-        return $this->movies()->count('id');
     }
 }

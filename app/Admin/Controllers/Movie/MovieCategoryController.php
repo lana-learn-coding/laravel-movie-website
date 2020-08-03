@@ -26,6 +26,8 @@ class MovieCategoryController extends AdminController
     {
         $grid = new Grid(new MovieCategory());
 
+        $grid->model()->withCount('movies');
+
         $grid->column('id', __('Id'))->hide();
         $grid->column('name', __('Name'));
         $grid->column('updated_at', __('Updated at'))->hide()->sortable();
@@ -33,6 +35,15 @@ class MovieCategoryController extends AdminController
         $grid->column('movies', 'Movies count')->display(function ($movies) {
             return count($movies);
         });
+
+        $grid->filter(function (Grid\Filter $filter) {
+            $filter->like('name', __('Name'));
+            $filter->between('updated_at', __('Updated At'))->date();
+            $filter->where(function ($query) {
+                $query->manyMovie(intval("{$this->input}"));
+            }, __('Movies count'))->decimal(['rightAlign' => false, 'radixPoint' => '']);
+        });
+
         return $grid;
     }
 

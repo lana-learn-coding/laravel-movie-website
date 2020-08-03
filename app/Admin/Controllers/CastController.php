@@ -42,7 +42,7 @@ class CastController extends AdminController
             $filter->like('name', __('Name'));
             $filter->between('updated_at', __('Updated At'))->date();
             $filter->where(function ($query) {
-                $query->where('movies_count', '>', intval("{$this->input}"));
+                $query->manyMovie(intval("{$this->input}"));
             }, __('Movies count'))->decimal(['rightAlign' => false, 'radixPoint' => '']);
         });
         return $grid;

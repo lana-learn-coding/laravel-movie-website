@@ -28,11 +28,11 @@ class MovieEpisodeController extends AdminController
         $grid = new Grid(new MovieEpisode());
 
         $grid->column('id', __('Id'))->hide()->sortable();
-        $grid->column('movie.name', __('Movie'))->sortable();
-        $grid->column('number', __('Number'));
+        $grid->column('movie.name', __('Movie'))->sortable()->searchable();
+        $grid->column('number', __('Number'))->sortable();
         $grid->column('name', __('Name'));
         $grid->column('file', __('File'));
-        $grid->column('quality', __('Quality'))->sortable();
+        $grid->column('quality', __('Quality'))->sortable()->searchable();
         $grid->column('movie_id', __('Movie Id'))->sortable()->hide()->searchable();
         $grid->column('updated_at', __('Updated at'))->sortable();
         $grid->column('created_at', __('Created at'))->hide()->sortable();

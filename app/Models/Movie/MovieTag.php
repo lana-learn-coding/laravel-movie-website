@@ -3,6 +3,7 @@
 namespace App\Models\Movie;
 
 use App\Models\BaseModel;
+use App\Models\MovieCountable;
 
 /**
  * App\Models\Movie\MovieTag
@@ -24,6 +25,8 @@ use App\Models\BaseModel;
  */
 class MovieTag extends BaseModel
 {
+    use MovieCountable;
+
     protected $fillable = [
         "name"
     ];

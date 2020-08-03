@@ -2,6 +2,7 @@
 
 namespace App\Models\Movie;
 
+use App\Models\MovieCountable;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -24,6 +25,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class MovieLanguage extends Model
 {
+    use MovieCountable;
+
     protected $fillable = [
         "name",
     ];
