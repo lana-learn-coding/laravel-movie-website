@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Blade;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -46,6 +48,13 @@ class AppServiceProvider extends ServiceProvider
 
         Blade::directive('end' . $directive, function ($expression) {
             return '<?php $__env->stopPush(); endif; ?>';
+        });
+
+        $this->app->resolving(LengthAwarePaginator::class, static function (LengthAwarePaginator $paginator) {
+            return $paginator->appends(request()->query());
+        });
+        $this->app->resolving(Paginator::class, static function (Paginator $paginator) {
+            return $paginator->appends(request()->query());
         });
     }
 
