@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
 /**
  * App\Models\Cast
  *
@@ -27,7 +25,7 @@ use Illuminate\Database\Eloquent\Model;
  * @mixin \Eloquent
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Cast manyMovie($count = 0)
  */
-class Cast extends Model
+class Cast extends BaseModel
 {
     use MovieCountable;
 

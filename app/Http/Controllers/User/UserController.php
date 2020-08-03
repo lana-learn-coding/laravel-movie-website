@@ -33,8 +33,8 @@ class UserController extends BaseController
         $user = User::findOrFail($id);
         return view('user.user-detail', [
             'user' => $user,
-            'favorites' => $user->favoriteMovies()->paginate(12),
-            'rateds' => $user->ratedMovies()->paginate(12),
+            'favorites' => $user->favoriteMovies()->toPage(12),
+            'rateds' => $user->ratedMovies()->toPage(12),
         ]);
     }
 
@@ -43,7 +43,7 @@ class UserController extends BaseController
         $user = Auth::user();
         return view('user.user-favorite', [
             'user' => $user,
-            'favorites' => $user->favoriteMovies()->paginate(12),
+            'favorites' => $user->favoriteMovies()->toPage(12),
         ]);
     }
 
@@ -52,7 +52,7 @@ class UserController extends BaseController
         $user = Auth::user();
         return view('user.user-rated', [
             'user' => $user,
-            'rateds' => $user->ratedMovies()->paginate(12),
+            'rateds' => $user->ratedMovies()->toPage(12),
         ]);
     }
 

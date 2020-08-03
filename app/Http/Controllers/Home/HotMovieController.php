@@ -16,7 +16,7 @@ class HotMovieController extends BaseController
 
     public function index()
     {
-        $movies = Movie::hot()->paginate(24);
+        $movies = Movie::hot()->toPage(24);
         return view('home.hot-movie', [
             'by' => 'all time',
             'movies' => $movies
@@ -25,7 +25,7 @@ class HotMovieController extends BaseController
 
     public function hotByDay()
     {
-        $movies = Movie::hotByDay()->paginate(24);
+        $movies = Movie::hotByDay()->toPage(24);
         return view('home.hot-movie', [
             'by' => 'day',
             'movies' => $movies
@@ -36,13 +36,13 @@ class HotMovieController extends BaseController
     {
         return view('home.hot-movie', [
             'by' => 'week',
-            'movies' => Movie::hot()->paginate(24),
+            'movies' => Movie::hot()->toPage(24),
         ]);
     }
 
     public function hotByMonth()
     {
-        $movies = Movie::hotByMonth()->paginate(24);
+        $movies = Movie::hotByMonth()->toPage(24);
         return view('home.hot-movie', [
             'by' => 'month',
             'movies' => $movies,

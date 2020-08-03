@@ -19,7 +19,7 @@ class CastController extends BaseController
 
     function casts(Request $request)
     {
-        $casts = Cast::where('name', 'like', '%' . $request->query('name') . '%')->paginate(24);
+        $casts = Cast::where('name', 'like', '%' . $request->query('name') . '%')->toPage(24);
         return view('movie.cast-list', [
             'casts' => $casts
         ]);
@@ -28,7 +28,7 @@ class CastController extends BaseController
     function castDetail($id)
     {
         $cast = Cast::findOrFail($id);
-        $movies = $cast->movies()->paginate(12);
+        $movies = $cast->movies()->toPage(12);
         return view('movie.cast-detail', [
             'cast' => $cast,
             'movies' => $movies,

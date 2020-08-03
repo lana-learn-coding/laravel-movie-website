@@ -24,7 +24,7 @@ class NewMovieController extends BaseController
     {
         return view('home.new-movie', [
             'by' => 'released',
-            'movies' => Movie::newReleased()->paginate(24)
+            'movies' => Movie::newReleased()->toPage(24),
         ]);
     }
 
@@ -32,7 +32,7 @@ class NewMovieController extends BaseController
     {
         return view('home.new-movie', [
             'by' => 'updated',
-            'movies' => Movie::newUpdated()->paginate(24),
+            'movies' => Movie::newUpdated()->toPage(24),
         ]);
     }
 
@@ -40,7 +40,7 @@ class NewMovieController extends BaseController
     {
         return view('home.new-movie', [
             'by' => 'created',
-            'movies' => Movie::newCreated()->paginate(24),
+            'movies' => Movie::newCreated()->toPage(24),
         ]);
     }
 }
