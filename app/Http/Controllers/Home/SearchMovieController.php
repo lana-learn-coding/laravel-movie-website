@@ -19,31 +19,29 @@ class SearchMovieController extends BaseController
 
     public function simpleSearch(Request $request)
     {
-        $conditions = array();
+        $movies = Movie::query();
         if ($request->query('query')) {
-            array_push($conditions, ['name', 'like', '%' . $request->query('query') . '%']);
+            $movies->where('name', 'like', '%' . $request->query('query') . '%');
         }
         if ($request->query('category')) {
-            array_push($conditions, ['movie_category_id', $request->query('category')]);
+            $movies->where('movie_category_id', $request->query('category'));
         }
         if ($request->query('language')) {
-            array_push($conditions, ['movie_language_id', $request->query('language')]);
+            $movies->where('movie_language_id', $request->query('language'));
         }
         if ($request->query('nation')) {
-            array_push($conditions, ['movie_nation_id', $request->query('nation')]);
+            $movies->where('movie_nation_id', $request->query('nation'));
         }
         if ($request->query('date_range')) {
             try {
                 $dates = explode('to', $request->query('date_range'));
                 $startDate = strtotime(trim($dates[0]));
                 $endDate = strtotime(trim($dates[1]));
-                array_push($conditions, ['release_date', '>=', date('Y-m-d', $startDate)]);
-                array_push($conditions, ['release_date', '<=', date('Y-m-d', $endDate)]);
+                $movies->where('release_date', '>=', date('Y-m-d', $startDate));
+                $movies->where('release_date', '<=', date('Y-m-d', $endDate));
             } catch (Exception $ignored) {
             }
         }
-
-        $movies = Movie::where($conditions);
 
         if ($request->query('genre')) {
             $movies->whereHas('genres', function ($genres) use ($request) {
