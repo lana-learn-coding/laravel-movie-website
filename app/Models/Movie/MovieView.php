@@ -3,6 +3,7 @@
 namespace App\Models\Movie;
 
 use App\Models\BaseModel;
+use Illuminate\Database\Eloquent\Builder;
 
 /**
  * App\Models\Movie\MovieView
@@ -21,17 +22,25 @@ use App\Models\BaseModel;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\MovieView whereMovieId($value)
  * @mixin \Eloquent
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BaseModel toPage($size = 12)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\MovieView today()
  */
 class MovieView extends BaseModel
 {
     public $timestamps = false;
 
     protected $fillable = [
-        "count", "date"
+        'count', 'date'
     ];
 
     public function movie()
     {
         return $this->belongsTo("App\Models\Movie\Movie");
+    }
+
+    public function scopeToday(Builder $query)
+    {
+        $now = date('Y-m-d');
+        $oneDayAgo = date('Y-m-d', strtotime('-1 day'));
+        return $query->whereBetween('date', [$now, $oneDayAgo]);
     }
 }
