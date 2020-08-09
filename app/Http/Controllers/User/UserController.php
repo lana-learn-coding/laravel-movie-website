@@ -97,7 +97,7 @@ class UserController extends BaseController
                     ->crop(250, 250)
                     ->encode($ext);
                 $path = 'images' . DIRECTORY_SEPARATOR . uniqid() . '.' . $ext;
-                Storage::disk('upload')->put($path, $image);
+                Storage::disk('public')->put($path, $image);
 
                 $user->avatar = $path;
             } catch (Exception $e) {

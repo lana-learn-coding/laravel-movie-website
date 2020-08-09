@@ -27,7 +27,7 @@
             <div class="col-3 col-md-5">
                 <div class="ratio-wrapper" style="padding-bottom: 85%">
                     <img class="w-100"
-                         src="{{ $movie->image ? url('uploads/' . $movie->image) : asset('img/movie-placeholder.jpg') }}"
+                         src="{{ $movie->image ? url('storage/' . $movie->image) : asset('img/movie-placeholder.jpg') }}"
                          alt="{{ $movie->name }}">
                 </div>
             </div>

@@ -106,7 +106,7 @@ class MovieEpisodeController extends AdminController
                     $ext = pathinfo($path, PATHINFO_EXTENSION);
 
                     $saveFilename = uniqid() . uniqid() . '.' . $ext;
-                    $savePath = path_join(['uploads', 'videos', $saveFilename]);
+                    $savePath = path_join(['public', 'videos', $saveFilename]);
 
                     Storage::move(path_join(['aetherupload', $path]), $savePath);
                     $form->file = 'videos/' . $saveFilename;

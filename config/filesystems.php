@@ -67,17 +67,10 @@ return [
 
         'admin' => [
             'driver' => 'local',
-            'root' => storage_path('app/uploads'),
+            'root' => storage_path('app/public'),
             'visibility' => 'public',
-            'url' => env('APP_URL') . '/uploads',
+            'url' => env('APP_URL') . '/storage',
         ],
-
-        'upload' => [
-            'driver' => 'local',
-            'root' => storage_path('app/uploads'),
-            'visibility' => 'public',
-            'url' => env('APP_URL') . '/uploads',
-        ]
     ],
 
     /*
@@ -93,7 +86,6 @@ return [
 
     'links' => [
         public_path('storage') => storage_path('app/public'),
-        public_path('uploads') => storage_path('app/uploads')
     ],
 
 ];

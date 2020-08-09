@@ -2,7 +2,7 @@
     <div class="col-5 col-md-4 col-xl-3 d-flex pr-1 pr-md-2">
         <div class="card shadow border-0 w-100">
             <a class="stretched-link" href="{{ route('user.detail', ['id' => $user->id]) }}"></a>
-            <img src="{{ $user->avatar ? url('uploads/' . $user->avatar) : asset('img/avatar-placeholder.jpg') }}"
+            <img src="{{ $user->avatar ? url('storages/' . $user->avatar) : asset('img/avatar-placeholder.jpg') }}"
                  alt="{{ $user->username }}"
                  id="user-avatar"
                  class="card-img">

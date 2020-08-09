@@ -9,7 +9,7 @@ class ContentController extends Controller
 {
     function stream($path)
     {
-        $file = storage_path('app/uploads') . DIRECTORY_SEPARATOR . $path;
+        $file = storage_path('app/public') . DIRECTORY_SEPARATOR . $path;
 
         if (!file_exists($file)) {
             abort(404);
