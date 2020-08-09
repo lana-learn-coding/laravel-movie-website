@@ -17,4 +17,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/movies/{id}/views/bump', 'MovieController@bumpMovieViewsCount')->name('movie.views.bump');
+
+Route::group(['namespace' => 'Movie'], function () {
+    Route::post('/movies/{id}/views/bump', 'MovieController@bumpMovieViewsCount')->name('movie.views.bump');
+});
+
