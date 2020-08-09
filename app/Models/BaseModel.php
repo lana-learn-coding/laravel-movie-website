@@ -60,4 +60,9 @@ class BaseModel extends Model
         }
         return $sort[1] === 'desc' ? 'desc' : $default;
     }
+
+    protected function isProd()
+    {
+        return in_array(getenv('APP_ENV'), ['prod', 'production']);
+    }
 }

@@ -230,7 +230,10 @@ class Movie extends BaseModel
 
     public function scopeHaveAnyEpisodes($query)
     {
-        return $query->has('episodes');
+        if ($this->isProd()) {
+            return $query->has('episodes');
+        }
+        return $query;
     }
 
     public function isFavoritedBy($userId)
