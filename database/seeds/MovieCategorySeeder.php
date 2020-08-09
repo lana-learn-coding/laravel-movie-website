@@ -12,6 +12,13 @@ class MovieCategorySeeder extends Seeder
      */
     public function run()
     {
-        factory(MovieCategory::class, 8)->create();
+        $categories = [
+            ['name' => 'Series'],
+            ['name' => 'Documentary'],
+            ['name' => 'Film'],
+            ['name' => 'Others'],
+        ];
+
+        MovieCategory::insert($categories);
     }
 }

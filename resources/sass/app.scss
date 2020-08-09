@@ -7,9 +7,11 @@
 // Bootstrap
 @import './bootstrap.min.css';
 
-// Font Awesome
 @import 'node_modules/@fortawesome/fontawesome-free/scss/fontawesome';
 @import 'node_modules/hover.css/scss/hover';
+
+@import 'node_modules/video.js/src/css/video-js';
+@import 'node_modules/@silvermine/videojs-quality-selector/src/sass/quality-selector';
 
 .pagination {
     flex-wrap: wrap;

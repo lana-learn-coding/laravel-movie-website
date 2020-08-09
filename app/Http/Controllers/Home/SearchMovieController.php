@@ -3,10 +3,7 @@
 namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\BaseController;
-use App\Http\Controllers\Controller;
 use App\Models\Movie\Movie;
-use App\Models\Movie\MovieCategory;
-use App\Models\Movie\MovieGenre;
 use Exception;
 use Illuminate\Http\Request;
 use View;
@@ -17,7 +14,7 @@ class SearchMovieController extends BaseController
     {
         parent::__construct();
         View::share('hots', Movie::hot()->take(8)->get());
-        View::share('news', Movie::newRelease()->take(6)->get());
+        View::share('news', Movie::newReleased()->take(6)->get());
     }
 
     public function simpleSearch(Request $request)
@@ -35,9 +32,15 @@ class SearchMovieController extends BaseController
         if ($request->query('nation')) {
             array_push($conditions, ['movie_nation_id', $request->query('nation')]);
         }
-        if ($request->query('date-after')) {
-            array_push($conditions, ['release_date', '>', $request->query('date-after') . '-01' . '-01']);
-            array_push($conditions, ['release_date', '<', $request->query('date-after') . '-12' . '-12']);
+        if ($request->query('date_range')) {
+            try {
+                $dates = explode('to', $request->query('date_range'));
+                $startDate = strtotime(trim($dates[0]));
+                $endDate = strtotime(trim($dates[1]));
+                array_push($conditions, ['release_date', '>=', date('Y-m-d', $startDate)]);
+                array_push($conditions, ['release_date', '<=', date('Y-m-d', $endDate)]);
+            } catch (Exception $ignored) {
+            }
         }
 
         $movies = Movie::where($conditions);
@@ -49,7 +52,7 @@ class SearchMovieController extends BaseController
         }
 
         return view('home.search-movie', [
-            'movies' => $movies->paginate(24)
+            'movies' => $movies->toPage(24)
         ]);
     }
 
@@ -64,7 +67,7 @@ class SearchMovieController extends BaseController
         }
 
         return view('home.subtype', [
-            'movies' => $movies->paginate(24),
+            'movies' => $movies->toPage(24),
         ]);
     }
 }

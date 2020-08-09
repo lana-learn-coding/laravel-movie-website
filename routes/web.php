@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
 Route::group(['namespace' => 'Home'], function () {
@@ -28,20 +24,37 @@ Route::group(['namespace' => 'Home'], function () {
     Route::get('/hot/month', 'HotMovieController@hotByMonth')->name('hot.month');
 
     Route::get('/new', 'NewMovieController@index')->name('new');
-    Route::get('/new/release', 'NewMovieController@newByReleaseDate')->name('new.release');
-    Route::get('/new/update', 'NewMovieController@newByUpdateDate')->name('new.update');
+    Route::get('/new/released', 'NewMovieController@newByReleaseDate')->name('new.released');
+    Route::get('/new/updated', 'NewMovieController@newByUpdateDate')->name('new.updated');
+    Route::get('/new/created', 'NewMovieController@newByCreateDate')->name('new.created');
 
     Route::get('/search', 'SearchMovieController@simpleSearch')->name('search');
     Route::get('/search/type', 'SearchMovieController@typeSearch')->name('type');
     Route::get('/search/advanced', 'SearchMovieController@advancedSearch')->name('search.advanced');
 });
 
-Route::get('/movies/{id}', 'MovieController@movie')->name('movie');
-Route::get('/movies/{id}/watch', 'MovieController@watchMovieIndex')->name('movie.watch');
-Route::get('/movies/{id}/watch/{ep}', 'MovieController@watchMovie')->name('movie.watch.ep');
+Route::group(['namespace' => 'Movie'], function () {
+    Route::get('/movies/{id}', 'MovieController@movie')->name('movie');
+    Route::get('/movies/{id}/watch', 'MovieController@watchMovieIndex')->name('movie.watch');
+    Route::get('/movies/{id}/watch/{ep}', 'MovieController@watchMovie')->name('movie.watch.ep');
+    Route::get('/movies/{id}/favorite/add', 'MovieController@favoriteMovie')->name('movie.favorite.add');
+    Route::get('/movies/{id}/favorite/remove', 'MovieController@removeFavoriteMovie')->name('movie.favorite.remove');
+    Route::get('/movies/{id}/rating/rate', 'MovieController@rateMovie')->name('movie.rating.rate');
 
-Route::group(['namespace' => 'Admin'], function () {
-    Route::get('/admin', 'AdminController@index')->name('admin');
+    Route::post('/movies/{id}/comment/write', 'MovieController@writeComment')->name('movie.comment.write');
 
+    Route::get('/casts', 'CastController@casts')->name('cast');
+    Route::get('/casts/{id}', 'CastController@castDetail')->name('cast.detail');
+
+    Route::get('/streams/{path}', 'ContentController@stream')->where('path', '(.*)')->name('stream.video');
+});
+
+Route::group(['namespace' => 'User'], function () {
+    Route::get('/users/{id}', 'UserController@userDetail')->name('user.detail');
+    Route::get('/users/{id}/favorite-movies', 'UserController@favorites')->name('user.favorite');
+    Route::get('/users/{id}/rated-movies', 'UserController@ratedMovies')->name('user.rated');
+
+    Route::get('/users/{id}/update', 'UserController@getUpdate')->name('user.update');
+    Route::post('/users/{id}/update', 'UserController@update')->name('user.update');
 });
 

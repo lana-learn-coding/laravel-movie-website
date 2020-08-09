@@ -16,3 +16,8 @@ function url_with_query($path = null, $queryParameters = [], $parameters = [], $
     }
     return $url;
 }
+
+function path_join($segments, $glue = DIRECTORY_SEPARATOR)
+{
+    return implode($glue, $segments);
+}

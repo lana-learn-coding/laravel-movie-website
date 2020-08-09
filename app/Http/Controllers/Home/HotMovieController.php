@@ -11,12 +11,12 @@ class HotMovieController extends BaseController
     public function __construct()
     {
         parent::__construct();
-        View::share('updates', Movie::newUpdate()->take(8)->get());
+        View::share('updates', Movie::newUpdated()->take(8)->get());
     }
 
     public function index()
     {
-        $movies = Movie::select()->orderBy('views_by_all_time')->paginate(24);
+        $movies = Movie::hot()->toPage(24);
         return view('home.hot-movie', [
             'by' => 'all time',
             'movies' => $movies
@@ -25,7 +25,7 @@ class HotMovieController extends BaseController
 
     public function hotByDay()
     {
-        $movies = Movie::select()->orderBy('views_by_day')->paginate(24);
+        $movies = Movie::hotByDay()->toPage(24);
         return view('home.hot-movie', [
             'by' => 'day',
             'movies' => $movies
@@ -36,13 +36,13 @@ class HotMovieController extends BaseController
     {
         return view('home.hot-movie', [
             'by' => 'week',
-            'movies' => Movie::hot()->paginate(24),
+            'movies' => Movie::hot()->toPage(24),
         ]);
     }
 
     public function hotByMonth()
     {
-        $movies = Movie::select()->orderBy('views_by_month')->paginate(24);
+        $movies = Movie::hotByMonth()->toPage(24);
         return view('home.hot-movie', [
             'by' => 'month',
             'movies' => $movies,

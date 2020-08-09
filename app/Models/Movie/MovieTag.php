@@ -3,32 +3,33 @@
 namespace App\Models\Movie;
 
 use App\Models\BaseModel;
-use Eloquent;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Carbon;
+use App\Models\MovieCountable;
 
 /**
  * App\Models\Movie\MovieTag
  *
- * @property-read Collection|Movie[] $movies
- * @property-read int|null $movies_count
- * @method static Builder|MovieTag newModelQuery()
- * @method static Builder|MovieTag newQuery()
- * @method static Builder|MovieTag query()
- * @mixin Eloquent
  * @property int $id
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @property string $name
- * @method static Builder|MovieTag whereCreatedAt($value)
- * @method static Builder|MovieTag whereId($value)
- * @method static Builder|MovieTag whereName($value)
- * @method static Builder|MovieTag whereUpdatedAt($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Movie\Movie[] $movies
+ * @property-read int|null $movies_count
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\MovieTag newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\MovieTag newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\MovieTag query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\MovieTag whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\MovieTag whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\MovieTag whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\MovieTag whereUpdatedAt($value)
+ * @mixin \Eloquent
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\MovieTag manyMovie($count = 0)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BaseModel toPage($size = 12)
  */
 class MovieTag extends BaseModel
 {
-    protected array $fillable = [
+    use MovieCountable;
+
+    protected $fillable = [
         "name"
     ];
 

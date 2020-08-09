@@ -14,15 +14,15 @@ class HomeController extends BaseController
 
     public function home()
     {
-        $features = Movie::select()->orderBy('updated_at')->limit(6)->get();
-        $hots = Movie::select()->orderBy('views_by_week')->limit(10)->get();
-        $news = Movie::select()->orderBy('release_date')->limit(12)->get();
-        $random = Movie::select()->inRandomOrder()->limit(12)->get();
+        $features = Movie::newFeatured()->limit(6)->get();
+        $hots = Movie::hot()->limit(10)->get();
+        $news = Movie::newUpdated()->limit(12)->get();
+        $releases = Movie::newReleased()->limit(8)->get();
         return view('home.home', [
             'hots' => $hots,
             'features' => $features,
             'news' => $news,
-            'random' => $random,
+            'releases' => $releases
         ]);
     }
 }

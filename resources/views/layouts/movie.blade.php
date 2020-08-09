@@ -41,17 +41,9 @@
         <div class="card-body">
             <h4 class="card-title mb-3">Casts</h4>
             <div class="row">
-                @foreach($movie->genres as $cast)
-                    <div class="col-6 col-sm-4 col-lg-3 col-xl-2 hvr-bob">
-                        <div class="card shadow border-0">
-                            <div class="ratio-wrapper" style="padding-bottom: 120%">
-                                <img src="{{ $cast->avatar ?: asset('img/placeholder.png') }}" alt="{{ $cast->name }}"
-                                     class="card-img">
-                            </div>
-                            <div class="py-2 px-1">
-                                <span class="text-info text-truncate" style="font-size: 85%">{{ $cast->name }}</span>
-                            </div>
-                        </div>
+                @foreach($movie->casts as $cast)
+                    <div class="col-4 col-lg-3 col-xl-2 hvr-bob">
+                        @include('components.movie.cast-card', ['$cast' => $cast])
                     </div>
                 @endforeach
             </div>
@@ -62,6 +54,51 @@
             <h4 class="card-title">Movie Plot</h4>
             <h6 class="card-subtitle mb-3 text-muted">{{ $movie->name }}</h6>
             <p class="card-text">{{ $movie->description }}</p>
+        </div>
+    </div>
+    <div class="card mt-4">
+        <div class="card-body" id="comment">
+            <h4 class="card-title">Comments</h4>
+            <h6 class="card-subtitle mb-3 text-muted">Write a comment</h6>
+            <form class="row px-3" method="post" action="{{ route('movie.comment.write', [ 'id' => $movie->id]) }}">
+                @csrf
+                <div class="col-2 col-lg-1 px-0 mt-1">
+                    @guest
+                        <img class="card-image w-100" src="{{ asset('img/avatar-placeholder.jpg') }}" alt="anonymous">
+                        <button type="submit" class="btn btn-info btn-sm w-100 mt-2" data-require-logged-in>Post
+                        </button>
+                    @else
+                        <img class="card-image w-100"
+                             src="{{ Auth::user()->avatar ? url(Auth::user()->avatar) : asset('img/avatar-placeholder.jpg') }}"
+                             alt="anonymous">
+                        <button type="submit" class="btn btn-info btn-sm w-100 mt-2">Post</button>
+                    @endguest
+                </div>
+                <div class="col-10 col-lg-11">
+                    <div class="form-group">
+                        <textarea type="text" name="comment" class="form-control" rows="4"
+                                  data-require-logged-in></textarea>
+                        @error('comment')
+                        <div class="mt-1 text-danger">Please enter something</div>
+                        @enderror
+                    </div>
+                </div>
+            </form>
+
+            <hr class="border-secondary mt-2">
+            @foreach($movie->comments as $user)
+                <div class="row pb-4">
+                    <div class="col-2 col-lg-1 pr-1 pt-1">
+                        <img class="card-image w-100"
+                             src="{{ $user->avatar ? url($user->avatar) : asset('img/avatar-placeholder.jpg') }}"
+                             alt="anonymous">
+                    </div>
+                    <div class="col-10 col-lg-11 pl-2">
+                        <a href="{{ route('user.detail', ['id' => $user->id]) }}"><b>{{ $user->username }}</b></a>
+                        <div>{{ $user->pivot->comment }}</div>
+                    </div>
+                </div>
+            @endforeach
         </div>
     </div>
 @endsection

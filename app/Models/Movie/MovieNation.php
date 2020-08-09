@@ -3,32 +3,33 @@
 namespace App\Models\Movie;
 
 use App\Models\BaseModel;
-use Eloquent;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Carbon;
+use App\Models\MovieCountable;
 
 /**
  * App\Models\Movie\MovieNation
  *
  * @property int $id
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @property string $name
- * @property-read Collection|Movie[] $movies
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Movie\Movie[] $movies
  * @property-read int|null $movies_count
- * @method static Builder|MovieNation newModelQuery()
- * @method static Builder|MovieNation newQuery()
- * @method static Builder|MovieNation query()
- * @method static Builder|MovieNation whereCreatedAt($value)
- * @method static Builder|MovieNation whereId($value)
- * @method static Builder|MovieNation whereName($value)
- * @method static Builder|MovieNation whereUpdatedAt($value)
- * @mixin Eloquent
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\MovieNation newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\MovieNation newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\MovieNation query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\MovieNation whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\MovieNation whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\MovieNation whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\MovieNation whereUpdatedAt($value)
+ * @mixin \Eloquent
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\MovieNation manyMovie($count = 0)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BaseModel toPage($size = 12)
  */
 class MovieNation extends BaseModel
 {
-    protected array $fillable = [
+    use MovieCountable;
+
+    protected $fillable = [
         "name",
     ];
 
