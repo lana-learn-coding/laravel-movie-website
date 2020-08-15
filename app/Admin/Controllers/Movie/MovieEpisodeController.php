@@ -63,7 +63,7 @@ class MovieEpisodeController extends AdminController
         $show->field('movie.name', __('Movie'));
         $show->field('number', __('Number'));
         $show->field('name', __('Name'));
-        $show->field('file', __('File'));
+        $show->field('file', __('File'))->file();
         $show->field('quality', __('Quality'));
         $show->field('updated_at', __('Updated at'));
 

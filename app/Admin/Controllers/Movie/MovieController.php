@@ -91,6 +91,17 @@ class MovieController extends AdminController
             $episodes->disableFilter();
         });
 
+        $show->trailers('Trailers', function (Grid $episodes) {
+            $episodes->resource('/admin/movies/trailers');
+
+            $episodes->id()->hide();
+            $episodes->number()->sortable()->searchable();
+            $episodes->quality()->sortable()->searchable();
+            $episodes->updated_at()->sortable();
+
+            $episodes->disableFilter();
+        });
+
         $show->casts('Casts', function (Grid $casts) {
             $casts->resource('/admin/casts');
 
@@ -127,9 +138,8 @@ class MovieController extends AdminController
         $form->belongsToMany('casts', CastSelectable::class, __('Casts'));
 
         if ($form->isCreating()) {
-            $form->hasMany('episodes', __('Episode'), function (Form\NestedForm $form) {
+            $form->hasMany('trailers', __('Trailers'), function (Form\NestedForm $form) {
                 $form->number('number', __('Number'))->required()->rules('integer|min:1');
-                $form->text('name', __('Name'));
                 $form->select('quality', __('Quality'))->options([
                     '360' => '360p',
                     '480' => '480p',
