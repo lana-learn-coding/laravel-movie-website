@@ -15,14 +15,13 @@ Route::group([
 
     $router->resource('movies/languages', 'Movie\MovieLanguageController');
     $router->resource('movies/nations', 'Movie\MovieNationController');
-
     $router->resource('movies/tags', 'Movie\MovieTagController');
     $router->resource('movies/categories', 'Movie\MovieCategoryController');
-    $router->resource('movies/episodes', 'Movie\MovieEpisodeController');
     $router->resource('movies/genres', 'Movie\MovieGenreController');
+    $router->resource('movies/episodes', 'Movie\MovieEpisodeController');
+    $router->resource('movies/trailers', 'Movie\MovieTrailerController');
     $router->resource('movies', 'Movie\MovieController');
 
     $router->resource('casts', 'CastController');
-
     $router->resource('users', 'User\UserController');
 });
