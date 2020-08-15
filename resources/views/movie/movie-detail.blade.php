@@ -106,4 +106,70 @@
             </div>
         </div>
     </div>
+    @if(!$movie->trailers()->get()->isEmpty())
+        <div class="card mt-4">
+            <div class="card-body">
+                <h4 class="card-title mb-3">Trailers</h4>
+                <div id="carousel" class="carousel slide">
+                    <ol class="carousel-indicators">
+                        @for($i = 0; $i < $movie->trailers->groupBy('number')->count(); $i++)
+                            <li data-target="#carousel" data-slide-to="{{ $i }}"
+                                @if($i === 0) class="active" @endif></li>
+                        @endfor
+                    </ol>
+                    <div class="carousel-inner">
+                        @foreach($movie->trailers->groupBy('number') as $number => $trailer)
+                            <div class="carousel-item @if($loop->iteration === 1) active @endif">
+                                <video
+                                    id="video-{{ $number }}"
+                                    data-player="video-trailer-{{$number}}"
+                                    class="video-js vjs-fluid vjs-16-9"
+                                >
+                                    @foreach($trailer->sortBy('quality')  as $quality)
+                                        <source src="{{ route('stream.video', ['path' => $quality->file]) }}"
+                                                type="video/mp4"
+                                                label="{{ $quality->quality }}"
+                                        >
+                                    @endforeach
+                                    <p class="vjs-no-js">
+                                        To view this video please enable JavaScript, and consider upgrading to a
+                                        web browser that supports HTML5 video
+                                    </p>
+                                </video>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
 @endsection
+
+@scopedscript('movie.movie-detail')
+<script>
+    const options = {
+        controls: true,
+        autoplay: false,
+        preload: 'auto',
+        controlBar: {
+            children: [
+                'playToggle',
+                'progressControl',
+                'volumePanel',
+                'qualitySelector',
+                'fullscreenToggle',
+            ],
+        },
+    };
+
+    $('[data-player^="video-trailer-"]').each(function () {
+        const $element = $(this);
+        videojs($element.attr('id'), options).ready(function () {
+            const player = this;
+            $('[data-target="#carousel"]').on('click', function () {
+                player.pause();
+            })
+        });
+    })
+</script>
+@endscopedscript
