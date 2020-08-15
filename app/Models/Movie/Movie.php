@@ -98,6 +98,11 @@ class Movie extends BaseModel
             ->withPivot(['comment']);
     }
 
+    public function trailers()
+    {
+        return $this->hasMany('App\Models\Movie\MovieTrailer');
+    }
+
     public function casts()
     {
         return $this->belongsToMany('App\Models\Cast');
@@ -170,7 +175,7 @@ class Movie extends BaseModel
 
     public function scopeNewReleased($query)
     {
-        return $query->orderBy('release_date');
+        return $query->haveAnyTrailers()->orderBy('release_date', 'desc');
     }
 
     public function scopeNewUpdated($query)
@@ -229,6 +234,14 @@ class Movie extends BaseModel
     }
 
     public function scopeHaveAnyEpisodes($query)
+    {
+        if ($this->isProd()) {
+            return $query->has('episodes');
+        }
+        return $query;
+    }
+
+    public function scopeHaveAnyTrailers($query)
     {
         if ($this->isProd()) {
             return $query->has('episodes');
