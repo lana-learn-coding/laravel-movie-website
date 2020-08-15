@@ -8,7 +8,6 @@ use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
-use Storage;
 
 class MovieEpisodeController extends AdminController
 {
@@ -101,15 +100,7 @@ class MovieEpisodeController extends AdminController
 
             $form->saving(function (Form $form) {
                 if ($form->file && $form->model()->file != $form->file) {
-                    // file_image_hum.jpg => file/image/hum.jpg
-                    $path = implode(DIRECTORY_SEPARATOR, explode('_', $form->file));
-                    $ext = pathinfo($path, PATHINFO_EXTENSION);
-
-                    $saveFilename = uniqid() . uniqid() . '.' . $ext;
-                    $savePath = path_join(['public', 'videos', $saveFilename]);
-
-                    Storage::move(path_join(['aetherupload', $path]), $savePath);
-                    $form->file = 'videos/' . $saveFilename;
+                    $form->file = moveAetherUploadedVideoToPublicStorageAndGetUrl($form->file);
                 }
             });
         }
