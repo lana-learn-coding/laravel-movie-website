@@ -82,7 +82,7 @@ class MovieEpisodeController extends AdminController
 
         $form->select('movie_id', __('Movie'))->options(Movie::all()->pluck('name', 'id'))->required();
         $form->number('number', __('Number'))->required()->rules('integer|min:1');
-        $form->text('name', __('Name'))->required();
+        $form->text('name', __('Name'));
         $form->select('quality', __('Quality'))->options([
             '360' => '360p',
             '480' => '480p',

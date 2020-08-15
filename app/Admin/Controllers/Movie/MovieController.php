@@ -129,7 +129,7 @@ class MovieController extends AdminController
         if ($form->isCreating()) {
             $form->hasMany('episodes', __('Episode'), function (Form\NestedForm $form) {
                 $form->number('number', __('Number'))->required()->rules('integer|min:1');
-                $form->text('name', __('Name'))->required();
+                $form->text('name', __('Name'));
                 $form->select('quality', __('Quality'))->options([
                     '360' => '360p',
                     '480' => '480p',
