@@ -5,21 +5,12 @@ Source code of a movie website
 ## Administration
 
 ### Installation
+- Prepare database and set config into .env
 
-- Initialize default admin (admin:admin)
+- Initialize project
 ```
-$ php artisan admin:install
+$ php artisan install:dev
 ```
-- Optional plugins
-  - helpers
-  ```
-  $ php artisan admin:import helpers
-  ``` 
-  - media manager
-  ```
-  $ php artisan admin:import media-manager
-  ```
-  
 - 404 fix (may caused by aetherupload): 
 ```
 $ php artisan aetherupload:publish
