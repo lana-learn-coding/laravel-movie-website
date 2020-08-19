@@ -14,7 +14,7 @@ class CastController extends BaseController
     {
         parent::__construct();
         View::share('hots', Movie::hot()->take(8)->get());
-        View::share('news', Movie::newReleased()->take(6)->get());
+        View::share('news', Movie::newUpdated()->take(6)->get());
     }
 
     function casts(Request $request)

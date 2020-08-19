@@ -14,7 +14,7 @@ class SearchMovieController extends BaseController
     {
         parent::__construct();
         View::share('hots', Movie::hot()->take(8)->get());
-        View::share('news', Movie::newReleased()->take(6)->get());
+        View::share('news', Movie::newUpdated()->take(6)->get());
     }
 
     public function simpleSearch(Request $request)
