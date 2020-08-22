@@ -1,17 +1,12 @@
-// Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
-
-// Variables
-@import 'variables';
-
-// Bootstrap
-@import './bootstrap.min.css';
-
 @import 'node_modules/@fortawesome/fontawesome-free/scss/fontawesome';
 @import 'node_modules/hover.css/scss/hover';
 
 @import 'node_modules/video.js/src/css/video-js';
 @import 'node_modules/@silvermine/videojs-quality-selector/src/sass/quality-selector';
+
+[v-cloak] {
+    display: none;
+}
 
 .pagination {
     flex-wrap: wrap;
