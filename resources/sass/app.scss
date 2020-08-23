@@ -12,8 +12,6 @@
     flex-wrap: wrap;
 }
 
-.ratio-wrapper {
-    width: 100%;
-    overflow: hidden;
-    height: 0;
+.w-100 {
+    width: 100% !important;
 }
