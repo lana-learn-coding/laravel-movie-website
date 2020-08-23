@@ -8,6 +8,7 @@ import Vuetify, {
     VBtn,
     VCard,
     VCardActions,
+    VCardSubtitle,
     VCardText,
     VCardTitle,
     VCheckbox,
@@ -16,6 +17,7 @@ import Vuetify, {
     VDialog,
     VDivider,
     VIcon,
+    VImg,
     VList,
     VListGroup,
     VListItem,
@@ -31,6 +33,8 @@ import Vuetify, {
     VRow,
     VSpacer,
     VSubheader,
+    VTab,
+    VTabs,
     VTextField,
     VToolbarTitle,
 } from 'vuetify/lib';
@@ -70,6 +74,10 @@ Vue.use(Vuetify, {
         VDialog,
         VCardActions,
         VListGroup,
+        VTab,
+        VTabs,
+        VImg,
+        VCardSubtitle,
     },
 });
 

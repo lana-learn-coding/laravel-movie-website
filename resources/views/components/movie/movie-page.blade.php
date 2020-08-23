@@ -1,6 +1,6 @@
-<div class="row">
+<v-row>
     @if($movies->isEmpty())
-        <div class="col w-100 text-center pt-2">
+        <v-col class="w-100 text-center pt-2">
             <div class="card">
                 <div class="card-body my-lg-4">
                     <h5 class="text-muted mb-0">
@@ -8,18 +8,18 @@
                     </h5>
                 </div>
             </div>
-        </div>
+        </v-col>
     @else
         @foreach ($movies as $movie)
-            <div class="col-6 col-md-4 col-xl-3 my-4">
-                <div class="hvr-grow shadow d-flex">
+            <v-col class="my-3 d-flex" cols="6" md="4" xl="3">
+                <div class="hvr-grow shadow flex-grow-1 d-flex">
                     @include('components.movie.movie-card', ['movie' => $movie])
                 </div>
-            </div>
+            </v-col>
         @endforeach
     @endif
-</div>
+</v-row>
 
-<div class="d-flex justify-content-center mt-4 w-100">
+<div class="d-flex justify-center w-100">
     @include('components.paging-bar', ['paginator'=> $movies])
 </div>
