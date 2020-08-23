@@ -1,23 +1,27 @@
 @extends('layouts.base.main-app-base')
 
 @section('content.footer')
-    <div>
-        <h4 class="mt-4 mb-2">New Updated</h4>
-        <hr class="border-info mt-2 mb-0">
-        <div class="row overflow-hidden flex-nowrap pb-3 mb-4 mb-lg-5">
+    <div class="mt-6 mt-sm-8 mt-md-10 mt-lg-12">
+        <h4 class="text-h5 mb-2">New Updated</h4>
+        <v-divider></v-divider>
+        <v-row class="overflow-hidden flex-nowrap pb-10 pb-lg-20">
             @foreach($news as $movie)
-                <div class="col-6 col-sm-4 col-lg-3 mt-4">
-                    <div class="d-block shadow hvr-grow">
+                <v-col class="mt-4 d-flex" cols="6" sm="4" lg="3">
+                    <div class="d-block shadow hvr-grow flex-grow-1 d-flex">
                         @include('components.movie.movie-card', ['movie' => $movie])
                     </div>
-                </div>
+                </v-col>
             @endforeach
-        </div>
+        </v-row>
     </div>
 @endsection
 
 @section('content.aside')
-    <h4 class="mb-2">Hot Movies</h4>
-    <hr class="border-info mt-2">
-    @include('components.movie.side-movie-list', ['movies' => $hots])
+    <v-card>
+        <v-card-title>Hot Movies</v-card-title>
+        <v-divider></v-divider>
+        <v-card-text>
+            @include('components.movie.side-movie-list', ['movies' => $hots])
+        </v-card-text>
+    </v-card>
 @endsection
