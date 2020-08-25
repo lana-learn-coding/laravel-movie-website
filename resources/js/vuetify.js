@@ -11,6 +11,8 @@ import Vuetify, {
     VCardSubtitle,
     VCardText,
     VCardTitle,
+    VCarousel,
+    VCarouselItem,
     VCheckbox,
     VCol,
     VContainer,
@@ -80,6 +82,8 @@ Vue.use(Vuetify, {
         VImg,
         VCardSubtitle,
         VTextarea,
+        VCarousel,
+        VCarouselItem,
     },
 });
 
