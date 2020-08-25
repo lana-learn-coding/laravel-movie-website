@@ -1,47 +1,37 @@
 @extends('layouts.main-app')
 
-@section('content.header')
-    <ol class="breadcrumb mb-4 mb-md-5">
-        <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('cast') }}">Casts</a></li>
-        <li class="breadcrumb-item active">{{ $cast->name }}</li>
-    </ol>
-@endsection
-
 @section('content.body')
     <div>
-        <h4 class="mb-2">{{ $cast->name }}</h4>
-        <hr class="mt-2 mb-0 border-info">
+        <h4 class="text-h5 mb-2">{{ $cast->name }}</h4>
+        <v-divider></v-divider>
     </div>
     @yield('content.movie')
-    <div class="row mt-4">
-        <div class="col-5 col-md-4 col-xl-3 d-flex">
+    <v-row>
+        <v-col cols="5" md="4" lg="3" xl="2" class="d-flex">
             @include('components.movie.cast-card', ['cast' => $cast])
-        </div>
-        <div class="col-7 col-md-8 col-xl-9 pl-0">
-            <div class="card h-100 border-0">
-                <div class="card-body p-2 p-md-3">
-                    <div>
-                        <div class="mb-2 text-break">
-                            <span class="font-weight-bold mr-2">Birth: </span>
-                            <span>{{ $cast->birth_date ?: 'unknown' }}</span>
-                        </div>
-                        <div class="mb-2">
-                            <span class="font-weight-bold mr-2">Gender: </span>
-                            <span>{{ $cast->gender ?: 'unknown' }}</span>
-                        </div>
-                        <div class="mb-2">
-                            <span class="font-weight-bold mr-2">Movies: </span>
-                            <span>{{ $cast->movies_count }}</span>
-                        </div>
+        </v-col>
+        <v-col class="pl-0 d-flex" cols="7" md="8" lg="9" xl="10">
+            <v-card class="flex-grow-1 w-100">
+                <v-card-text style="font-size: 1.1rem">
+                    <div class="mb-4 text-break">
+                        <span class="font-weight-bold mr-2">Birth: </span>
+                        <span>{{ $cast->birth_date ?: 'unknown' }}</span>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div>
-        <hr class="mb-0 mt-4 border-secondary">
-        @include('components.movie.movie-page', ['movies' => $movies])
-    </div>
+                    <div class="mb-4">
+                        <span class="font-weight-bold mr-2">Gender: </span>
+                        <span>{{ $cast->gender ?: 'unknown' }}</span>
+                    </div>
+                    <div class="mb-4">
+                        <span class="font-weight-bold mr-2">Movies: </span>
+                        <span>{{ $cast->movies_count }}</span>
+                    </div>
+                </v-card-text>
+            </v-card>
+        </v-col>
+    </v-row>
+
+    <h4 class="text-h6 mb-2 mt-5 mt-sm-6 mt-md-7 mt-lg-8 mt-xl-10 font-weight-regular">Movies of {{ $cast->name }}</h4>
+    <v-divider></v-divider>
+    @include('components.movie.movie-page', ['movies' => $movies])
 @endsection
 

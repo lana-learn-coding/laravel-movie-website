@@ -1,63 +1,61 @@
 @extends('layouts.main-app')
 
 @section('content.header')
-    <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-        <li class="breadcrumb-item active">Casts</li>
-        <li class="ml-auto">
-            <a href="#" class="hvr-grow-rotate" data-toggle="collapse" data-target="#search-form">
-                <i class="fas fa-search"></i>
-            </a>
-        </li>
-    </ol>
-    <div class="collapse show" id="search-form">
-        <form method="GET" class="pb-4">
-            <div class="form-row">
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="input-group input-group-sm">
-                        <input type="text" class="form-control" name="name" value="{{ request()->input('name') }}">
-                        <button class="btn btn-primary input-group-append px-3">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
+    <form method="GET" class="pb-4">
+        <v-row>
+            <v-col cols="12" md="6" lg="4" xl="3">
+                <v-text-field
+                    name="name"
+                    type="text"
+                    placeholder="Search casts..."
+                    value="{{ request()->query('name') }}"
+                    solo
+                    single-line
+                    hide-details
+                >
+                    <template v-slot:append>
+                        <v-btn icon x-small type="submit">
+                            <v-icon x-small>fas fa-search</v-icon>
+                        </v-btn>
+                    </template>
+                </v-text-field>
+            </v-col>
+        </v-row>
+    </form>
 @endsection
 
 @section('content.body')
     <div>
         @if(request()->input('name'))
-            <h4 class="mb-2">Casts named "{{ request()->input('name') }}"</h4>
+            <h4 class="text-h5 mb-2">Casts named "{{ request()->input('name') }}"</h4>
         @else
-            <h4 class="mb-2">All Cast</h4>
+            <h4 class="text-h5 mb-2">All Cast</h4>
         @endif
-        <hr class="mt-2 mb-0 border-info">
+        <v-divider></v-divider>
     </div>
-    <div class="row">
+    <v-row>
         @if($casts->isEmpty())
-            <div class="col w-100 text-center pt-2">
-                <div class="card">
-                    <div class="card-body my-lg-4">
+            <v-col class="col w-100 text-center pt-1">
+                <v-card>
+                    <v-card-text class="card-body my-lg-4 body-1">
                         <h5 class="text-muted mb-0">
                             No Data found :(
                         </h5>
-                    </div>
-                </div>
-            </div>
+                    </v-card-text>
+                </v-card>
+            </v-col>
         @else
             @foreach ($casts as $cast)
-                <div class="col-4 col-md-3 col-xl-2 my-4">
-                    <div class="hvr-grow shadow d-flex">
+                <v-col class="my-4 d-flex" cols="4" md="3" xl="2">
+                    <div class="hvr-grow shadow d-flex flex-grow-1">
                         @include('components.movie.cast-card', ['cast' => $cast])
                     </div>
-                </div>
+                </v-col>
             @endforeach
         @endif
-    </div>
+    </v-row>
 
-    <div class="d-flex justify-content-center mt-4 w-100">
+    <div class="d-flex justify-center w-100">
         @include('components.paging-bar', ['paginator'=> $casts])
     </div>
 @endsection
