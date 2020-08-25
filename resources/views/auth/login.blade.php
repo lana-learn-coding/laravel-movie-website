@@ -40,7 +40,8 @@
                             <div class="mt-3">
                                 <v-btn type="submit" color="indigo darken-2 mr-4">Login</v-btn>
                                 @if (Route::has('password.request'))
-                                    <a class="text--primary" href="{{ route('password.request') }}">
+                                    <a class="text--primary text-decoration-none"
+                                       href="{{ route('password.request') }}">
                                         {{ __('Forgot Your Password?') }}
                                     </a>
                                 @endif
