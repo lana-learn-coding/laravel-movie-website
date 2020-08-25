@@ -155,6 +155,17 @@
                             <v-list-item-title>Favorite</v-list-item-title>
                         </v-list-item-content>
                     </v-list-item>
+                    <v-list-item
+                        href="{{ route('user.rated', ['id' => Auth::id()]) }}"
+                        @if(Route::is('user.rated')) class="v-list-item--active" @endif
+                    >
+                        <v-list-item-action>
+                            <v-icon>fas fa-star</v-icon>
+                        </v-list-item-action>
+                        <v-list-item-content>
+                            <v-list-item-title>Rated</v-list-item-title>
+                        </v-list-item-content>
+                    </v-list-item>
                     <v-list-item @click="applicationLogoutDialog = true">
                         <v-list-item-action>
                             <v-icon>fas fa-sign-out-alt</v-icon>
