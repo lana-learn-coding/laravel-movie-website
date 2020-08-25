@@ -35,6 +35,7 @@ import Vuetify, {
     VSubheader,
     VTab,
     VTabs,
+    VTextarea,
     VTextField,
     VToolbarTitle,
 } from 'vuetify/lib';
@@ -78,6 +79,7 @@ Vue.use(Vuetify, {
         VTabs,
         VImg,
         VCardSubtitle,
+        VTextarea,
     },
 });
 
