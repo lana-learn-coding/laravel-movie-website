@@ -275,6 +275,11 @@
                             single-line
                             hide-details
                         >
+                            <template v-slot:append>
+                                <v-btn icon x-small type="submit">
+                                    <v-icon x-small>fas fa-search</v-icon>
+                                </v-btn>
+                            </template>
                         </v-text-field>
                     </form>
 
