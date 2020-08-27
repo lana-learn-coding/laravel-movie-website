@@ -1,12 +1,7 @@
-@import 'node_modules/@fortawesome/fontawesome-free/scss/fontawesome';
 @import 'node_modules/hover.css/scss/hover';
 
 [v-cloak] {
     display: none;
-}
-
-input[type=checkbox]:checked {
-    opacity: 1 !important;
 }
 
 .w-100 {

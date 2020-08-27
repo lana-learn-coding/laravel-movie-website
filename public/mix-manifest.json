@@ -2,8 +2,7 @@
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
     "/css/video.css": "/css/video.css",
-    "/css/admin.css": "/css/admin.css",
-    "/js/axios.js": "/js/axios.js",
+    "/js/cropper.js": "/js/cropper.js",
     "/js/video.js": "/js/video.js",
     "/js/use.js": "/js/use.js"
 }

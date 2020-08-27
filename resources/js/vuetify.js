@@ -1,3 +1,4 @@
+import '@fortawesome/fontawesome-free/css/all.css';
 import Vue from 'vue';
 import Vuetify, {
     VAlert,
@@ -16,6 +17,7 @@ import Vuetify, {
     VCheckbox,
     VCol,
     VContainer,
+    VDatePicker,
     VDialog,
     VDivider,
     VIcon,
@@ -33,6 +35,7 @@ import Vuetify, {
     VMenu,
     VNavigationDrawer,
     VRow,
+    VSelect,
     VSpacer,
     VSubheader,
     VTab,
@@ -84,6 +87,8 @@ Vue.use(Vuetify, {
         VTextarea,
         VCarousel,
         VCarouselItem,
+        VSelect,
+        VDatePicker,
     },
 });
 

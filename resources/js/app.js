@@ -1,4 +1,3 @@
-import '@fortawesome/fontawesome-free/js/all.min';
 import Vue from 'vue';
 import vuetify from './vuetify';
 import VueCompositionAPI, {computed, reactive, ref} from '@vue/composition-api';

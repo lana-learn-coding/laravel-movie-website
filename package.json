@@ -18,11 +18,11 @@
         "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
-        "hover.css": "^2.3.2",
-        "cropperjs": "^1.5.7",
         "@fortawesome/fontawesome-free": "^5.13.0",
         "@silvermine/videojs-quality-selector": "^1.2.4",
         "@vue/composition-api": "^1.0.0-beta.10",
+        "cropperjs": "^1.5.7",
+        "hover.css": "^2.3.2",
         "video.js": "^7.8.4",
         "vue": "^2.6.12",
         "vuetify": "^2.3.9"
