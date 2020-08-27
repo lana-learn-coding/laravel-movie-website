@@ -47,7 +47,7 @@
                             <v-img
                                 class="rounded"
                                 aspect-ratio="1"
-                                src="{{ Auth::user()->avatar ? url(Auth::user()->avatar) : asset('img/avatar-placeholder.jpg') }}"
+                                src="{{ Auth::user()->avatar ? url('storage/' . Auth::user()->avatar) : asset('img/avatar-placeholder.jpg') }}"
                                 alt="{{ Auth::user()->username }}"
                             >
                             </v-img>
@@ -68,7 +68,7 @@
                         <v-img
                             class="rounded"
                             aspect-ratio="1"
-                            src="{{ $user->avatar ? url($user->avatar) : asset('img/avatar-placeholder.jpg') }}"
+                            src="{{ $user->avatar ? url('storage/' . $user->avatar) : asset('img/avatar-placeholder.jpg') }}"
                             alt="{{ $user->username }}"
                         >
                         </v-img>

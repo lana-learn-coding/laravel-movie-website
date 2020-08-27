@@ -335,7 +335,7 @@
                                         @if(Auth::user()->avatar)
                                             <img
                                                 alt="avatar"
-                                                src="{{ url(Auth::user()->avatar) }}"
+                                                src="{{ url('storage/' . Auth::user()->avatar) }}"
                                             >
                                         @else
                                             {{ ucfirst(substr(Auth::user()->username, 0, 1)) }}
