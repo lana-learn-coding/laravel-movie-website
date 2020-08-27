@@ -189,7 +189,7 @@
                         class="d-lg-none mr-sm-2 mr-md-4"
                     >
                     </v-app-bar-nav-icon>
-                    <v-toolbar-title class="d-none d-md-block d-xl-block mr-6">LaraMov</v-toolbar-title>
+                    <v-toolbar-title class="d-none d-md-block d-xl-block mr-5">LaraMov</v-toolbar-title>
 
                     <div class="d-none d-lg-block">
                         <app-bar-nav-button @if(Route::is('home')) active @endif href="{{ route('home') }}">
@@ -274,7 +274,7 @@
                     </div>
 
                     <v-spacer class="d-none d-lg-block"></v-spacer>
-                    <form action="{{ route("search") }}" class="flex-grow-1 mr-6">
+                    <form action="{{ route("search") }}" class="flex-grow-1 mr-sm-6">
                         @csrf
                         <v-text-field
                             name="query"
