@@ -5,8 +5,8 @@
     display: none;
 }
 
-.pagination {
-    flex-wrap: wrap;
+input[type=checkbox]:checked {
+    opacity: 1 !important;
 }
 
 .w-100 {
