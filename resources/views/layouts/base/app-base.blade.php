@@ -23,7 +23,9 @@
     @stack('globals')
     @yield('body')
 </div>
-
+<script>
+    window.__userIsLoggedIn = {{ Auth::check() ? 'true' : 'false' }};
+</script>
 <script src="{{ asset('js/app.js') }}"></script>
 @yield('vue')
 @stack('scripts')

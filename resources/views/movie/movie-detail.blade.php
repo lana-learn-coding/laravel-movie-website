@@ -75,7 +75,7 @@
                                     <span class="font-weight-bold">Favorited</span>
                                 </v-btn>
                             @else
-                                <v-btn class="mr-2 mb-2" id="favorite-button" color="indigo darken-2"
+                                <v-btn class="mr-2 mb-2" id="favorite-button" color="indigo darken-2" data-require-login
                                        href="{{ route('movie.favorite.add', ['id' => $movie->id])}} ">
                                     <v-icon small>fas fa-heart mr-1</v-icon>
                                     <span class="font-weight-bold">Favorite</span>
@@ -95,6 +95,7 @@
                                         </v-btn>
                                     @else
                                         <v-btn
+                                            data-require-login
                                             class="mb-2"
                                             color="green darken-1"
                                             v-bind="attrs"

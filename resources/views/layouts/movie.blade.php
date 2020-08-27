@@ -55,7 +55,8 @@
                         <v-btn type="submit" color="indigo darken-2" class="w-100 mt-3">Post</v-btn>
                     </v-col>
                     <v-col cols="9" sm="10" lg="11">
-                        <v-textarea dense outlined auto-grow placeholder="Write a comment" name="comment"></v-textarea>
+                        <v-textarea dense outlined auto-grow placeholder="Write a comment" name="comment"
+                                    data-require-login></v-textarea>
                     </v-col>
                 </v-row>
             </form>

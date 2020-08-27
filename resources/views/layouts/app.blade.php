@@ -420,7 +420,19 @@
             </v-card-actions>
         </v-card>
     </v-dialog>
+
+    <v-dialog v-model="applicationLoginRequiredDialog" max-width="450px">
+        <v-card>
+            <v-card-title>Require Login</v-card-title>
+            <v-card-text>Please login to perform this action</v-card-text>
+            <v-card-actions class="justify-end">
+                <v-btn text color="blue" href="{{ route('login') }}">Login</v-btn>
+                <v-btn text @click.stop="applicationLoginRequiredDialog = false">Cancel</v-btn>
+            </v-card-actions>
+        </v-card>
+    </v-dialog>
 @endsection
+
 @section('vue')
     <script src="{{ asset('js/use.js') }}"></script>
     <script>
@@ -435,3 +447,5 @@
         });
     </script>
 @endsection
+
+

@@ -18,21 +18,31 @@
                     web browser that supports HTML5 video
                 </p>
             </video>
-            <div class="mt-2 d-flex align-baseline">
+            <div class="mt-4 d-flex align-baseline">
                 @if(!Auth::check() || !$movie->isFavoritedBy(Auth::id()))
-                    <a class="btn btn-secondary btn-sm mr-2 mb-2"
-                       href="{{ route("movie.favorite.add", ["id" => $movie->id]) }}">
+                    <v-btn
+                        data-require-login
+                        text
+                        small
+                        class="mr-2 mb-2"
+                        href="{{ route("movie.favorite.add", ["id" => $movie->id]) }}"
+                    >
                         Add to favorite
-                    </a>
+                    </v-btn>
                 @endif
-                <v-btn href="{{ route("movie", ["id" => $movie->id]) }}" class="btn btn-secondary btn-sm mr-2 mb-2">
+                <v-btn text small href="{{ route("movie", ["id" => $movie->id]) }}"
+                       class="btn btn-secondary btn-sm mr-2 mb-2">
                     Back <span class="d-none d-md-inline">to movie page</span>
                 </v-btn>
                 <div class="ml-3 text-nowrap">
                     @for($i = 1; $i <= 5; $i++)
-                        <a href="{{ route_with_query('movie.rating.rate', ['rating' => $i], ['id' => $movie->id]) }}">
-                            <v-icon small @if($i <= ($movie->ratedBy(Auth::id()) ?? 0)) class="yellow--text" @endif>fas
-                                fa-star
+                        <a class="text-decoration-none"
+                           href="{{ route_with_query('movie.rating.rate', ['rating' => $i], ['id' => $movie->id]) }}"
+                        >
+                            <v-icon small data-require-login
+                                    @if($i <= ($movie->ratedBy(Auth::id()) ?? 0)) class="yellow--text" @endif
+                            >
+                                fas fa-star
                             </v-icon>
                         </a>
                     @endfor
