@@ -20,6 +20,7 @@ Route::group([
     $router->resource('movies/genres', 'Movie\MovieGenreController');
     $router->resource('movies/episodes', 'Movie\MovieEpisodeController');
     $router->resource('movies/trailers', 'Movie\MovieTrailerController');
+    $router->resource('movies/reports', 'Movie\MovieReportController');
     $router->resource('movies', 'Movie\MovieController');
 
     $router->resource('casts', 'CastController');

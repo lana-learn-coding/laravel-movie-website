@@ -31,8 +31,10 @@ class MovieController extends AdminController
     {
         $grid = new Grid(new Movie());
         $grid->model()->withCount('episodes');
+        $grid->model()->withCount('reports');
 
         $grid->column('id', __('Id'))->hide()->sortable();
+        $grid->column('reports_count', __('Report'))->sortable()->hide();
         $grid->column('name', __('Name'))->sortable();
         $grid->column('description', __('Description'))->hide();
         $grid->column('genres', __('Genres'))->pluck('name')->label();
@@ -110,6 +112,17 @@ class MovieController extends AdminController
             $casts->updated_at()->sortable();
 
             $casts->disableBatchActions();
+        });
+
+        $show->reports('Reports', function (Grid $reports) {
+            $reports->resource('/admin/movies/reports');
+
+            $reports->id()->hide();
+            $reports->form()->searchable();
+            $reports->episode()->sortable()->searchable();
+            $reports->created_at()->sortable();
+
+            $reports->disableFilter();
         });
 
         return $show;

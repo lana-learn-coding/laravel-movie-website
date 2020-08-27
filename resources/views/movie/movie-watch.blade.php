@@ -7,7 +7,7 @@
                 id="video"
                 class="video-js vjs-fluid vjs-16-9 w-100"
             >
-                @foreach($episodes  as $ep)
+                @foreach($episodes as $ep)
                     <source src="{{ route('stream.video', ['path' => $ep->file]) }}"
                             type="video/mp4"
                             label="{{ $ep->quality }}"
@@ -32,8 +32,15 @@
                 @endif
                 <v-btn text small href="{{ route("movie", ["id" => $movie->id]) }}"
                        class="btn btn-secondary btn-sm mr-2 mb-2">
-                    Back <span class="d-none d-md-inline">to movie page</span>
+                    Back <span class="d-none d-md-inline ml-1">to movie page</span>
                 </v-btn>
+                @if(!$movie->isReported(Auth::check() ? Auth::id() : getIp(), request()->ep))
+                    <v-btn text small
+                           href="{{ route("movie.report", ["id" => $movie->id, "ep" => request()->ep]) }}"
+                           class="btn btn-secondary btn-sm mr-2 mb-2">
+                        Report <span class="d-none d-md-inline ml-1">broken episode</span>
+                    </v-btn>
+                @endif
                 <div class="ml-3 text-nowrap">
                     @for($i = 1; $i <= 5; $i++)
                         <a class="text-decoration-none"

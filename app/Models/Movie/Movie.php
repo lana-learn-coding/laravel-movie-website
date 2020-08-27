@@ -98,6 +98,11 @@ class Movie extends BaseModel
             ->withPivot(['comment']);
     }
 
+    public function reports()
+    {
+        return $this->hasMany('App\Models\Movie\MovieReport');
+    }
+
     public function trailers()
     {
         return $this->hasMany('App\Models\Movie\MovieTrailer');
@@ -261,5 +266,13 @@ class Movie extends BaseModel
             return (int)$user->pivot->rating;
         }
         return null;
+    }
+
+    public function isReported($form, $episode)
+    {
+        return $this->reports()
+            ->where('from', $form)
+            ->where('episode', $episode)
+            ->exists();
     }
 }
