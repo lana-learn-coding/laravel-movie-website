@@ -137,7 +137,7 @@
                     :show-arrows="false"
                 >
                     @foreach($movie->trailers->groupBy('number') as $number => $trailer)
-                        <v-carousel-item>
+                        <v-carousel-item eager>
                             <v-card class="pa-1">
                                 <video
                                     id="video-{{ $number }}"
