@@ -22,10 +22,6 @@
                     <span class="font-weight-bold mr-2">Gender: </span>
                     <span>{{ ($user->detail ? $user->detail->gender : '') ?: 'unknown' }}</span>
                 </div>
-                <div class="mb-2">
-                    <span class="font-weight-bold mr-2">Birth: </span>
-                    <span>{{ ($user->detail ? $user->detail->birth_date : '') ?: 'unknown' }}</span>
-                </div>
                 <div>
                     <span class="font-weight-bold mr-2">Since: </span>
                     <span>{{ $user->created_at ? date('Y-m-d', strtotime($user->created_at)): 'unknown' }}</span>
