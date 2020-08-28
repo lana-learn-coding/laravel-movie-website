@@ -77,6 +77,50 @@ class UserController extends AdminController
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
 
+        $show->comments('Comment', function (Grid $movies) {
+            $movies->filter(function ($filter) {
+                $filter->disableIdFilter();
+                $filter->like('comment', __('Comment'));
+            });
+            $movies->disableFilter();
+            $movies->disableActions();
+            $movies->disableBatchActions();
+            $movies->disableTools();
+            $movies->disableCreateButton();
+
+            $movies->resource('/admin/users/comments');
+
+            $movies->column('id', __('Movie Id'))->searchable()->hide();
+            $movies->column('name', __('Movie'))->searchable();
+            $movies->column('comment', __('Comment'));
+            $movies->column('created_at', __('Comment at'));
+        });
+
+        $show->favoriteMovies('Favorite Movies', function (Grid $movies) {
+            $movies->disableFilter();
+            $movies->disableActions();
+            $movies->disableBatchActions();
+            $movies->disableTools();
+            $movies->disableCreateButton();
+
+            $movies->column('id', __('Movie Id'))->searchable()->hide();
+            $movies->column('name', __('Movie'))->searchable();
+            $movies->column('created_at', __('Favorite at'));
+        });
+
+        $show->ratedMovies('Rated Movies', function (Grid $movies) {
+            $movies->disableFilter();
+            $movies->disableActions();
+            $movies->disableBatchActions();
+            $movies->disableTools();
+            $movies->disableCreateButton();
+
+            $movies->column('id', __('Movie Id'))->searchable()->hide();
+            $movies->column('name', __('Movie'))->searchable();
+            $movies->column('rating', __('Rate'));
+            $movies->column('created_at', __('Rated at'));
+        });
+
         return $show;
     }
 

@@ -8,20 +8,27 @@ class AdminMenuSeeder extends Seeder
 {
     public function run()
     {
-        $parentId = Menu::insertGetId(['title' => 'Movie', 'icon' => 'fa-bars']);
-        $menus = [
-            ['parent_id' => $parentId, 'title' => 'Movie', 'icon' => 'fa-bars', 'uri' => 'movies'],
-            ['parent_id' => $parentId, 'title' => 'Category', 'icon' => 'fa-bars', 'uri' => 'movies/categories'],
-            ['parent_id' => $parentId, 'title' => 'Genre', 'icon' => 'fa-bars', 'uri' => 'movies/genres'],
-            ['parent_id' => $parentId, 'title' => 'Tag', 'icon' => 'fa-bars', 'uri' => 'movies/tags'],
-            ['parent_id' => $parentId, 'title' => 'Language', 'icon' => 'fa-bars', 'uri' => 'movies/languages'],
-            ['parent_id' => $parentId, 'title' => 'Nation', 'icon' => 'fa-bars', 'uri' => 'movies/nations'],
-            ['parent_id' => $parentId, 'title' => 'Episode', 'icon' => 'fa-bars', 'uri' => 'movies/episodes'],
-            ['parent_id' => $parentId, 'title' => 'Cast', 'icon' => 'fa-bars', 'uri' => 'casts'],
-            ['parent_id' => $parentId, 'title' => 'Trailer', 'icon' => 'fa-bars', 'uri' => 'movies/trailers'],
-            ['parent_id' => $parentId, 'title' => 'Report', 'icon' => 'fa-bars', 'uri' => 'movies/reports'],
+        $movieId = Menu::insertGetId(['title' => 'Movie', 'icon' => 'fa-bars']);
+        $movieMenus = [
+            ['parent_id' => $movieId, 'title' => 'Movie', 'icon' => 'fa-bars', 'uri' => 'movies/manage'],
+            ['parent_id' => $movieId, 'title' => 'Category', 'icon' => 'fa-bars', 'uri' => 'movies/categories'],
+            ['parent_id' => $movieId, 'title' => 'Genre', 'icon' => 'fa-bars', 'uri' => 'movies/genres'],
+            ['parent_id' => $movieId, 'title' => 'Tag', 'icon' => 'fa-bars', 'uri' => 'movies/tags'],
+            ['parent_id' => $movieId, 'title' => 'Language', 'icon' => 'fa-bars', 'uri' => 'movies/languages'],
+            ['parent_id' => $movieId, 'title' => 'Nation', 'icon' => 'fa-bars', 'uri' => 'movies/nations'],
+            ['parent_id' => $movieId, 'title' => 'Episode', 'icon' => 'fa-bars', 'uri' => 'movies/episodes'],
+            ['parent_id' => $movieId, 'title' => 'Cast', 'icon' => 'fa-bars', 'uri' => 'casts'],
+            ['parent_id' => $movieId, 'title' => 'Trailer', 'icon' => 'fa-bars', 'uri' => 'movies/trailers'],
+            ['parent_id' => $movieId, 'title' => 'Report', 'icon' => 'fa-bars', 'uri' => 'movies/reports'],
         ];
-        Menu::insert($menus);
-        Menu::insert(['title' => 'User', 'icon' => 'fa-user', 'uri' => 'users']);
+
+        $userId = Menu::insertGetId(['title' => 'User', 'icon' => 'fa-user']);
+        $userMenu = [
+            ['parent_id' => $userId, 'title' => 'User', 'icon' => 'fa-bars', 'uri' => 'users/manage'],
+            ['parent_id' => $userId, 'title' => 'Comment', 'icon' => 'fa-bars', 'uri' => 'users/comments']
+        ];
+
+        Menu::insert($movieMenus);
+        Menu::insert($userMenu);
     }
 }

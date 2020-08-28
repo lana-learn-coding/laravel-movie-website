@@ -91,6 +91,7 @@ class User extends Authenticatable
     public function comments()
     {
         return $this->belongsToMany('App\Models\Movie\Movie', 'movie_user_comment')
-            ->using('App\Models\User\UserComment');
+            ->using('App\Models\User\UserComment')
+            ->withTimestamps();
     }
 }

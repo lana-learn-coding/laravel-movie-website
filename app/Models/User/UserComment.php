@@ -18,6 +18,8 @@ class UserComment extends Pivot
 {
     public $incrementing = true;
 
+    protected $table = 'movie_user_comment';
+
     protected $fillable = ['comment'];
 
     public function user()

@@ -95,7 +95,8 @@ class Movie extends BaseModel
     {
         return $this->belongsToMany('App\Models\User\User', 'movie_user_comment')
             ->using('App\Models\User\UserComment')
-            ->withPivot(['comment']);
+            ->withPivot(['comment'])
+            ->withTimestamps();
     }
 
     public function reports()

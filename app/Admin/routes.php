@@ -21,8 +21,10 @@ Route::group([
     $router->resource('movies/episodes', 'Movie\MovieEpisodeController');
     $router->resource('movies/trailers', 'Movie\MovieTrailerController');
     $router->resource('movies/reports', 'Movie\MovieReportController');
-    $router->resource('movies', 'Movie\MovieController');
+    $router->resource('movies/manage', 'Movie\MovieController');
 
     $router->resource('casts', 'CastController');
-    $router->resource('users', 'User\UserController');
+
+    $router->resource('users/manage', 'User\UserController');
+    $router->resource('users/comments', 'User\UserCommentController');
 });
