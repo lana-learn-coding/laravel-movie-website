@@ -37,6 +37,7 @@ class UserCommentController extends AdminController
 
         $grid->filter(function ($filter) {
             $filter->like('user.username', __('Username'));
+            $filter->like('comment', __('Comment'));
             $filter->like('email', __('Email'));
             $filter->between('email_verified_at', __('Email verified at'))->date();
             $filter->between('updated_at', __('Updated At'))->date();

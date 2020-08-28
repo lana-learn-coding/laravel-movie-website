@@ -65,7 +65,7 @@ class UserController extends AdminController
 
         $show->field('id', __('Id'));
         $show->field('username', __('Username'));
-        $show->field('avatar', __('Avatar'));
+        $show->field('avatar', __('Avatar'))->image();
         $show->field('email', __('Email'));
         $show->field('email_verified_at', __('Email verified at'));
         $show->field('remember_token', __('Remember token'));
