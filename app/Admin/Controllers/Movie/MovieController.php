@@ -118,7 +118,7 @@ class MovieController extends AdminController
             $reports->resource('/admin/movies/reports');
 
             $reports->id()->hide();
-            $reports->form()->searchable();
+            $reports->from()->searchable();
             $reports->episode()->sortable()->searchable();
             $reports->created_at()->sortable();
 
