@@ -85,7 +85,8 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Models\Movie\Movie', 'movie_user_rating')
             ->using('App\Models\Movie\MovieRating')
-            ->withPivot(['rating']);
+            ->withPivot(['rating'])
+            ->withTimestamps();
     }
 
     public function comments()

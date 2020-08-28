@@ -14,13 +14,15 @@ class CreateMovieUserRatingTable extends Migration
     public function up()
     {
         Schema::create('movie_user_rating', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+            $table->integer('rating');
+
             $table->integer('movie_id')->unsigned()->index();
             $table->foreign('movie_id')->references('id')->on('movies')->onDelete('cascade');
             $table->integer('user_id')->unsigned()->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->primary(['movie_id', 'user_id']);
-
-            $table->integer('rating');
+            $table->unique(['movie_id', 'user_id']);
         });
     }
 

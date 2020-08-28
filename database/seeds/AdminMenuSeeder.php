@@ -25,7 +25,8 @@ class AdminMenuSeeder extends Seeder
         $userId = Menu::insertGetId(['title' => 'User', 'icon' => 'fa-user']);
         $userMenu = [
             ['parent_id' => $userId, 'title' => 'User', 'icon' => 'fa-bars', 'uri' => 'users/manage'],
-            ['parent_id' => $userId, 'title' => 'Comment', 'icon' => 'fa-bars', 'uri' => 'users/comments']
+            ['parent_id' => $userId, 'title' => 'Comment', 'icon' => 'fa-bars', 'uri' => 'users/comments'],
+            ['parent_id' => $userId, 'title' => 'Rating', 'icon' => 'fa-bars', 'uri' => 'users/ratings']
         ];
 
         Menu::insert($movieMenus);

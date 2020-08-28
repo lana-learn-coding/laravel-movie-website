@@ -27,4 +27,5 @@ Route::group([
 
     $router->resource('users/manage', 'User\UserController');
     $router->resource('users/comments', 'User\UserCommentController');
+    $router->resource('users/ratings', 'User\UserMovieRatingController');
 });

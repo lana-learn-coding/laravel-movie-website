@@ -88,7 +88,8 @@ class Movie extends BaseModel
     {
         return $this->belongsToMany('App\Models\User\User', 'movie_user_rating')
             ->using('App\Models\Movie\MovieRating')
-            ->withPivot(['rating']);
+            ->withPivot(['rating'])
+            ->withTimestamps();
     }
 
     public function comments()
@@ -174,7 +175,7 @@ class Movie extends BaseModel
 
     public function getRatingByPercentAttribute()
     {
-        $maxRate = $this->ratedByUsers()->count('id') * 5 ?: 1;
+        $maxRate = $this->ratedByUsers()->count('user_id') * 5 ?: 1;
         $rate = $this->ratedByUsers()->sum('rating');
         return ((double)$rate / $maxRate) * 100;
     }
@@ -262,7 +263,7 @@ class Movie extends BaseModel
 
     public function ratedBy($userId)
     {
-        $user = $this->ratedByUsers()->where('id', $userId)->first();
+        $user = $this->ratedByUsers()->where('user_id', $userId)->first();
         if ($user) {
             return (int)$user->pivot->rating;
         }

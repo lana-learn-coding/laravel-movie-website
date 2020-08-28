@@ -16,6 +16,8 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
  */
 class MovieRating extends Pivot
 {
+    protected $table = 'movie_user_rating';
+
     protected $fillable = ['rating'];
 
     public function user()
