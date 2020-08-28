@@ -2,8 +2,23 @@
 
 @section('content')
     <v-container class="pt-8 pt-md-10 pt-lg-12 pt-xl-15">
-
-        <div class="mt-5 mt-lg-8">
+        @if(!$carousels->isEmpty())
+            <v-carousel height="100%" hide-delimiters hide-delimiter-background show-arrows-on-hover cycle>
+                @foreach($carousels as $carousel)
+                    <v-carousel-item eager @if($carousel->link) href="{{ $carousel->link }}" @endif>
+                        <v-card>
+                            <v-img
+                                width="100%"
+                                height="100%"
+                                :aspect-ratio="$vuetify.breakpoint.mdAndUp ? 3 : $vuetify.breakpoint.smAndUp ? 1.8 : 1.5"
+                                src="{{ url('storage/' . $carousel->banner) }}">
+                            </v-img>
+                        </v-card>
+                    </v-carousel-item>
+                @endforeach
+            </v-carousel>
+        @endif
+        <div class="mt-3 mt-md-5 mt-lg-8">
             <h4 class="text-h5 mb-2 text-center">Featured Movies</h4>
             <v-divider></v-divider>
             <v-row class="overflow-hidden flex-nowrap pb-3 mb-3 mb-lg-4">

@@ -29,7 +29,13 @@ class AdminMenuSeeder extends Seeder
             ['parent_id' => $userId, 'title' => 'Rating', 'icon' => 'fa-bars', 'uri' => 'users/ratings']
         ];
 
+        $webId = Menu::insertGetId(['title' => 'Web', 'icon' => 'fa-globe']);
+        $webMenu = [
+            ['parent_id' => $webId, 'title' => 'Banner', 'icon' => 'fa-bars', 'uri' => 'web/banners'],
+        ];
+
         Menu::insert($movieMenus);
         Menu::insert($userMenu);
+        Menu::insert($webMenu);
     }
 }

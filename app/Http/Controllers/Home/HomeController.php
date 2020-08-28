@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\BaseController;
+use App\Models\Banner;
 use App\Models\Movie\Movie;
 
 class HomeController extends BaseController
@@ -18,11 +19,13 @@ class HomeController extends BaseController
         $hots = Movie::hot()->limit(10)->get();
         $news = Movie::newUpdated()->limit(12)->get();
         $releases = Movie::newReleased()->limit(8)->get();
+        $carousels = Banner::all();
         return view('home.home', [
             'hots' => $hots,
             'features' => $features,
             'news' => $news,
-            'releases' => $releases
+            'releases' => $releases,
+            'carousels' => $carousels
         ]);
     }
 }
