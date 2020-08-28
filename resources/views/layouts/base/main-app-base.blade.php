@@ -1,16 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container mt-4">
+    <v-container class="pt-8 pt-md-10 pt-lg-12 pt-xl-15">
         @yield('content.header')
-        <div class="row">
-            <div class="col-md-8 col-xl-9">
+        <v-row>
+            <v-col md="8" xl="9" class="pr-xl-8">
                 @yield('content.body')
                 @yield('content.footer')
-            </div>
-            <div class="col-md-4 col-xl-3">
+            </v-col>
+            <v-col cols="12" md="4" xl="3" class="pl-md-5 pl-lg-10">
                 @yield('content.aside')
-            </div>
-        </div>
-    </div>
+            </v-col>
+        </v-row>
+    </v-container>
 @endsection

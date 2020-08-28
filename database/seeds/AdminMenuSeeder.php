@@ -19,6 +19,7 @@ class AdminMenuSeeder extends Seeder
             ['parent_id' => $parentId, 'title' => 'Episode', 'icon' => 'fa-bars', 'uri' => 'movies/episodes'],
             ['parent_id' => $parentId, 'title' => 'Cast', 'icon' => 'fa-bars', 'uri' => 'casts'],
             ['parent_id' => $parentId, 'title' => 'Trailer', 'icon' => 'fa-bars', 'uri' => 'movies/trailers'],
+            ['parent_id' => $parentId, 'title' => 'Report', 'icon' => 'fa-bars', 'uri' => 'movies/reports'],
         ];
         Menu::insert($menus);
         Menu::insert(['title' => 'User', 'icon' => 'fa-user', 'uri' => 'users']);

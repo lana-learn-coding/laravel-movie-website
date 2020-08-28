@@ -1,11 +1,9 @@
-<div class="card shadow border-0 w-100">
-    <a class="stretched-link" href="{{ route('cast.detail', ['id' => $cast->id]) }}"></a>
-    <div class="ratio-wrapper" style="padding-bottom: 120%">
-        <img src="{{ $cast->avatar ? url('storage/' . $cast->avatar) : asset('img/cast-placeholder.jpeg') }}"
-             alt="{{ $cast->name }}"
-             class="card-img">
-    </div>
-    <div class="py-2 px-1 text-truncate text-info">
-        <span style="font-size: 85%">{{ $cast->name }}</span>
-    </div>
-</div>
+<v-card class="w-100 elevation-8" href="{{ route('cast.detail', ['id' => $cast->id]) }}">
+    <v-img
+        aspect-ratio="0.8"
+        src="{{ $cast->avatar ? url('storage/' . $cast->avatar) : asset('img/cast-placeholder.jpeg') }}"
+        alt="{{ $cast->name }}"
+    >
+    </v-img>
+    <v-card-title class="body-2">{{ $cast->name }}</v-card-title>
+</v-card>

@@ -98,4 +98,19 @@ class MovieController extends BaseController
         ]);
         return back();
     }
+
+    function reportMovie(int $id, int $ep)
+    {
+        $movie = Movie::findOrFail($id);
+        if (Auth::check()) {
+            $source = Auth::id();
+        } else {
+            $source = getIp();
+        }
+        $movie->reports()->create([
+            'from' => $source,
+            'episode' => $ep
+        ])->save();
+        return back();
+    }
 }

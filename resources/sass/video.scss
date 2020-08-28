@@ -1,0 +1,6 @@
+@import 'node_modules/video.js/src/css/video-js';
+@import 'node_modules/@silvermine/videojs-quality-selector/src/sass/quality-selector';
+
+.v-carousel__controls {
+    bottom: 22px !important;
+}

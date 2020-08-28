@@ -40,6 +40,7 @@ Route::group(['namespace' => 'Movie'], function () {
     Route::get('/movies/{id}/favorite/add', 'MovieController@favoriteMovie')->name('movie.favorite.add');
     Route::get('/movies/{id}/favorite/remove', 'MovieController@removeFavoriteMovie')->name('movie.favorite.remove');
     Route::get('/movies/{id}/rating/rate', 'MovieController@rateMovie')->name('movie.rating.rate');
+    Route::get('/movies/{id}/episodes/{ep}/report', 'MovieController@reportMovie')->name('movie.report');
 
     Route::post('/movies/{id}/comment/write', 'MovieController@writeComment')->name('movie.comment.write');
 

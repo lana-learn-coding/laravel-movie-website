@@ -1,41 +1,27 @@
-@extends('layouts.main-app')
+@extends('layouts.app')
 
-@scopedstyle('layouts.movie')
-<style>
-    .card-font-size-lg {
-        font-size: 1rem;
-    }
-
-    .card-font-size-lg .card-title {
-        font-min-size: 1.2rem;
-    }
-</style>
-@endscopedstyle
-
-@section('content.header')
-    <ol class="breadcrumb mb-4 mb-md-5">
-        <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-        <li class="breadcrumb-item active">Users</li>
-        <li class="breadcrumb-item active">{{ $user->username }}</li>
-    </ol>
-@endsection
-
-@section('content.body')
-    <div>
-        <h4 class="mb-2"><span class="d-none d-lg-inline">Profile of </span> {{ $user->username }}</h4>
-        <hr class="mt-2 mb-0 border-info">
-    </div>
-    <div class="mt-3">
-        @include('components.user.user-detail-card',['user' => $user])
-        <hr class="border-secondary">
-    </div>
-    @yield('content.body.user')
-@endsection
-
-@section('content.footer')
-@endsection
-
-@section('content.aside')
-    @include('components.user.user-nav')
+@section('content')
+    <v-container class="pt-8 pt-md-10 pt-lg-12 pt-xl-15">
+        @yield('content.header')
+        <v-row>
+            <v-col cols="12" lg="8" xl="9" class="pr-xl-8">
+                <div>
+                    <h4 class="text-h5 mb-2">
+                        <span class="d-none d-md-inline">Profile of </span>
+                        <span class="d-md-none">User </span>
+                        {{ $user->username }}</h4>
+                    <v-divider></v-divider>
+                </div>
+                <div class="mt-2 mt-lg-3">
+                    @include('components.user.user-detail-card',['user' => $user])
+                </div>
+                @yield('content.body.user')
+                @yield('content.footer')
+            </v-col>
+            <v-col cols="12" lg="4" xl="3" class="d-none d-lg-block pl-lg-8 pl-lg-10">
+                @include('components.user.user-nav')
+            </v-col>
+        </v-row>
+    </v-container>
 @endsection
 

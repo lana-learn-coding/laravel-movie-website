@@ -1,35 +1,70 @@
 @if(Auth::check() && request()->id && request()->id === strval(Auth::id()))
-    <div class="pl-2 pl-lg-4 d-none d-md-block">
-        <div class="card">
-            <div class="card-body p-3">
-                <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
-                    <a class="nav-link {{ Route::is('user.detail') ? 'active': '' }}"
-                       href="{{ route('user.detail', ['id' => Auth::id()]) }}">
-                        Profile
-                    </a>
-                    <a class="nav-link {{ Route::is('user.update') ? 'active': '' }}"
-                       href="{{ route('user.update', ['id' => Auth::id()]) }}">
-                        Account
-                    </a>
-                    <a class="nav-link {{ Route::is('user.favorite') ? 'active': '' }}"
-                       href="{{ route('user.favorite', ['id' => Auth::id()]) }}">
-                        Favorites
-                    </a>
-                    <a class="nav-link {{ Route::is('user.rated') ? 'active': '' }}"
-                       href="{{ route('user.rated', ['id' => Auth::id()]) }}">
-                        Rated
-                    </a>
-
-                    <a class="nav-link" href="#" data-logout-warning>
-                        Logout
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
+    <v-card>
+        <v-card-title>Navigation</v-card-title>
+        <v-card-text>
+            <v-list nav>
+                <v-list-item
+                    href="{{ route('user.detail', ['id' => Auth::id()]) }}"
+                    @if(Route::is('user.detail')) class="v-list-item--active" @endif
+                >
+                    <v-list-item-action>
+                        <v-icon>fas fa-address-book</v-icon>
+                    </v-list-item-action>
+                    <v-list-item-content>
+                        <v-list-item-title>Profile</v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
+                <v-list-item
+                    href="{{ route('user.update', ['id' => Auth::id()]) }}"
+                    @if(Route::is('user.update')) class="v-list-item--active" @endif
+                >
+                    <v-list-item-action>
+                        <v-icon>fas fa-user</v-icon>
+                    </v-list-item-action>
+                    <v-list-item-content>
+                        <v-list-item-title>Account</v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
+                <v-list-item
+                    href="{{ route('user.favorite', ['id' => Auth::id()]) }}"
+                    @if(Route::is('user.favorite')) class="v-list-item--active" @endif
+                >
+                    <v-list-item-action>
+                        <v-icon>fas fa-heart</v-icon>
+                    </v-list-item-action>
+                    <v-list-item-content>
+                        <v-list-item-title>Favorite</v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
+                <v-list-item
+                    href="{{ route('user.rated', ['id' => Auth::id()]) }}"
+                    @if(Route::is('user.rated')) class="v-list-item--active" @endif
+                >
+                    <v-list-item-action>
+                        <v-icon>fas fa-star</v-icon>
+                    </v-list-item-action>
+                    <v-list-item-content>
+                        <v-list-item-title>Rated</v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
+                <v-list-item @click="applicationLogoutDialog = true">
+                    <v-list-item-action>
+                        <v-icon>fas fa-sign-out-alt</v-icon>
+                    </v-list-item-action>
+                    <v-list-item-content>
+                        <v-list-item-title>Sign Out</v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
+            </v-list>
+        </v-card-text>
+    </v-card>
 @else
-    <h4 class="mb-2">Hot Movies</h4>
-    <hr class="border-info mt-2">
-    @include('components.movie.side-movie-list', ['movies' => $hots])
+    <v-card>
+        <v-card-title>Hot Movies</v-card-title>
+        <v-divider></v-divider>
+        <v-card-text>
+            @include('components.movie.side-movie-list', ['movies' => $hots])
+        </v-card-text>
+    </v-card>
 @endif
 
