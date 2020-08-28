@@ -1,13 +1,13 @@
 <v-row>
     @if($movies->isEmpty())
         <v-col class="w-100 text-center pt-2">
-            <div class="card">
-                <div class="card-body my-lg-4">
-                    <h5 class="text-muted mb-0">
+            <v-card>
+                <v-card-text class="py-5 py-lg-8">
+                    <span class="body-1">
                         No Data found :(
-                    </h5>
-                </div>
-            </div>
+                    </span>
+                </v-card-text>
+            </v-card>
         </v-col>
     @else
         @foreach ($movies as $movie)
