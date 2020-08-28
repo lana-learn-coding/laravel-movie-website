@@ -16,3 +16,20 @@ function url_with_query($path = null, $queryParameters = [], $parameters = [], $
     }
     return $url;
 }
+
+function path_join($segments, $glue = DIRECTORY_SEPARATOR)
+{
+    return implode($glue, $segments);
+}
+
+function moveAetherUploadedVideoToPublicStorageAndGetUrl($uploadedPath)
+{
+    $path = implode(DIRECTORY_SEPARATOR, explode('_', $uploadedPath));
+    $ext = pathinfo($path, PATHINFO_EXTENSION);
+
+    $saveFilename = uniqid() . uniqid() . '.' . $ext;
+    $savePath = path_join(['public', 'videos', $saveFilename]);
+
+    Storage::move(path_join(['aetherupload', $path]), $savePath);
+    return 'videos/' . $saveFilename;
+}

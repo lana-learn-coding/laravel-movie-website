@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             CastSeeder::class,
             MovieSeeder::class,
             MovieViewSeeder::class,
+            AdminMenuSeeder::class
         ]);
     }
 }

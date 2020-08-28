@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\BaseController;
-use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Session;
+use URL;
 
 class LoginController extends BaseController
 {
@@ -22,11 +23,6 @@ class LoginController extends BaseController
 
     use AuthenticatesUsers;
 
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
     protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
@@ -38,5 +34,15 @@ class LoginController extends BaseController
     {
         parent::__construct();
         $this->middleware('guest')->except('logout');
+
+        $loginPath = url('/login');
+        if (URL::previous() !== $loginPath) {
+            Session::put('login.back.url', URL::previous());
+        }
+    }
+
+    public function redirectTo()
+    {
+        return Session::get('login.back.url') ?? $this->redirectTo;
     }
 }

@@ -32,7 +32,7 @@
                 </ul>
                 <div class="mt-4">
                     <h4 class="mb-1">Most Viewed by {{ $by }}</h4>
-                    <hr class="mt-1 border-info">
+                    <hr class="mt-2 mb-0 border-info">
                 </div>
                 @include('components.movie.movie-page', ['movies' => $movies])
             </div>

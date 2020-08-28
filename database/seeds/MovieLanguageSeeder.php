@@ -12,6 +12,14 @@ class MovieLanguageSeeder extends Seeder
      */
     public function run()
     {
-        factory(MovieLanguage::class, 8)->create();
+        $languages = [
+            ['name' => 'Vietnamese'],
+            ['name' => 'English'],
+            ['name' => 'Vietnamese subtitles'],
+            ['name' => 'English subtitles'],
+            ['name' => 'Others']
+        ];
+
+        MovieLanguage::insert($languages);
     }
 }

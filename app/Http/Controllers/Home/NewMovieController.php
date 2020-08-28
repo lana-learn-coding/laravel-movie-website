@@ -11,28 +11,36 @@ class NewMovieController extends BaseController
     public function __construct()
     {
         parent::__construct();
-        $hotByDay = Movie::orderBy('views_by_day')->take(8)->get();
+        $hotByDay = Movie::hotByDay()->take(8)->get();
         View::share('hots', $hotByDay);
     }
 
     public function index()
     {
-        return redirect('/new/release');
+        return redirect()->route('new.released');
     }
 
     public function newByReleaseDate()
     {
         return view('home.new-movie', [
-            'by' => 'release',
-            'movies' => Movie::newRelease()->paginate(24)
+            'by' => 'released',
+            'movies' => Movie::newReleased()->toPage(24),
         ]);
     }
 
     public function newByUpdateDate()
     {
         return view('home.new-movie', [
-            'by' => 'update',
-            'movies' => Movie::newUpdate()->paginate(24),
+            'by' => 'updated',
+            'movies' => Movie::newUpdated()->toPage(24),
+        ]);
+    }
+
+    public function newByCreateDate()
+    {
+        return view('home.new-movie', [
+            'by' => 'created',
+            'movies' => Movie::newCreated()->toPage(24),
         ]);
     }
 }

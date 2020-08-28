@@ -12,6 +12,15 @@ class MovieNationSeeder extends Seeder
      */
     public function run()
     {
-        factory(MovieNation::class, 8)->create();
+        $nations = [
+            ['name' => 'Vietnam'],
+            ['name' => 'America'],
+            ['name' => 'China'],
+            ['name' => 'Japan'],
+            ['name' => 'India'],
+            ['name' => 'Others'],
+        ];
+
+        MovieNation::insert($nations);
     }
 }

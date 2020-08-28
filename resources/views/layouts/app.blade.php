@@ -1,4 +1,4 @@
-@extends('layouts.base')
+@extends('layouts.base.app-base')
 
 @scopedstyle('layouts.app')
 <style>
@@ -100,15 +100,20 @@
                             New Movies
                         </a>
                         <div class="dropdown-menu">
-                            <a href="{{ route('new.release') }}"
-                               class="dropdown-item {{ Route::is('new.release') ? 'active': '' }}"
+                            <a href="{{ route('new.released') }}"
+                               class="dropdown-item {{ Route::is('new.released') ? 'active': '' }}"
                             >
-                                New Release
+                                New Released
                             </a>
-                            <a href="{{ route('new.update') }}"
-                               class="dropdown-item {{ Route::is('new.update') ? 'active': '' }}"
+                            <a href="{{ route('new.created') }}"
+                               class="dropdown-item {{ Route::is('new.released') ? 'active': '' }}"
                             >
-                                New Update
+                                New Added
+                            </a>
+                            <a href="{{ route('new.updated') }}"
+                               class="dropdown-item {{ Route::is('new.updated') ? 'active': '' }}"
+                            >
+                                New Updated
                             </a>
                         </div>
                     </li>
@@ -116,6 +121,9 @@
                     @include('components.app.nav-dropdown', ['name' => 'Genres', 'type' => 'genres', 'items' => $genres])
                     @include('components.app.nav-dropdown', ['name' => 'Languages', 'type' => 'language', 'items' => $languages])
                     @include('components.app.nav-dropdown', ['name' => 'Nations', 'type' => 'nation', 'items' => $nations])
+                    <li class="nav-item">
+                        <a href="{{ route('cast') }}" class="nav-link {{ Route::is('cast') ? 'active' : '' }}">Casts</a>
+                    </li>
                 </ul>
 
                 <!-- Right Side of Navbar -->

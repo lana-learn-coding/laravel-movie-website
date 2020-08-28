@@ -26,7 +26,8 @@
         <div class="row no-gutters">
             <div class="col-3 col-md-5">
                 <div class="ratio-wrapper" style="padding-bottom: 85%">
-                    <img class="w-100" src="{{ $movie->image ?: asset('img/placeholder.png') }}"
+                    <img class="w-100"
+                         src="{{ $movie->image ? url('storage/' . $movie->image) : asset('img/movie-placeholder.jpg') }}"
                          alt="{{ $movie->name }}">
                 </div>
             </div>

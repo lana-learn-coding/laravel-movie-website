@@ -20,6 +20,7 @@ class CreateMoviesTable extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->string('image')->nullable();
+            $table->integer('total_episodes')->nullable();
 
             $table->date('release_date');
             $table->smallInteger('length')->unsigned();
