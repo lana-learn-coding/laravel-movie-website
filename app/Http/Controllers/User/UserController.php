@@ -67,7 +67,7 @@ class UserController extends BaseController
 
     function update(Request $request, int $id)
     {
-        $user = User::findOrFail($id);
+        $user = Auth::user();
 
         $request->validate([
             'name' => ['nullable', 'string', 'min:3', 'max:255'],
