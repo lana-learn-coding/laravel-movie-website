@@ -34,7 +34,7 @@
             <form action="{{ route('movie.comment.write', [ 'id' => $movie->id]) }}" method="POST">
                 <v-row>
                     @csrf
-                    <v-col cols="3" sm="2" lg="1">
+                    <v-col cols="3" sm="2" xl="1">
                         @guest
                             <v-img
                                 class="rounded"
@@ -54,9 +54,21 @@
                         @endguest
                         <v-btn type="submit" color="indigo darken-2" class="w-100 mt-3">Post</v-btn>
                     </v-col>
-                    <v-col cols="9" sm="10" lg="11">
-                        <v-textarea dense outlined auto-grow placeholder="Write a comment" name="comment"
-                                    data-require-login></v-textarea>
+                    <v-col cols="9" sm="10" xl="11" class="d-flex">
+                        <v-textarea
+                            dense
+                            outlined
+                            auto-grow
+                            placeholder="Write a comment"
+                            name="comment"
+                            data-require-login
+                            @error('comment')
+                            error
+                            error-messages="{{ $message }}"
+                            @enderror
+                            @if(!$errors->has('comment')) hide-details @endif
+                        >
+                        </v-textarea>
                     </v-col>
                 </v-row>
             </form>
@@ -65,7 +77,7 @@
             @endif
             @foreach($movie->comments as $user)
                 <v-row>
-                    <v-col cols="3" sm="2" lg="1" class="pr-3 pr-lg-5">
+                    <v-col cols="3" sm="2" xl="1" class="pr-3 pr-lg-5">
                         <v-img
                             class="rounded"
                             aspect-ratio="1"
@@ -74,7 +86,7 @@
                         >
                         </v-img>
                     </v-col>
-                    <v-col cols="9" sm="10" lg="11" class="pl-0">
+                    <v-col cols="9" sm="10" xl="11" class="pl-0">
                         <a style="font-size: 1.1rem"
                            href="{{ route('user.detail', ['id' => $user->id]) }}"
                            class="text-decoration-none blue--text text--lighten-1 mb-3">{{ $user->username }}

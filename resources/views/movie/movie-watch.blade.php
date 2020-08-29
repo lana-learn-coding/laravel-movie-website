@@ -18,7 +18,7 @@
                     web browser that supports HTML5 video
                 </p>
             </video>
-            <div class="mt-4 d-flex align-baseline">
+            <div class="mt-4 d-flex align-baseline flex-wrap">
                 @if(!Auth::check() || !$movie->isFavoritedBy(Auth::id()))
                     <v-btn
                         data-require-login
@@ -41,7 +41,7 @@
                         Report <span class="d-none d-md-inline ml-1">broken episode</span>
                     </v-btn>
                 @endif
-                <div class="ml-3 text-nowrap">
+                <div class="ml-3 text-no-wrap">
                     @for($i = 1; $i <= 5; $i++)
                         <a class="text-decoration-none"
                            href="{{ route_with_query('movie.rating.rate', ['rating' => $i], ['id' => $movie->id]) }}"
@@ -64,13 +64,13 @@
                         style="min-width: auto" class="px-3 mr-1"
                         color="indigo darken-2"
                         href="#player">
-                        {{ $ep->number }}
+                        {{ $ep->name ?: $ep->number }}
                     </v-btn>
                 @else
                     <v-btn
                         style="min-width: auto" class="px-3 mr-1"
                         href="{{ route('movie.watch.ep', ['id' => $movie->id, 'ep' => $ep->number]) }}">
-                        {{ $ep->number }}
+                        {{ $ep->name ?: $ep->number }}
                     </v-btn>
                 @endif
             @endforeach

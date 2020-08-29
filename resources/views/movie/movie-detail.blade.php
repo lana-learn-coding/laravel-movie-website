@@ -3,25 +3,35 @@
 @section('content.movie')
     <v-row class="row">
         <v-col cols="12" sm="5" md="4" lg="3" class="d-flex">
-            @include('components.movie.movie-card', ['movie' => $movie])
+            <v-card class="w-100" href="{{ route('movie', ['id' => $movie->id]) }}">
+                <v-img
+                    :aspect-ratio="0.76"
+                    src="{{ $movie->image ? url('storage/' . $movie->image) : asset('img/movie-placeholder.jpg') }}"
+                    alt="{{ $movie->name }}">
+                </v-img>
+                <v-card-title class="body-2">{{ $movie->name }}</v-card-title>
+                <v-card-subtitle class="subtitle-2">
+                    <v-icon class="mr-2 text--disabled" small>far fa-clock</v-icon>{{ $movie->length }} min
+                </v-card-subtitle>
+            </v-card>
         </v-col>
         <v-col cols="12" sm="7" md="8" lg="9" class="d-flex">
             <v-card class="w-100">
                 <v-card-text class="body-1 px-5">
                     <v-row class="mb-5">
-                        <v-col cols="12" lg="4" class="pt-1 pb-2">
+                        <v-col cols="12" lg="6" xl="4" class="pt-1 pb-2">
                             <span class="font-weight-bold mr-2">Release: </span>
                             <span>{{ $movie->release_date ?: 'unknown' }}</span>
                         </v-col>
-                        <v-col cols="12" lg="8" class="pt-1 pb-2">
+                        <v-col cols="12" lg="6" xl="8" class="pt-1 pb-2">
                             <span class="font-weight-bold mr-2">Language: </span>
                             <span>{{ $movie->language ? $movie->language->name : 'updating' }}</span>
                         </v-col>
-                        <v-col cols="12" lg="4" class="pt-1 pb-2">
+                        <v-col cols="12" lg="6" xl="8" class="pt-1 pb-2">
                             <span class="font-weight-bold mr-2">Episodes: </span>
                             <span>{{ $movie->number_of_episodes ?: 'updating' }}</span>
                         </v-col>
-                        <v-col cols="12" lg="8" class="pt-1 pb-2">
+                        <v-col cols="12" lg="6" xl="8" class="pt-1 pb-2">
                             <span class="font-weight-bold mr-2">Category: </span>
                             <span>{{ $movie->category ? $movie->category->name : 'updating' }}</span>
                         </v-col>
@@ -39,17 +49,17 @@
                                 @endforeach
                             @endif
                         </v-col>
-                        <v-col cols="12" class="pt-1 pb-2">
-                            <span class="font-weight-bold mr-2">Views: </span>
-                            <span>{{ $movie->views_count_by_all_time ?: 0 }}</span>
-                        </v-col>
-                        <v-col cols="12" class="pt-1 pb-2">
+                        <v-col cols="12" lg="6" xl="8" class="pt-1 pb-2">
                             <span class="font-weight-bold mr-2">Rating: </span>
                             <span class="small">
                                 @for($i = 0; $i < 5; $i++)
                                     <v-icon small @if($i * 20 < $movie->rating_by_percent) color="yellow" @endif>fas fa-star</v-icon>
                                 @endfor
                             </span>
+                        </v-col>
+                        <v-col cols="12" lg="6" xl="4" class="pt-1 pb-2">
+                            <span class="font-weight-bold mr-2">Views: </span>
+                            <span>{{ $movie->views_count_by_all_time ?: 0 }}</span>
                         </v-col>
                     </v-row>
                     <v-row>
