@@ -19,38 +19,8 @@ class SearchMovieController extends BaseController
 
     public function simpleSearch(Request $request)
     {
-        $movies = Movie::query();
-        if ($request->query('query')) {
-            $movies->where('name', 'like', '%' . $request->query('query') . '%');
-        }
-        if ($request->query('category')) {
-            $movies->where('movie_category_id', $request->query('category'));
-        }
-        if ($request->query('language')) {
-            $movies->where('movie_language_id', $request->query('language'));
-        }
-        if ($request->query('nation')) {
-            $movies->where('movie_nation_id', $request->query('nation'));
-        }
-        if ($request->query('date_range')) {
-            try {
-                $dates = explode('to', $request->query('date_range'));
-                $startDate = strtotime(trim($dates[0]));
-                $endDate = strtotime(trim($dates[1]));
-                $movies->where('release_date', '>=', date('Y-m-d', $startDate));
-                $movies->where('release_date', '<=', date('Y-m-d', $endDate));
-            } catch (Exception $ignored) {
-            }
-        }
-
-        if ($request->query('genre')) {
-            $movies->whereHas('genres', function ($genres) use ($request) {
-                $genres->where('id', $request->get('genre'));
-            });
-        }
-
         return view('home.search-movie', [
-            'movies' => $movies->toPage(24)
+            'movies' => Movie::toPage(24)
         ]);
     }
 

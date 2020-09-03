@@ -3,6 +3,7 @@
 namespace App\Models\Movie;
 
 use App\Models\BaseModel;
+use Exception;
 use Fico7489\Laravel\EloquentJoin\Traits\EloquentJoin;
 
 /**
@@ -70,6 +71,11 @@ use Fico7489\Laravel\EloquentJoin\Traits\EloquentJoin;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movie whereUpdatedAt($value)
  * @mixin \Eloquent
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BaseModel toPage($size = 12)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Movie\MovieReport[] $reports
+ * @property-read int|null $reports_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Movie\MovieTrailer[] $trailers
+ * @property-read int|null $trailers_count
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movie haveAnyTrailers()
  */
 class Movie extends BaseModel
 {
@@ -276,5 +282,40 @@ class Movie extends BaseModel
             ->where('from', $form)
             ->where('episode', $episode)
             ->exists();
+    }
+
+    protected function scopeFilterable($query)
+    {
+        $request = request();
+        if ($request->query('query')) {
+            $query->where('name', 'like', '%' . $request->query('query') . '%');
+        }
+        if ($request->query('filters_category')) {
+            $query->where('movie_category_id', $request->query('filters_category'));
+        }
+        if ($request->query('filters_language')) {
+            $query->where('movie_language_id', $request->query('filters_language'));
+        }
+        if ($request->query('filters_nation')) {
+            $query->where('movie_nation_id', $request->query('filters_nation'));
+        }
+        if ($request->query('filters_date_range')) {
+            try {
+                $dates = explode('to', $request->query('filters_date_range'));
+                $startDate = strtotime(trim($dates[0]));
+                $endDate = strtotime(trim($dates[1]));
+                $query->where('release_date', '>=', date('Y-m-d', $startDate));
+                $query->where('release_date', '<=', date('Y-m-d', $endDate));
+            } catch (Exception $ignored) {
+            }
+        }
+
+        if ($request->query('filters_genres')) {
+            $query->whereHas('genres', function ($genres) use ($request) {
+                $genres->where('id', $request->query('filters_genres'));
+            });
+        }
+
+        return $query;
     }
 }

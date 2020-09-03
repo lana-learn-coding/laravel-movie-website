@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,53 +11,51 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BaseModel newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BaseModel newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BaseModel query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BaseModel toPage($size, $columns = [], $pageName = 'page', $sizeName = 'size')
  * @mixin \Eloquent
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BaseModel toPage($size = 12)
  */
 class BaseModel extends Model
 {
-    public function scopeToPage(Builder $query, int $size = 12)
+    public function scopeToPage(Builder $query, $size, $columns = ['*'], $pageName = 'page', $sizeName = 'size')
     {
-        $size = $this->getSizeOrDefault($size);
-        $sort = $this->getSort();
-        $direction = $this->getSortDirection();
-        return $query->orderBy($sort, $direction)->paginate($size);
+        $size = $this->getSizeOrDefault($size, $sizeName);
+        return $query->filterable()->sortable()->paginate($size, $columns, $pageName);
     }
 
-    private function getSizeOrDefault(int $size)
+    private function getSizeOrDefault(int $size, $sizeName = 'size')
     {
-        if (request()->query('page_size')) {
-            try {
-                $size = intval(request()->query('page_size'));
-            } catch (Exception $ignored) {
-            }
-        }
+        $size = $size ?: intval(request()->query($sizeName));
         if (!$size || $size < 1) {
             $size = 12;
         }
         return $size;
     }
 
-    private function getSort()
+    protected function scopeSortable($query)
     {
         $sort = explode(',', request()->query('sort') ?: '');
         if (sizeof($sort) < 1) {
-            return '';
+            return $query;
         }
-        return $sort[0];
+        $sort = $sort[0];
+
+        if (request()->query('direction')) {
+            $direction = request()->query('direction') === 'desc' ? 'desc' : 'asc';
+        } else {
+            $directionParam = explode(',', request()->query('sort') ?: '');
+            if (sizeof($directionParam) < 2) {
+                $direction = 'asc';
+            } else {
+                $direction = $directionParam[1] === 'desc' ? 'desc' : 'asc';
+            }
+        }
+
+        return $query->orderBy($sort, $direction);
     }
 
-    private function getSortDirection()
+    protected function scopeFilterable($query)
     {
-        $default = 'asc';
-        if (request()->query('sort_direction')) {
-            return request()->query('sort_direction') === 'desc' ? 'desc' : $default;
-        }
-        $sort = explode(',', request()->query('sort') ?: '');
-        if (sizeof($sort) < 2) {
-            return $default;
-        }
-        return $sort[1] === 'desc' ? 'desc' : $default;
+        return $query;
     }
 
     protected function isProd()
