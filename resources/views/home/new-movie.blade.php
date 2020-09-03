@@ -2,6 +2,7 @@
 
 @section('content')
     <v-container class="pt-8 pt-md-10 pt-lg-12 pt-xl-15">
+        @include('components.movie.filter-bar', ['excludes' => ['sort']])
         <v-row>
             <v-col md="8" xl="9" class="pr-xl-8">
                 <v-tabs hide-slider optional show-arrows>
