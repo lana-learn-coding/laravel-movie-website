@@ -1,8 +1,8 @@
 function useMovieFilterDatePicker(oldDate) {
     const menu = ref(false);
-    const dates = ref(oldDate.split(' to '));
+    const dates = ref(oldDate ? oldDate.split(' to ') : []);
     const dateRangeValue = computed(() => {
-        if (dates.length <= 1) {
+        if (dates.value.length < 2) {
             return '';
         }
         return dates.value
