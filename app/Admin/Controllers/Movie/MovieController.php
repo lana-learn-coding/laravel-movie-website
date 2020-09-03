@@ -62,10 +62,10 @@ class MovieController extends AdminController
             });
 
             $filter->column(1 / 2, function ($filter) {
-                $filter->in('nation.id', __('nation'))->multipleSelect(MovieNation::all()->pluck('name', 'id'));
-                $filter->in('category.id', __('Category'))->multipleSelect(MovieCategory::all()->pluck('name', 'id'));
-                $filter->in('genres.id', __('Genres'))->multipleSelect(MovieGenre::all()->pluck('name', 'id'));
-                $filter->in('casts.id', __('Cast'))->multipleSelect(Cast::all()->pluck('name', 'id'));
+                $filter->equal('nation.id', __('nation'))->select(MovieNation::all()->pluck('name', 'id'));
+                $filter->equal('category.id', __('Category'))->select(MovieCategory::all()->pluck('name', 'id'));
+                $filter->equal('genres.id', __('Genres'))->select(MovieGenre::all()->pluck('name', 'id'));
+                $filter->equal('casts.id', __('Cast'))->select(Cast::all()->pluck('name', 'id'));
             });
         });
 
