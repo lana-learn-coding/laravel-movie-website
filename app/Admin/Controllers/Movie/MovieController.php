@@ -3,6 +3,7 @@
 namespace App\Admin\Controllers\Movie;
 
 use App\Admin\Selectables\CastSelectable;
+use App\Models\Cast;
 use App\Models\Movie\Movie;
 use App\Models\Movie\MovieCategory;
 use App\Models\Movie\MovieGenre;
@@ -37,19 +38,35 @@ class MovieController extends AdminController
         $grid->column('reports_count', __('Report'))->sortable()->hide();
         $grid->column('name', __('Name'))->sortable();
         $grid->column('description', __('Description'))->hide();
-        $grid->column('genres', __('Genres'))->pluck('name')->label();
-        $grid->column('casts', __('Casts'))->pluck('name')->label('info');
-        $grid->column('image', __('Cover'))->image()->hide();
+        $grid->column('genres', __('Genres'))->pluck('name')->label()->hide();
+        $grid->column('casts', __('Casts'))->pluck('name')->label('info')->hide();
+        $grid->column('image', __('Cover'))->image();
+        $grid->column('length', __('Length'))->hide()->sortable();
         $grid->column('episodes_count', __('Episodes'))->sortable();
-        $grid->column('category.name', __('Category'))->hide()->searchable();
-        $grid->column('language.name', __('Language'))->searchable();
-        $grid->column('nation.name', __('Nation'))->hide()->searchable();
+        $grid->column('category.name', __('Category'));
+        $grid->column('language.name', __('Language'));
+        $grid->column('nation.name', __('Nation'))->hide();
         $grid->column('updated_at', __('Updated at'))->hide()->sortable();
         $grid->column('created_at', __('Created at'))->hide()->sortable();
 
-        $grid->filter(function ($filter) {
-            $filter->like('name', __('Name'));
-            $filter->between('updated_at', __('Updated At'))->date();
+        $grid->filter(function (Grid\Filter $filter) {
+            $filter->column(1 / 2, function ($filter) {
+                $filter->like('name', __('Name'));
+                $filter->like('description', __('Description'));
+                $filter->between('updated_at', __('Updated At'))->date();
+                $filter->group('length', 'Length', function ($group) {
+                    $group->lt('less than');
+                    $group->gt('greater than');
+                    $group->equal('equal to');
+                });
+            });
+
+            $filter->column(1 / 2, function ($filter) {
+                $filter->in('nation.id', __('nation'))->multipleSelect(MovieNation::all()->pluck('name', 'id'));
+                $filter->in('category.id', __('Category'))->multipleSelect(MovieCategory::all()->pluck('name', 'id'));
+                $filter->in('genres.id', __('Genres'))->multipleSelect(MovieGenre::all()->pluck('name', 'id'));
+                $filter->in('casts.id', __('Cast'))->multipleSelect(Cast::all()->pluck('name', 'id'));
+            });
         });
 
         return $grid;
